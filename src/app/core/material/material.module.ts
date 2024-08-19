@@ -26,7 +26,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+ 
   ],
   exports:[
     MatTabsModule,
@@ -39,7 +40,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatDividerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatRadioModule
+    MatRadioModule,
+
   ]
 })
 export class MaterialModule { }

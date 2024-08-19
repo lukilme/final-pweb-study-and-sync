@@ -19,7 +19,7 @@ export class MessageSweetAlertService {
 
   static erro(mensagem: string) {
       Swal.fire({
-          title: 'Erro!',
+          title: 'Error!',
           text: mensagem,
           icon: 'error',
           confirmButtonText: 'OK'
@@ -28,7 +28,7 @@ export class MessageSweetAlertService {
 
   static sucesso(mensagem: string) {
       Swal.fire({
-        title: 'Sucesso!',
+        title: 'Success!',
         text: mensagem,
         icon: 'success',
         confirmButtonText: 'OK'

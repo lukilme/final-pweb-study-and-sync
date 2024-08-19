@@ -59,10 +59,10 @@
 
   <div id="small-fields">
     <mat-form-field appearance="fill">
-      <mat-label>Birthday</mat-label>
-      <input matInput [matDatepicker]="picker" placeholder="dd/mm/yyyy" formControlName="birthdayRegisterField" type="date">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <mat-label>Birthday</mat-label> 
+      <input matInput [matDatepicker]="picker" formControlName="birthdayRegisterField" placeholder="dd/mm/yyyy">
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
       <mat-hint *ngIf="!registerForm.get('birthdayRegisterField')?.value">Select your birthday date</mat-hint>
       <mat-error *ngIf="registerForm.get('birthdayRegisterField')?.hasError('required')">
         Birthday is <strong>required</strong>

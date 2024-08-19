@@ -1,6 +1,7 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../service/user.service";
+import { UserLoginData } from "../../../../core/interfaces/user.login.interface";
 
 @Component({
   selector: "app-user-form-login",
@@ -29,7 +30,14 @@ export class UserFormLoginComponent {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      console.log(this.loginForm.value);
+      const formData: UserLoginData = this.loginForm.value as UserLoginData;
+      try {
+        this.service.login(formData);
+      } catch (error) {
+        console.error('An unexpected error occurred:', error);
+      }
+    } else {
+      console.log("Form is invalid!", this.loginForm.errors);
     }
   }
 }

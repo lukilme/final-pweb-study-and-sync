@@ -22,7 +22,6 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
   ],
   providers: [
     provideAnimationsAsync(),
-    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }  // Define o locale como 'pt-BR'
   ],
   bootstrap: [AppComponent]
 })

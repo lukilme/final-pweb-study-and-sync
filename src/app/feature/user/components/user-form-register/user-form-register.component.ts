@@ -2,14 +2,37 @@ import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../service/user.service";
 import { UserRegisterData } from "../../../../core/interfaces/user.register.interface";
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from "@angular/material/core";
+import { MY_FORMATS } from "../../user.module";
+import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, provideMomentDateAdapter } from "@angular/material-moment-adapter";
+import { MatDatepickerModule } from "@angular/material/datepicker";
+
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMM YYYY',
+    dateA11yLabel: 'DD/MM/YYYY',
+    monthYearA11yLabel: 'MMMM YYYY',
+  },
+};
 
 @Component({
   selector: "app-user-form-register",
   templateUrl: "./user-form-register.component.html",
   styleUrls: ["./user-form-register.component.scss"],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' }, // Define o local de data para pt-BR
+    { provide: MAT_DATE_FORMATS, useValue: MY_DATE_FORMATS },
+    { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } } // Opções adicionais do adaptador
+  ]
+  
 })
 
 export class UserFormRegisterComponent {
+
   registerForm: FormGroup<{
     nameRegisterField: FormControl<string | null>;
     emailRegisterField: FormControl<string | null>;
@@ -18,6 +41,7 @@ export class UserFormRegisterComponent {
     statusRegisterField: FormControl<string | null>;
     birthdayRegisterField: FormControl<string | null>;
   }>;
+
   hidePassword: boolean = true;
 
   constructor(private service: UserService) {
@@ -35,7 +59,6 @@ export class UserFormRegisterComponent {
       ]),
       repeat_passwordRegisterField: new FormControl<string>("",[
         Validators.required,
-     
       ]),
       statusRegisterField: new FormControl<string>("student",[
         Validators.required
