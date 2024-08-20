@@ -46,9 +46,9 @@ export class UserValidator {
         if (password !== repeat_password) {
             throw new Error("Passwords do not match.");
         }
-        if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
-            throw new Error("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
-        }
+        //if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
+            //throw new Error("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        //}
     }
 
     private static birthdayUserValidate(birthday: string) {

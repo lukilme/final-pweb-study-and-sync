@@ -6,6 +6,7 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, MatNativeDateModule } from "@angular
 import { MY_FORMATS } from "../../user.module";
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS, MatMomentDateModule, provideMomentDateAdapter } from "@angular/material-moment-adapter";
 import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MessageSweetAlertService } from "../../../../shared/service/message-sweet-alert.service";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -82,8 +83,10 @@ export class UserFormRegisterComponent {
       const formData: UserRegisterData = this.registerForm.value as UserRegisterData;
       try {
         this.service.register(formData);
-      } catch (error) {
-        console.error('An unexpected error occurred:', error);
+        MessageSweetAlertService.sucesso("Registered successfully! 🎉✨")
+
+      } catch (error: any) {
+        MessageSweetAlertService.erro(error.message)
       }
     } else {
       console.log("Form is invalid!", this.registerForm.errors);

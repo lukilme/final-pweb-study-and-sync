@@ -4,6 +4,7 @@ import { UserFormComponent } from './feature/user/components/user-form/user-form
 
 const routes: Routes = [  
   { path: '', component: UserFormComponent },
+  { path: 'home',}
 ];
 
 @NgModule({

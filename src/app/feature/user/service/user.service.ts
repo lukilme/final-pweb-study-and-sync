@@ -38,7 +38,7 @@ export class UserService implements Service<User> {
 
     UserValidator.registerValidate(userForm);
 
-    const newUser = new User(1,
+    const newUser = new User(
       userForm.nameRegisterField,
       userForm.emailRegisterField,
       userForm.passwordRegisterField,
@@ -52,6 +52,7 @@ export class UserService implements Service<User> {
         return value;
       },
       error: err => {
+        
         console.error('Observable emitted an error: ' + err);
         return null;
       }

@@ -1,69 +1,12 @@
 {
   "user": [
     {
-      "id": "1",
-      "name": "Alice Johnson",
-      "email": "alice.johnson@example.com",
-      "password": "password123",
-      "birthday": "1990-05-21",
-      "status": "student"
-    },
-    {
-      "id": "2",
-      "name": "Bob Smith",
-      "email": "bob.smith@example.com",
-      "password": "securepass456",
-      "birthday": "1985-08-15",
-      "status": "teacher"
-    },
-    {
-      "id": "3",
-      "name": "Clara Lee",
-      "email": "clara.lee@example.com",
-      "password": "pass789word",
-      "birthday": "2000-12-10",
-      "status": "student"
-    },
-    {
-      "id": "4",
-      "name": "David Brown",
-      "email": "david.brown@example.com",
-      "password": "mypassword321",
-      "birthday": "1975-03-30",
-      "status": "teacher"
-    },
-    {
-      "id": "b1c3",
-      "_id": 1,
-      "_name": "Luis Kilmer",
-      "_email": "kilmer@gmail.com",
-      "_password": "lK12345678!",
+      "id": "7b0b",
+      "_name": "asdsadasda",
+      "_email": "dasdsa@dasdsa.com",
+      "_password": "12345678",
       "_birthday": "2003-12-12T02:00:00.000Z",
       "_status": "student"
-    },
-    {
-      "id": "246f",
-      "_id": 1,
-      "_name": "Luis Kilmer",
-      "_email": "kilmer@gmail.com",
-      "_password": "lK12345678!",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "student"
-    },
-    {
-      "id": "74d5",
-      "_id": 1,
-      "_name": "Luis Kilmer",
-      "_email": "kilmer@gmail.com",
-      "_password": "lK12345678!",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "student"
-    }
-  ],
-  "config": [
-    {
-      "last_id": "4",
-      "id": "d6d2"
     }
   ]
 }
