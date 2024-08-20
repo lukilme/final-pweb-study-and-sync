@@ -1,5 +1,5 @@
 export class User {
-  private _id : string | undefined;
+  private id : string | undefined;
   private _name: string;
   private _email: string;
   private _password: string;
@@ -22,14 +22,16 @@ export class User {
     this._birthday = birthday;
   }
 
-  public get id():string | undefined{
-    return this._id;
+  public setId(newId: string){
+    this.id = newId;
   }
 
-  public set id(newId: string){
-    this._id = newId;
+  public getId():string{
+    if(this.id === undefined){
+      throw new Error("ID is undefined");
+    }
+    return this.id;
   }
-
   public get name(): string {
     return this._name;
   }

@@ -16,6 +16,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 
 
 
+
 export const MY_FORMATS = {
   parse: {
     dateInput:
@@ -34,7 +35,8 @@ export const MY_FORMATS = {
   declarations: [
     UserFormRegisterComponent,
     UserFormLoginComponent,
-    UserFormComponent
+    UserFormComponent,
+
   ],
   providers:[
     UserService,

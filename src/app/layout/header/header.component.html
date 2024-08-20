@@ -1,0 +1,7 @@
+<mat-toolbar>
+    <span>My Application</span>
+    @if (isLogged()) {
+        <button (click)="logout()"> Logout</button>
+    } 
+    
+</mat-toolbar>

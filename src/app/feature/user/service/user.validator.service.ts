@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { UserRegisterData } from "../../../core/interfaces/user.register.interface";
+import { UserLoginData } from "../../../core/interfaces/user.login.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -9,6 +10,7 @@ export class UserValidator {
     public static readonly MAX_NAME = 255;
     public static readonly MIN_EMAIL = 5;
     public static readonly MAX_EMAIL = 255;
+    public static readonly MIN_PASSWORD = 8;
     public static readonly PATTERN_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     public static readonly PATTERN_NAME = /^[a-zA-Zà-üÀ-Ü\s]+$/;
 
@@ -19,6 +21,10 @@ export class UserValidator {
         UserValidator.emailUserValidate(data.emailRegisterField);
         UserValidator.passwordUserValidate(data.passwordRegisterField, data.repeat_passwordRegisterField);
         UserValidator.birthdayUserValidate(data.birthdayRegisterField);
+    }
+
+    static loginValidate( data: UserLoginData){
+        UserValidator.emailUserValidate(data.emailLoginField);
     }
 
     private static nameUserValidate(name: string) {
@@ -40,7 +46,7 @@ export class UserValidator {
     }
 
     private static passwordUserValidate(password: string, repeat_password: string) {
-        if (!password || password.length < 8) {
+        if (!password || password.length < this.MIN_PASSWORD) {
             throw new Error("Password must be at least 8 characters long.");
         }
         if (password !== repeat_password) {

@@ -1,4 +1,4 @@
 export interface UserLoginData {
-    emailLoginField: string | null;
-    passwordLoginField: string | null;
+    emailLoginField: string ;
+    passwordLoginField: string;
   }

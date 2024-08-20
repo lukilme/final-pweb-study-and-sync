@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { UserFormComponent } from './feature/user/components/user-form/user-form.component';
+import { HomeComponent } from './feature/user/components/home/home.component';
 
 const routes: Routes = [  
   { path: '', component: UserFormComponent },
-  { path: 'home',}
+  { path: 'home', component: HomeComponent },
+  { path: '**', redirectTo: '', pathMatch: 'full' } 
 ];
 
 @NgModule({

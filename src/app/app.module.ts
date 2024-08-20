@@ -6,19 +6,19 @@ import { AppComponent } from './app.component';
 import { UserModule } from './feature/user/user.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './core/material/material.module';
-import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { LayoutModule } from './layout/layout.module';
 
 
 @NgModule({
   declarations: [
-    AppComponent
-
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     UserModule,
-    MaterialModule
+    MaterialModule,
+    LayoutModule
   ],
   providers: [
     provideAnimationsAsync(),
