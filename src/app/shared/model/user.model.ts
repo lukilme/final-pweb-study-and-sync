@@ -7,14 +7,12 @@ export class User {
   private _status: string; // student or teacher
 
   constructor(
-  
     name: string,
     email: string,
     password: string,
     birthday: Date,
     status: string
   ) {
-   
     this._name = name;
     this._email = email;
     this._password = password;

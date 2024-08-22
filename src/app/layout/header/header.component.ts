@@ -23,30 +23,22 @@ export class HeaderComponent implements OnInit {
         filter(event => event instanceof NavigationEnd)
       ).subscribe((event: NavigationEnd) => {
         console.log('A URL mudou para:', event.urlAfterRedirects);
-        if (this.isLogged()) {
-          this.router.navigate(['home']);
-        } else {
-          this.router.navigate(['']);
-        }
+        this.isLogged();
       });
-    if (this.isLogged()) {
+    this.isLogged();
+  }
+
+  isLogged(){
+    this.currentUser = this.userStorage.getUser();
+    if (this.currentUser!=null) {
       this.router.navigate(['home']);
     } else {
       this.router.navigate(['']);
     }
-  }
-
-  isLogged(): boolean {
-    this.currentUser = this.userStorage.getUser();
-    return this.currentUser != null;
   }
 
   logout(){
     this.userStorage.clearAllData();
-    if (this.isLogged()) {
-      this.router.navigate(['home']);
-    } else {
-      this.router.navigate(['']);
-    }
+    this.isLogged();
   }
 }

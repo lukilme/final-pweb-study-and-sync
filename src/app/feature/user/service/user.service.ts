@@ -87,7 +87,6 @@ export class UserService implements Service<User> {
             users[0]._status
           );
           user.setId(users[0].id);
-          console.log(user);
           if (user.password === loginData.passwordLoginField) {
             this.storage.saveUser(user);
             this.route.navigate(['home']);
