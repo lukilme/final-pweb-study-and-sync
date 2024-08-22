@@ -16,3 +16,10 @@
     │   │   └──service
     │   └──app
     └── db.json
+
+   
+## TO-DO:
+
+- verifcação de email ao criar a conta
+- tratamente de excessões na criação da conta
+- tratamente de excessões no login

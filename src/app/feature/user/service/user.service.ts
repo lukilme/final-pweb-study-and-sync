@@ -24,7 +24,6 @@ export class UserService implements Service<User> {
 
   constructor(private httpClient: HttpClient, private route : Router, private storage : UserStorageService) {}
 
-
   read(key: string): Observable<User>{
     return this.httpClient.get<User>(`${this.URL_USER}/${key}`);
   }
@@ -48,7 +47,6 @@ export class UserService implements Service<User> {
   readBy(key: string,value: string ): Observable<UserJson[]>{
     return this.httpClient.get<UserJson[]>(`${this.URL_USER}?${key}=${value}`);
   }
-
 
   register(userForm: UserRegisterData){
 
@@ -76,7 +74,7 @@ export class UserService implements Service<User> {
 
   login(loginData: UserLoginData) {
     UserValidator.loginValidate(loginData);
-    this.readBy("email", loginData.emailLoginField).subscribe({
+    this.readBy("_email", loginData.emailLoginField).subscribe({
       next: users => {
         if (users.length > 0) {
           const user = new User(

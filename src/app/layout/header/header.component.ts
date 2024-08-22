@@ -3,6 +3,7 @@ import { UserService } from '../../feature/user/service/user.service';
 import { SavedUser, UserStorageService } from '../../core/storage/user-storage.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
+import { User } from '../../shared/model/user.model';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import { filter } from 'rxjs';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent implements OnInit {
-  currentUser: SavedUser | null | undefined;
+  currentUser: User | null | undefined;
 
   constructor(
     private userStorage: UserStorageService,

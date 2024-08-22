@@ -13,6 +13,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { TeacherModule } from '../teacher/teacher.module';
+import { StudentModule } from '../student/student.module';
+import { HomeComponent } from './components/home/home.component';
 
 
 
@@ -36,7 +39,7 @@ export const MY_FORMATS = {
     UserFormRegisterComponent,
     UserFormLoginComponent,
     UserFormComponent,
-
+    HomeComponent
   ],
   providers:[
     UserService,
@@ -50,11 +53,14 @@ export const MY_FORMATS = {
     HttpClientModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    TeacherModule,
+    StudentModule
     
   ],
   exports:[
-    UserFormComponent
+    UserFormComponent,
+    HomeComponent
   ]
 })
 export class UserModule {}
