@@ -8,15 +8,11 @@ import { Observable } from "rxjs";
 import { UserValidator } from "./user.validator.service";
 import { Router } from "@angular/router";
 import { UserStorageService } from "../../../core/storage/user-storage.service";
+import { Teacher } from "../../../shared/model/teacher.model";
+import { Student } from "../../../shared/model/student.model";
 
-export interface UserJson {
-  id: string;
-  _name: string;
-  _email: string;
-  _password: string;
-  _birthday: string; 
-  _status: string; 
-}
+
+
 
 @Injectable()
 export class UserService implements Service<User> {
@@ -29,7 +25,7 @@ export class UserService implements Service<User> {
   }
 
   update(newObj: User): Observable<User> {
-    return this.httpClient.put<User>(`${this.URL_USER}/${newObj.getId()}`, newObj);
+    return this.httpClient.put<User>(`${this.URL_USER}/${newObj.id}`, newObj);
   }
 
   delete(key: string): Observable<Object> {
@@ -44,22 +40,36 @@ export class UserService implements Service<User> {
     return this.httpClient.post<User>(this.URL_USER, newUser);
   }
 
-  readBy(key: string,value: string ): Observable<UserJson[]>{
-    return this.httpClient.get<UserJson[]>(`${this.URL_USER}?${key}=${value}`);
+  readBy(key: string,value: string ): Observable<User[]>{
+    return this.httpClient.get<User[]>(`${this.URL_USER}?${key}=${value}`);
   }
 
   register(userForm: UserRegisterData){
 
     UserValidator.registerValidate(userForm);
-
-    const newUser = new User(
-      userForm.nameRegisterField,
-      userForm.emailRegisterField,
-      userForm.passwordRegisterField,
-      new Date(userForm.birthdayRegisterField),
-      userForm.statusRegisterField
-    );
-    
+    let newUser : User;
+    if(userForm.statusRegisterField=='teacher'){
+      newUser = new Teacher(
+        userForm.nameRegisterField,
+        userForm.emailRegisterField,
+        userForm.passwordRegisterField,
+        new Date(userForm.birthdayRegisterField),
+        'teacher',
+       'Computer Scientis',
+       []
+      );
+    }else{
+      newUser = new Student(
+        userForm.nameRegisterField,
+        userForm.emailRegisterField,
+        userForm.passwordRegisterField,
+        new Date(userForm.birthdayRegisterField),
+        'student',
+       'Internet System',
+       [],
+       4
+      );
+    }   
     this.create(newUser).subscribe({
       next: value => {
         console.log('Observable emitted the next value: ' + value);
@@ -74,19 +84,11 @@ export class UserService implements Service<User> {
 
   login(loginData: UserLoginData) {
     UserValidator.loginValidate(loginData);
-    this.readBy("_email", loginData.emailLoginField).subscribe({
+    this.readBy("email", loginData.emailLoginField).subscribe({
       next: users => {
         if (users.length > 0) {
-          const user = new User(
-             users[0]._name,
-             users[0]._email,
-             users[0]._password,
-             new Date(users[0]._birthday),
-            users[0]._status
-          );
-          user.setId(users[0].id);
-          if (user.password === loginData.passwordLoginField) {
-            this.storage.saveUser(user);
+          console.log(users)
+          if (true) {
             this.route.navigate(['home']);
           } else {
             console.error("Wrong password!");

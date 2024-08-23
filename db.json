@@ -1,44 +1,25 @@
 {
   "user": [
     {
-      "id": "7b0b",
-      "_name": "asdsadasda",
-      "_email": "dasdsa@dasdsa.com",
-      "_password": "12345678",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "student"
+      "id": "3f30",
+      "name": "Luciano",
+      "email": "luciano@gmail.com",
+      "password": "12345678",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "teacher",
+      "disciplines": [],
+      "course": "Internet System",
+      "semester": 4
     },
     {
-      "id": "ba40",
-      "_name": "Fulano seila",
-      "_email": "seila@gmail.com",
-      "_password": "12345678",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "student"
-    },
-    {
-      "id": "5be6",
-      "_name": "Lucas",
-      "_email": "lucas@gmail.com",
-      "_password": "12345678",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "teacher"
-    },
-    {
-      "id": "7d45",
-      "_name": "Felipe",
-      "_email": "felipe@gmail.com",
-      "_password": "12345678",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "student"
-    },
-    {
-      "id": "c035",
-      "_name": "student",
-      "_email": "student@gmail.com",
-      "_password": "student1",
-      "_birthday": "2003-12-12T02:00:00.000Z",
-      "_status": "student"
+      "id": "d9d6",
+      "name": "Luciano",
+      "email": "luciano@gmail.com",
+      "password": "12345678",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "teacher",
+      "disciplines": [],
+      "qualification": "Computer Scientis"
     }
   ]
 }

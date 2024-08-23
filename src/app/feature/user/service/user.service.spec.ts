@@ -2,7 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { UserService } from './user.service';
 import { UserValidator } from './user.validator.service';
-import { provideHttpClient } from '@angular/common/http';
+import { HttpClientModule, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { MatDialogModule} from '@angular/material/dialog';
 
 describe('UserService', () => {
   let service: UserService;
@@ -10,14 +11,13 @@ describe('UserService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
+        MatDialogModule,
         
       ], 
       providers: [
-        UserService,
         UserValidator,
-        provideHttpClient,
-        provideHttpClientTesting()
-        
+        UserService,
+        provideHttpClient(withInterceptorsFromDi()),
      ]
     });
     service = TestBed.inject(UserService);

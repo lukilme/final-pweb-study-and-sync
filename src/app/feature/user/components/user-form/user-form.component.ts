@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { UserService } from '../../service/user.service';
 
 @Component({
   selector: 'app-user-form',
@@ -7,6 +6,6 @@ import { UserService } from '../../service/user.service';
   styleUrl: './user-form.component.scss',
 })
 export class UserFormComponent {
-  constructor(private service : UserService){
+  constructor(){
   }
 }

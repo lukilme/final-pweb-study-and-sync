@@ -16,7 +16,7 @@ export class UserStorageService {
 
   saveUser(user: User): void { 
     const savedUser: SavedUser = { 
-      id: user.getId(),
+      id: user.id,
       name: user.name,
       status: user.status,
       birthday: user.birthday, 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../../feature/user/service/user.service';
-import { SavedUser, UserStorageService } from '../../core/storage/user-storage.service';
+import {  UserStorageService } from '../../core/storage/user-storage.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import { User } from '../../shared/model/user.model';
@@ -16,7 +15,6 @@ export class HeaderComponent implements OnInit {
   constructor(
     private userStorage: UserStorageService,
     private router: Router,
-    private rotaAtual: ActivatedRoute
   ) {}
 
   ngOnInit(): void {

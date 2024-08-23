@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { HeaderComponent } from './header.component';
+import { RouterModule, ActivatedRoute } from '@angular/router';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { of } from 'rxjs';
+import { MatToolbar, MatToolbarModule } from '@angular/material/toolbar';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -8,7 +11,22 @@ describe('HeaderComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [HeaderComponent]
+      declarations: [HeaderComponent],
+      imports: [RouterModule.forRoot([]), MatDialogModule, MatToolbarModule], 
+      providers: [
+        { provide: MatDialogRef, useValue: {} }, 
+        {
+          provide: ActivatedRoute, 
+          useValue: {
+            snapshot: {
+              paramMap: {
+                get: () => 'mockedValue', 
+              }
+            },
+            queryParams: of({}), 
+          }
+        }
+      ]
     })
     .compileComponents();
 

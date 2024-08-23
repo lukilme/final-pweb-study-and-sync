@@ -6,6 +6,7 @@ import { MaterialModule } from '../../../../core/material/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UserService } from '../../service/user.service';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('UserFormComponent', () => {
   let component: UserFormComponent;
@@ -23,7 +24,7 @@ describe('UserFormComponent', () => {
         ReactiveFormsModule,
         BrowserAnimationsModule
       ],
-      providers: [UserService]
+      providers: [UserService,provideHttpClient(withInterceptorsFromDi())]
     })
     .compileComponents();
 
@@ -36,3 +37,4 @@ describe('UserFormComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

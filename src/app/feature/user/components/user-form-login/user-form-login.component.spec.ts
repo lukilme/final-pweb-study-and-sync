@@ -5,6 +5,7 @@ import { UserService } from '../../service/user.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('UserFormLoginComponent', () => {
   let component: UserFormLoginComponent;
@@ -20,7 +21,8 @@ describe('UserFormLoginComponent', () => {
         BrowserAnimationsModule
       ],
       providers: [
-        UserService        
+        UserService,
+        provideHttpClient(withInterceptorsFromDi())
       ]
     })
     .compileComponents();

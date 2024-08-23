@@ -7,10 +7,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './create-discipline-form.component.scss'
 })
 export class CreateDisciplineFormComponent {
-data: any;
+data: any = "bola";
 readonly dialogRef = inject(MatDialogRef<CreateDisciplineFormComponent>);
 animal() {
-throw new Error('Method not implemented.');
+ console.log("seila");
 }
 onNoClick(): void {
   this.dialogRef.close();

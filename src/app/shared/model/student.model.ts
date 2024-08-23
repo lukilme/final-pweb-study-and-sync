@@ -1,22 +1,21 @@
 import { User } from "./user.model";
 
 export class Student extends User {
-  private _classrooms: string[] = [];
+  course: string;
+  semester: number;
+
   constructor(
     name: string,
     email: string,
     password: string,
     birthday: Date,
-    status: string
+    status: string,
+    course: string,
+    disciplines: string[],
+    semester: number
   ) {
-    super(name, email, password, birthday, status);
-  }
-
-  get classroom(): string[] {
-    return this._classrooms;
-  }
-
-  addClassroom(classroom: string) {
-    this._classrooms.push(classroom);
+    super(name, email, password, birthday, status, disciplines);
+    this.course = course;
+    this.semester = semester;
   }
 }

@@ -32,7 +32,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatRadioModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule
  
   ],providers:[
     MatPaginatorIntl
@@ -51,7 +52,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatRadioModule,
     MatToolbarModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatToolbarModule
 
   ]
 })
