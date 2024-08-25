@@ -1,82 +1,92 @@
 <form id="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <mat-form-field class="form-input">
-    <mat-label>Name</mat-label>
-    <input matInput type="text" formControlName="nameRegisterField" placeholder="Ex. Fulano da Silva">
-    <button *ngIf="registerForm.get('nameRegisterField')?.value" 
-            matSuffix mat-icon-button aria-label="Clear" 
-            (click)="registerForm.get('nameRegisterField')?.reset()" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    <mat-hint>Enter your full name</mat-hint>
-    <mat-error *ngIf="registerForm.get('nameRegisterField')?.hasError('required')">
-      Name is <strong>required</strong>
-    </mat-error>
+      <mat-label>Name</mat-label>
+      <input matInput type="text" formControlName="nameRegisterField" placeholder="Ex. Fulano da Silva" />
+      <button *ngIf="registerForm.get('nameRegisterField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.get('nameRegisterField')?.reset()" type="button">
+          <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint>Enter your full name</mat-hint>
+      <mat-error *ngIf="registerForm.get('nameRegisterField')?.hasError('required')"> Name is <strong>required</strong> </mat-error>
   </mat-form-field>
-  
   <mat-form-field class="form-input">
-    <mat-label>Email</mat-label>
-    <input matInput type="text" formControlName="emailRegisterField" placeholder="Ex. abc@example.com">
-    <button  *ngIf="registerForm.get('emailRegisterField')?.value" 
-            matSuffix mat-icon-button aria-label="Clear" 
-            (click)="registerForm.get('emailRegisterField')?.reset()" type="button">
-      <mat-icon>close</mat-icon>
-    </button>
-    <mat-hint>The email must be valid and unique</mat-hint>
-    <mat-error *ngIf="registerForm.get('emailRegisterField')?.hasError('required')">
-      Email is <strong>required</strong>
-    </mat-error>
-    <mat-error *ngIf="registerForm.get('emailRegisterField')?.hasError('email') && !registerForm.get('emailRegisterField')?.hasError('required')">
-      Please enter a valid email address
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Password</mat-label>
-    <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="passwordRegisterField">
-    <button mat-icon-button matSuffix aria-label="Toggle password visibility" (click)="hidePassword = !hidePassword" type="button">
-      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
-    <mat-hint *ngIf="!registerForm.get('passwordRegisterField')?.value">Enter your password</mat-hint>
-    <mat-error *ngIf="registerForm.get('passwordRegisterField')?.hasError('required')">
-      Password is <strong>required</strong>
-    </mat-error>
-    <mat-error *ngIf="registerForm.get('passwordRegisterField')?.hasError('minlength')&& !registerForm.get('passwordRegisterField')?.hasError('required')">
-      Password must be at least <strong>6</strong> characters
-    </mat-error>
-  </mat-form-field>
-
-  <mat-form-field>
-    <mat-label>Repeat Password</mat-label>
-    <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="repeat_passwordRegisterField">
-    <button mat-icon-button matSuffix aria-label="Toggle password visibility" (click)="hidePassword = !hidePassword" type="button">
-      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
-    </button>
-    <mat-hint *ngIf="!registerForm.get('repeat_passwordRegisterField')?.value">Repeat the password</mat-hint>
-    <mat-error *ngIf="registerForm.get('repeat_passwordRegisterField')?.hasError('required')">
-      Repeat password is <strong>required</strong>
-    </mat-error>
-  </mat-form-field>
-
-  <div id="small-fields">
-    <mat-form-field appearance="fill">
-      <mat-label>Birthday</mat-label> 
-      <input matInput [matDatepicker]="picker" formControlName="birthdayRegisterField" placeholder="dd/mm/yyyy">
-  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-  <mat-datepicker #picker></mat-datepicker>
-      <mat-hint *ngIf="!registerForm.get('birthdayRegisterField')?.value">Select your birthday date</mat-hint>
-      <mat-error *ngIf="registerForm.get('birthdayRegisterField')?.hasError('required')">
-        Birthday is <strong>required</strong>
+      <mat-label>Email</mat-label>
+      <input matInput type="text" formControlName="emailRegisterField" placeholder="Ex. abc@example.com" />
+      <button *ngIf="registerForm.get('emailRegisterField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.get('emailRegisterField')?.reset()" type="button">
+          <mat-icon>close</mat-icon>
+      </button>
+      <mat-hint>The email must be valid and unique</mat-hint>
+      <mat-error *ngIf="registerForm.get('emailRegisterField')?.hasError('required')"> Email is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="registerForm.get('emailRegisterField')?.hasError('email') && !registerForm.get('emailRegisterField')?.hasError('required')">
+          Please enter a valid email address
       </mat-error>
-    </mat-form-field>
-
-    <mat-radio-group formControlName="statusRegisterField" aria-label="Select an option">
-      <mat-label>I am:</mat-label><br>
-      <mat-radio-button value="teacher">Teacher</mat-radio-button>
-      <mat-radio-button value="student">Student</mat-radio-button>
-    </mat-radio-group>
+  </mat-form-field>
+  <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="passwordRegisterField" />
+      <button mat-icon-button matSuffix aria-label="Toggle password visibility" (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-hint *ngIf="!registerForm.get('passwordRegisterField')?.value">Enter your password</mat-hint>
+      <mat-error *ngIf="registerForm.get('passwordRegisterField')?.hasError('required')"> Password is <strong>required</strong> </mat-error>
+      <mat-error *ngIf="registerForm.get('passwordRegisterField')?.hasError('minlength')&& !registerForm.get('passwordRegisterField')?.hasError('required')"> Password must be at least <strong>6</strong> characters </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+      <mat-label>Repeat Password</mat-label>
+      <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="repeat_passwordRegisterField" />
+      <button mat-icon-button matSuffix aria-label="Toggle password visibility" (click)="hidePassword = !hidePassword" type="button">
+          <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+      </button>
+      <mat-hint *ngIf="!registerForm.get('repeat_passwordRegisterField')?.value">Repeat the password</mat-hint>
+      <mat-error *ngIf="registerForm.get('repeat_passwordRegisterField')?.hasError('required')"> Repeat password is <strong>required</strong> </mat-error>
+  </mat-form-field>
+  <div id="small-fields">
+      <mat-form-field appearance="fill">
+          <mat-label>Birthday</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="birthdayRegisterField" placeholder="dd/mm/yyyy" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-hint *ngIf="!registerForm.get('birthdayRegisterField')?.value">Select your birthday date</mat-hint>
+          <mat-error *ngIf="registerForm.get('birthdayRegisterField')?.hasError('required')"> Birthday is <strong>required</strong> </mat-error>
+      </mat-form-field>
+      <mat-radio-group formControlName="statusRegisterField" (change)="onOptionStatusSelected()" aria-label="Select an option">
+          <label>I am:</label><br />
+          <mat-radio-button value="teacher">Teacher</mat-radio-button>
+          <mat-radio-button value="student">Student</mat-radio-button>
+      </mat-radio-group>
   </div>
-
+  <ng-container *ngIf="option_flag === 'teacher'; else studentTemplate">
+      <mat-form-field class="form-input">
+          <mat-label>Qualification</mat-label>
+          <input matInput type="text" formControlName="qualificationRegisterField" placeholder="Ex. Fulano da Silva" />
+          <button *ngIf="registerForm.get('qualificationRegisterField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.get('qualificationRegisterField')?.reset()" type="button">
+              <mat-icon>close</mat-icon>
+          </button>
+          <mat-hint>Enter your full qualification</mat-hint>
+          <mat-error *ngIf="registerForm.get('qualificationRegisterField')?.hasError('required')"> Qualification is <strong>required</strong> </mat-error>
+      </mat-form-field>
+  </ng-container>
+  <ng-template #studentTemplate>
+      <div id="small-fields">
+          <mat-form-field>
+              <mat-label>Favorite food</mat-label>
+              <mat-select formControlName="disciplineRegisterField" (selectionChange)="onOptionSelected()">
+                  @for (course of courses; track course) {
+                  <mat-option [value]="course.value">{{course.viewValue}}</mat-option>
+                  }
+              </mat-select>
+              <mat-hint>Select your course</mat-hint>
+              <mat-error *ngIf="registerForm.get('disciplineRegisterField')?.hasError('required')"> Discipline is <strong>required</strong> </mat-error>
+          </mat-form-field>
+          <mat-form-field id="semester">
+            <mat-select [disabled]="semester_input_flag" formControlName="semesterRegisterField">
+              <mat-option *ngFor="let option of semester_number; trackBy: trackOption" [value]="option">
+                {{ option }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerForm.get('semesterRegisterField')?.hasError('required')"></mat-error>
+          </mat-form-field>
+      </div>
+  </ng-template>
   <mat-divider></mat-divider>
-
   <button id="send-register" type="submit" mat-raised-button color="primary">Register</button>
 </form>

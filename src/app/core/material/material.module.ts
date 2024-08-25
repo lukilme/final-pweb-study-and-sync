@@ -14,6 +14,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [],
@@ -33,7 +34,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule
  
   ],providers:[
     MatPaginatorIntl
@@ -53,7 +55,8 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
     MatToolbarModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatSelectModule
 
   ]
 })

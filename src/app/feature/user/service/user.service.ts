@@ -11,9 +11,6 @@ import { UserStorageService } from "../../../core/storage/user-storage.service";
 import { Teacher } from "../../../shared/model/teacher.model";
 import { Student } from "../../../shared/model/student.model";
 
-
-
-
 @Injectable()
 export class UserService implements Service<User> {
   private URL_USER = 'http://localhost:3000/user';
@@ -45,31 +42,10 @@ export class UserService implements Service<User> {
   }
 
   register(userForm: UserRegisterData){
-
     UserValidator.registerValidate(userForm);
-    let newUser : User;
-    if(userForm.statusRegisterField=='teacher'){
-      newUser = new Teacher(
-        userForm.nameRegisterField,
-        userForm.emailRegisterField,
-        userForm.passwordRegisterField,
-        new Date(userForm.birthdayRegisterField),
-        'teacher',
-       'Computer Scientis',
-       []
-      );
-    }else{
-      newUser = new Student(
-        userForm.nameRegisterField,
-        userForm.emailRegisterField,
-        userForm.passwordRegisterField,
-        new Date(userForm.birthdayRegisterField),
-        'student',
-       'Internet System',
-       [],
-       4
-      );
-    }   
+    
+    let newUser : Teacher | Student = this.buildUser(userForm);
+
     this.create(newUser).subscribe({
       next: value => {
         console.log('Observable emitted the next value: ' + value);
@@ -101,6 +77,33 @@ export class UserService implements Service<User> {
         console.error('Observable emitted an error: ' + err);
       }
     });
+  }
+
+  buildUser(data : UserRegisterData): Teacher | Student{
+    let newUser : Teacher | Student;
+    if(data.statusRegisterField=='teacher'){
+      newUser = new Teacher(
+        data.nameRegisterField,
+        data.emailRegisterField,
+        data.passwordRegisterField,
+        new Date(data.birthdayRegisterField),
+        'teacher',
+       data.qualificationRegisterField,
+       []
+      );
+    }else{
+      newUser = new Student(
+        data.nameRegisterField,
+        data.emailRegisterField,
+        data.passwordRegisterField,
+        new Date(data.birthdayRegisterField),
+        'student',
+       data.disciplineRegisterField,
+       [],
+       parseInt(data.semesterRegisterField)
+      );
+    }   
+    return newUser;
   }
 
 }
