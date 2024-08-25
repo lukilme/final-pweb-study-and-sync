@@ -1,7 +1,7 @@
 <form id="form-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <mat-form-field class="form-input">
       <mat-label>Name</mat-label>
-      <input matInput type="text" formControlName="nameRegisterField" placeholder="Ex. Fulano da Silva" />
+      <input matInput type="text" formControlName="nameRegisterField" placeholder="Ex. Fulano da Silva"  maxlength="128"/>
       <button *ngIf="registerForm.get('nameRegisterField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.get('nameRegisterField')?.reset()" type="button">
           <mat-icon>close</mat-icon>
       </button>
@@ -10,7 +10,7 @@
   </mat-form-field>
   <mat-form-field class="form-input">
       <mat-label>Email</mat-label>
-      <input matInput type="text" formControlName="emailRegisterField" placeholder="Ex. abc@example.com" />
+      <input matInput type="text" formControlName="emailRegisterField" placeholder="Ex. abc@example.com"  maxlength="128"/>
       <button *ngIf="registerForm.get('emailRegisterField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.get('emailRegisterField')?.reset()" type="button">
           <mat-icon>close</mat-icon>
       </button>
@@ -22,7 +22,7 @@
   </mat-form-field>
   <mat-form-field>
       <mat-label>Password</mat-label>
-      <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="passwordRegisterField" />
+      <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="passwordRegisterField"  maxlength="64"/>
       <button mat-icon-button matSuffix aria-label="Toggle password visibility" (click)="hidePassword = !hidePassword" type="button">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
@@ -32,7 +32,7 @@
   </mat-form-field>
   <mat-form-field>
       <mat-label>Repeat Password</mat-label>
-      <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="repeat_passwordRegisterField" />
+      <input matInput placeholder="***********" [type]="hidePassword ? 'password' : 'text'" formControlName="repeat_passwordRegisterField"  maxlength="64" />
       <button mat-icon-button matSuffix aria-label="Toggle password visibility" (click)="hidePassword = !hidePassword" type="button">
           <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
@@ -57,7 +57,7 @@
   <ng-container *ngIf="option_flag === 'teacher'; else studentTemplate">
       <mat-form-field class="form-input">
           <mat-label>Qualification</mat-label>
-          <input matInput type="text" formControlName="qualificationRegisterField" placeholder="Ex. Fulano da Silva" />
+          <input matInput type="text" formControlName="qualificationRegisterField" placeholder="Ex. Teacher formed on UFPB"  maxlength="128"/>
           <button *ngIf="registerForm.get('qualificationRegisterField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="registerForm.get('qualificationRegisterField')?.reset()" type="button">
               <mat-icon>close</mat-icon>
           </button>
@@ -68,7 +68,7 @@
   <ng-template #studentTemplate>
       <div id="small-fields">
           <mat-form-field>
-              <mat-label>Favorite food</mat-label>
+              <mat-label>Select your course</mat-label>
               <mat-select formControlName="disciplineRegisterField" (selectionChange)="onOptionSelected()">
                   @for (course of courses; track course) {
                   <mat-option [value]="course.value">{{course.viewValue}}</mat-option>

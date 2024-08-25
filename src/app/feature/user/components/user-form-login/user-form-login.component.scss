@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 700px;
+    height: 600px;
    
     color:black !important;
 }
@@ -29,6 +29,9 @@
     color:rgb(197, 18, 18);
 }
 
+mat-icon{
+    cursor: pointer;
+}
 
 .centralazy{
     display: block;
@@ -39,7 +42,7 @@
 mat-form-field{
     display: block;
     width: 90%;
-    margin:10px auto 0px auto;
+    margin:5px auto 0px auto;
 }
 
 

@@ -77,10 +77,11 @@ export class UserFormRegisterComponent {
       ]),
       passwordRegisterField: new FormControl<string>("", [
         Validators.required,
-        Validators.minLength(6),
+        Validators.minLength(8),
       ]),
       repeat_passwordRegisterField: new FormControl<string>("",[
         Validators.required,
+        Validators.minLength(8)
       ]),
       statusRegisterField: new FormControl<string>("teacher",[
         Validators.required
@@ -98,6 +99,7 @@ export class UserFormRegisterComponent {
       semesterRegisterField: new FormControl<string>("0",[
         Validators.required]),
     });
+    this.onOptionStatusSelected();
   }
 
   backtothefuture(control : FormControl) : { [error: string]: boolean } | null{
@@ -113,7 +115,6 @@ export class UserFormRegisterComponent {
       try {
         this.service.register(formData);
         MessageSweetAlertService.sucesso("Registered successfully! 🎉✨")
-
       } catch (error: any) {
         MessageSweetAlertService.erro(error.message)
       }
@@ -157,7 +158,7 @@ export class UserFormRegisterComponent {
         this.registerForm.get('qualificationRegisterField')?.reset();
       }
     } else {
-      MessageSweetAlertService.erro("Erro na seleção de categoria");
+      MessageSweetAlertService.erro("Something wrong with category... sorry");
     }
   }
 }
