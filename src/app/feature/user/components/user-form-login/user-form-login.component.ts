@@ -54,17 +54,17 @@ export class UserFormLoginComponent {
                 }
                 break;
               default:
-                MessageSweetAlertService.erro("Unexpected error happened");
+                MessageSweetAlertService.error("Unexpected error happened");
                 console.error(error);
             }
           } else {
-            MessageSweetAlertService.erro("Unexpected error happened");
+            MessageSweetAlertService.error("Unexpected error happened");
             console.error(error);
           }
         }
       });
     } else {
-      MessageSweetAlertService.erro("Form fields were not filled out correctly");
+      MessageSweetAlertService.error("Form fields were not filled out correctly");
     }
   }
 }

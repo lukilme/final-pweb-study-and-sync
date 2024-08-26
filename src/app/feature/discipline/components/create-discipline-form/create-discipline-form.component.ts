@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DisciplineService } from '../../service/discipline.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -17,6 +17,8 @@ export class CreateDisciplineFormComponent {
     nameDisciplineField: FormControl<string | null>;
     descriptionDisciplineField: FormControl<string | null>;
   }>;
+
+
 
   constructor(
     private dialogRef: MatDialogRef<CreateDisciplineFormComponent>,
@@ -45,7 +47,7 @@ export class CreateDisciplineFormComponent {
       this.service.createDiscipline(newDiscipline).subscribe({
         next: () => {
           this.dialogRef.close();
-          MessageSweetAlertService.sucesso("Created successfully");
+          MessageSweetAlertService.success("Created successfully"); 
         },
         error: () => {
           console.log("Error");

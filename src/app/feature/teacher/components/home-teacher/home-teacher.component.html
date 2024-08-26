@@ -1,10 +1,8 @@
-
-
 <div id="home-teacher">
 
     <p>home-teacher works!</p>
-
-    <button mat-fab extended (click)="openCreationForm()">
+  
+    <button mat-fab extended  (click)="openCreationForm()">
         <mat-icon>add</mat-icon>
         Create
     </button>
@@ -12,6 +10,7 @@
         <mat-icon>search</mat-icon>
         Search
     </button>
-
-    <app-list-discipline></app-list-discipline>
-</div>
+  
+    <app-list-discipline [refreshListSubject]="refreshListSubject"></app-list-discipline>
+  </div>
+  

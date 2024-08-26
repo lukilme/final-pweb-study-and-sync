@@ -112,9 +112,9 @@ export class UserFormRegisterComponent {
       const formData: UserRegisterData = this.registerForm.value as UserRegisterData;
       try {
         this.service.register(formData);
-        MessageSweetAlertService.sucesso("Registered successfully! 🎉✨")
+        MessageSweetAlertService.success("Registered successfully! 🎉✨")
       } catch (error: any) {
-        MessageSweetAlertService.erro(error.message)
+        MessageSweetAlertService.error(error.message)
       }
     } else {
       console.log("Form is invalid!", this.registerForm.errors);
@@ -156,7 +156,7 @@ export class UserFormRegisterComponent {
         this.registerForm.get('qualificationRegisterField')?.reset();
       }
     } else {
-      MessageSweetAlertService.erro("Something wrong with category... sorry");
+      MessageSweetAlertService.error("Something wrong with category... sorry");
     }
   }
 }

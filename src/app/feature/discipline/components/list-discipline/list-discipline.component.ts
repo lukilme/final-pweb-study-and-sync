@@ -1,79 +1,103 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, Input, OnInit } from '@angular/core';
 import { DisciplineService } from '../../service/discipline.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Discipline } from '../../../../shared/model/discipline.model';
 import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
 import Swal from 'sweetalert2';
+import { BehaviorSubject } from 'rxjs';
+
 
 @Component({
   selector: 'app-list-discipline',
   templateUrl: './list-discipline.component.html',
-  styleUrls: ['./list-discipline.component.scss'] // Corrigido o nome da propriedade para styleUrls
+  styleUrls: ['./list-discipline.component.scss']
 })
 export class ListDisciplineComponent implements OnInit {
   disciplines: Discipline[] = [];
   totalItems: number = 0;
   pageSize: number = 10;
   currentPage: number = 1;
+  @Input()
+  refreshListSubject!: BehaviorSubject<boolean>;
 
-  constructor(private service: DisciplineService) {}
-
-  ngOnInit(): void {
-    this.loadDisciplines(this.pageSize, this.currentPage);
+  constructor(
+   private readonly disciplineService: DisciplineService,
+  ) {
+   
   }
+  ngOnInit() {
+    this.loadDisciplines()
+    this.refreshListSubject.subscribe(refresh => {
+      if (refresh) {
+        this.loadDisciplines();
+        this.refreshListSubject.next(false); // Resetar o sinal após atualizar
+      }
+    });
+  }
+
+
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
-    this.loadDisciplines(this.pageSize, this.currentPage);
+    this.loadDisciplines();
   }
 
-  addStudent(index:number) {
-    console.log("called")
+  addStudent(index: number): void {
+    const discipline = this.disciplines[index];
+
     Swal.fire({
-      title: 'Submit your Github username',
+      title: 'Send student email',
       input: 'text',
       inputAttributes: {
         autocapitalize: 'off'
       },
       showCancelButton: true,
-      confirmButtonText: 'Look up',
+      confirmButtonText: 'Add student',
       showLoaderOnConfirm: true,
-      preConfirm: (email: string) => {
-        return this.service.addStudentToDiscipline(email, this.disciplines[index].id);
-      },
+      preConfirm: (email: string) => this.disciplineService.addStudentToDiscipline(email, discipline.id),
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
-      if (result.isConfirmed && result.value) {
-        Swal.fire({
-          title: `${result.value.login}'s avatar`,
-          imageUrl: result.value.avatar_url
-        });
+      if (result.isConfirmed) {
+        MessageSweetAlertService.success('Student added successfully!');
       }
     });
   }
 
   onDeleteDiscipline(index: number): void {
     const disciplineToDelete = this.disciplines[index];
-    this.service.delete(disciplineToDelete.id).subscribe({
-      next: () => {
-        this.loadDisciplines(this.pageSize, this.currentPage);
-        MessageSweetAlertService.sucesso("Deleted discipline!")
-      },
-      error: () => {
-        console.error('Error deleting discipline');
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you really want to delete ${disciplineToDelete.name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.disciplineService.delete(disciplineToDelete.id).subscribe({
+          next: () => {
+            this.loadDisciplines();
+            MessageSweetAlertService.success('Discipline deleted successfully!');
+          },
+          error: (err) => {
+            console.error('Error deleting discipline:', err);
+            MessageSweetAlertService.error('Failed to delete discipline. Please try again.');
+          }
+        });
       }
     });
   }
 
-  private loadDisciplines(limit: number, page: number): void {
-    this.service.paginationDiscipline(limit, page).subscribe({
+  private loadDisciplines(): void {
+    this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({
       next: (response: any) => {
         this.disciplines = response.data;
         this.totalItems = response.items;
       },
-      error: () => {
-        console.error('Error loading disciplines');
+      error: (err) => {
+        console.error('Error loading disciplines:', err);
+        MessageSweetAlertService.error('Failed to load disciplines. Please try again.');
       }
     });
   }

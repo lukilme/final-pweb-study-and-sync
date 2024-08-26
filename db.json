@@ -139,6 +139,51 @@
       ],
       "color": "#FFFFFF",
       "creation_date": "2024-08-26T15:17:55.295Z"
+    },
+    {
+      "id": "6d5b",
+      "id_teacher": "3f30",
+      "name": "Matemática aplicada",
+      "description": "Discipline de matemática 2024.1",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "2024-08-26T22:07:46.181Z"
+    },
+    {
+      "id": "04d3",
+      "id_teacher": "3f30",
+      "name": "Portugues",
+      "description": "portughes muito legal",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "2024-08-26T22:13:16.043Z"
+    },
+    {
+      "id": "cc6e",
+      "id_teacher": "3f30",
+      "name": "dasdsadasdsad",
+      "description": "asdasdsadsadsaddasdas",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "2024-08-26T22:20:20.871Z"
+    },
+    {
+      "id": "539d",
+      "id_teacher": "3f30",
+      "name": "dasd sadsafwev23r3qr e",
+      "description": "radfsaerfgefgw sfgrs szf",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "2024-08-26T22:27:48.021Z"
+    },
+    {
+      "id": "2aa6",
+      "id_teacher": "3f30",
+      "name": "Classse da juliar",
+      "description": "dasdasdsaddsadsad",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "2024-08-26T22:37:38.657Z"
     }
   ]
 }

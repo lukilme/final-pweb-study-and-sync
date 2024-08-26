@@ -22,9 +22,4 @@ export class DisciplineCardComponent {
     this.delete.emit(this.index); 
   }
 
-  teste(){
-    console.log("dadsda")
-  }
-
-  
 }

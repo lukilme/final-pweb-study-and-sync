@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ServiceAbstract } from '../../../core/util/service.abstract';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { DisciplineStorageService } from '../../../core/storage/discipline-storage.service';
-import { Discipline } from '../../../shared/model/discipline.model';
 import { UserService } from '../../user/service/user.service';
+import { DisciplineStorageService } from '../../../core/storage/discipline-storage.service';
 import { DisciplineFormInterface } from '../../../core/interfaces/discipline.form.interface';
-import { Observable } from 'rxjs';
+import { Discipline } from '../../../shared/model/discipline.model';
 import { Student } from '../../../shared/model/student.model';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,7 +23,7 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     super(httpClient);
   }
 
-  paginationDiscipline(limit : number, page: number){   
+  paginationDiscipline(limit: number, page: number): Observable<Object> {   
     return this.pagination(limit, page, '-creation_date');
   }
 
@@ -37,61 +37,32 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     return this.create(discipline);
   }
 
-  deleteDiscipline(){
-
-  }
-
-  updateDiscipline(){
-
-  }
-
-  getAllDiscipline(){
+  getAllDiscipline(): Observable<Discipline[]> {
     return this.readAll();
   }
 
-  addStudentToDiscipline(email: string, id: string): void {
-    this.userService.readBy("email", email).subscribe({
-      next: (users: any) => {
-        const student: Student = users.find((user: { email: string; }) => user.email === email);
-  
-        if (student) {
-          this.read(id).subscribe({
-            next: (discipline: Discipline) => {
-              // Adiciona a disciplina ao estudante e vice-versa
-              student.disciplines.push(discipline.id);
-              discipline.students.push(student.id);
-  
-              // Atualiza o estudante no backend
-              this.userService.update(student,student.id).subscribe({
-                next: () => {
-                  // Atualiza a disciplina no backend
-                  this.update(discipline, discipline.id).subscribe({
-                    next: () => {
-                      console.log('Estudante adicionado à disciplina com sucesso!');
-                    },
-                    error: (err) => {
-                      console.error('Erro ao atualizar a disciplina:', err);
-                    }
-                  });
-                },
-                error: (err) => {
-                  console.error('Erro ao atualizar o estudante:', err);
-                }
-              });
-            },
-            error: (err) => {
-              console.error('Erro ao ler a disciplina:', err);
-            }
-          });
-        } else {
-          console.error('Estudante não encontrado com o email fornecido.');
-        }
-      },
-      error: (err) => {
-        console.error('Erro ao ler o estudante:', err);
-      }
-    });
+  addStudentToDiscipline(email: string, id: string): Observable<Discipline|undefined> {
+    return this.userService.readBy("email", email).pipe(
+      map(users => users.find((user: { email: string }) => user.email === email) as Student),
+      switchMap(student => 
+        student ? this.read(id).pipe(
+          switchMap(discipline => {
+            student.disciplines.push(discipline.id);
+            discipline.students.push(student.id);
+
+            return this.userService.update(student, student.id).pipe(
+              switchMap(() => this.update(discipline, discipline.id)),
+              tap(() => console.log('Estudante adicionado à disciplina com sucesso!'))
+            );
+          })
+        ) : of(void 0).pipe(
+          tap(() => console.error('Estudante não encontrado com o email fornecido.'))
+        )
+      ),
+      catchError(err => {
+        console.error('Erro durante o processo:', err);
+        return of(void 0);
+      })
+    );
   }
-  
-  
 }

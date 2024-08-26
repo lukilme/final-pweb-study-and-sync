@@ -17,7 +17,7 @@ export class MessageSweetAlertService {
       });
   }
 
-  static erro(mensagem: string) {
+  static error(mensagem: string) {
       Swal.fire({
           title: 'Error!',
           text: mensagem,
@@ -26,7 +26,7 @@ export class MessageSweetAlertService {
       });
   }
 
-  static sucesso(mensagem: string) {
+  static success(mensagem: string) {
       Swal.fire({
         title: 'Success!',
         text: mensagem,
