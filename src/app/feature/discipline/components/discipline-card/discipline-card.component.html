@@ -1,8 +1,15 @@
-<p>discipline-card works!</p>
-<div>
-    <p>{{discipline.id}}</p>
-    <p>{{discipline.name}}</p>
-    <p>{{discipline.description}}</p>
-    <button>Add student</button>
-    <button (click)="deleteThis()">Delete discipline</button>
-</div>
+<mat-card class="discipline-card">
+    <mat-card-header>
+      <div mat-card-avatar class="discipline-avatar"></div>
+      <mat-card-title>{{discipline.name}}</mat-card-title>
+      <mat-card-subtitle>ID: {{discipline.id}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{discipline.description}}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button color="primary">Add student</button>
+      <button mat-button color="warn" (click)="deleteThis()">Delete discipline</button>
+    </mat-card-actions>
+</mat-card>
+  

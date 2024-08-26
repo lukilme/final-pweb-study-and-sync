@@ -1,11 +1,16 @@
-<div>
-    <div *ngFor="let discipline of disciplines; let i = index">
-        <app-discipline-card
-          [discipline]="discipline"
-          [index]="i"
-          (delete)="onDeleteDiscipline($event)">
-        </app-discipline-card>
-      </div>
-    <mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page">
-    </mat-paginator>
+<div class="discipline-list">
+  <mat-card *ngFor="let discipline of disciplines; let i = index" class="discipline-card">
+    <mat-card-header>
+      <mat-card-title>{{ discipline.name }}</mat-card-title>
+      <mat-card-subtitle>ID: {{ discipline.id }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{ discipline.description }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Add Student</button>
+      <button mat-raised-button color="warn" (click)="onDeleteDiscipline(i)">Delete Discipline</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
