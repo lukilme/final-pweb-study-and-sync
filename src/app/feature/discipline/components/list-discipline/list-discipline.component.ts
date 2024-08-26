@@ -3,6 +3,7 @@ import { DisciplineService } from '../../service/discipline.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Discipline } from '../../../../shared/model/discipline.model';
 import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-discipline',
@@ -25,6 +26,31 @@ export class ListDisciplineComponent implements OnInit {
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
     this.loadDisciplines(this.pageSize, this.currentPage);
+  }
+
+  addStudent(index:number) {
+    console.log("called")
+    Swal.fire({
+      title: 'Submit your Github username',
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Look up',
+      showLoaderOnConfirm: true,
+      preConfirm: (email: string) => {
+        return this.service.addStudentToDiscipline(email, this.disciplines[index].id);
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    }).then((result) => {
+      if (result.isConfirmed && result.value) {
+        Swal.fire({
+          title: `${result.value.login}'s avatar`,
+          imageUrl: result.value.avatar_url
+        });
+      }
+    });
   }
 
   onDeleteDiscipline(index: number): void {

@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Discipline } from '../../../../shared/model/discipline.model';
+import Swal from 'sweetalert2';
+import { DisciplineService } from '../../service/discipline.service';
 
 @Component({
   selector: 'app-discipline-card',
@@ -11,8 +13,18 @@ export class DisciplineCardComponent {
   @Input() index!: number;
   @Output() delete = new EventEmitter<number>();
 
+  constructor(private service : DisciplineService){
+
+  }
+
   deleteThis(){
     console.log(this.discipline.id);
     this.delete.emit(this.index); 
   }
+
+  teste(){
+    console.log("dadsda")
+  }
+
+  
 }

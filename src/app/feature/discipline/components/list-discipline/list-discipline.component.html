@@ -8,7 +8,7 @@
       <p>{{ discipline.description }}</p>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary">Add Student</button>
+      <button mat-raised-button color="primary" (click)="addStudent(i)">Add Student</button>
       <button mat-raised-button color="warn" (click)="onDeleteDiscipline(i)">Delete Discipline</button>
     </mat-card-actions>
   </mat-card>

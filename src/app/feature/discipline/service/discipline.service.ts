@@ -7,6 +7,7 @@ import { Discipline } from '../../../shared/model/discipline.model';
 import { UserService } from '../../user/service/user.service';
 import { DisciplineFormInterface } from '../../../core/interfaces/discipline.form.interface';
 import { Observable } from 'rxjs';
+import { Student } from '../../../shared/model/student.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,4 +48,50 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
   getAllDiscipline(){
     return this.readAll();
   }
+
+  addStudentToDiscipline(email: string, id: string): void {
+    this.userService.readBy("email", email).subscribe({
+      next: (users: any) => {
+        const student: Student = users.find((user: { email: string; }) => user.email === email);
+  
+        if (student) {
+          this.read(id).subscribe({
+            next: (discipline: Discipline) => {
+              // Adiciona a disciplina ao estudante e vice-versa
+              student.disciplines.push(discipline.id);
+              discipline.students.push(student.id);
+  
+              // Atualiza o estudante no backend
+              this.userService.update(student,student.id).subscribe({
+                next: () => {
+                  // Atualiza a disciplina no backend
+                  this.update(discipline, discipline.id).subscribe({
+                    next: () => {
+                      console.log('Estudante adicionado à disciplina com sucesso!');
+                    },
+                    error: (err) => {
+                      console.error('Erro ao atualizar a disciplina:', err);
+                    }
+                  });
+                },
+                error: (err) => {
+                  console.error('Erro ao atualizar o estudante:', err);
+                }
+              });
+            },
+            error: (err) => {
+              console.error('Erro ao ler a disciplina:', err);
+            }
+          });
+        } else {
+          console.error('Estudante não encontrado com o email fornecido.');
+        }
+      },
+      error: (err) => {
+        console.error('Erro ao ler o estudante:', err);
+      }
+    });
+  }
+  
+  
 }
