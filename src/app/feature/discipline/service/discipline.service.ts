@@ -6,7 +6,7 @@ import { DisciplineStorageService } from '../../../core/storage/discipline-stora
 import { DisciplineFormInterface } from '../../../core/interfaces/discipline.form.interface';
 import { Discipline } from '../../../shared/model/discipline.model';
 import { Student } from '../../../shared/model/student.model';
-import { Observable, of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
@@ -41,28 +41,27 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     return this.readAll();
   }
 
-  addStudentToDiscipline(email: string, id: string): Observable<Discipline|undefined> {
-    return this.userService.readBy("email", email).pipe(
-      map(users => users.find((user: { email: string }) => user.email === email) as Student),
-      switchMap(student => 
-        student ? this.read(id).pipe(
-          switchMap(discipline => {
-            student.disciplines.push(discipline.id);
-            discipline.students.push(student.id);
+  
+addStudentToDiscipline(email: string, id: string): Observable<Discipline | undefined> {
+  return this.userService.readBy("email", email).pipe(
+    map(users => users.find((user: { email: string }) => user.email === email) as Student),
+    switchMap(student => 
+      student ? this.read(id).pipe(
+        switchMap(discipline => {
+          student.disciplines.push(discipline.id);
+          discipline.students.push(student.id);
 
-            return this.userService.update(student, student.id).pipe(
-              switchMap(() => this.update(discipline, discipline.id)),
-              tap(() => console.log('Estudante adicionado à disciplina com sucesso!'))
-            );
-          })
-        ) : of(void 0).pipe(
-          tap(() => console.error('Estudante não encontrado com o email fornecido.'))
-        )
-      ),
-      catchError(err => {
-        console.error('Erro durante o processo:', err);
-        return of(void 0);
-      })
-    );
-  }
+          return this.userService.update(student, student.id).pipe(
+            switchMap(() => this.update(discipline, discipline.id)),
+            tap(() => console.log('Student successfully added to subject'))
+          );
+        })
+      ) : throwError(() => new Error('Student not found with this email')) // Exceção quando o email não é encontrado
+    ),
+    catchError(err => {
+      console.error("Error adding student:", err.message);
+      return throwError(() => new Error("Unexpected error: " + err.message));
+    })
+  );
+}
 }

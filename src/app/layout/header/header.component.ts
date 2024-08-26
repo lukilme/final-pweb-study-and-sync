@@ -16,11 +16,17 @@ export class HeaderComponent implements OnInit {
     private userStorage: UserStorageService,
     private router: Router
   ) {
-    this.currentButton = "user";
+    if(location.pathname=='/home' || location.pathname == '/'){
+      this.currentButton = "user"
+    }else{
+      this.currentButton = "home";
+    }
   }
 
   ngOnInit(): void {
     this.isLogged();
+ 
+  
   }
 
   isLogged(): void {
@@ -29,8 +35,10 @@ export class HeaderComponent implements OnInit {
       console.log(location.pathname)
       if(location.pathname=='/'){
         this.router.navigate(['home']);
+       
       }else{
         this.router.navigate([location.pathname]);
+  
       }
     } else {
       if (this.router.url !== '/') { 

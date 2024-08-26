@@ -18,7 +18,7 @@ export class ListDisciplineComponent implements OnInit {
   pageSize: number = 10;
   currentPage: number = 1;
   trackByDiscipline(index: number, discipline: Discipline): string {
-    return discipline.id; // ou qualquer outra propriedade única que identifique a disciplina
+    return discipline.id;
   }
   @Input()
   refreshListSubject!: BehaviorSubject<boolean>;
@@ -33,7 +33,7 @@ export class ListDisciplineComponent implements OnInit {
     this.refreshListSubject.subscribe(refresh => {
       if (refresh) {
         this.loadDisciplines();
-        this.refreshListSubject.next(false); // Resetar o sinal após atualizar
+        this.refreshListSubject.next(false); 
       }
     });
   }
@@ -58,10 +58,13 @@ export class ListDisciplineComponent implements OnInit {
       showCancelButton: true,
       confirmButtonText: 'Add student',
       showLoaderOnConfirm: true,
-      preConfirm: (email: string) => this.disciplineService.addStudentToDiscipline(email, discipline.id),
+      preConfirm: (email: string) => 
+        this.disciplineService.addStudentToDiscipline(email, discipline.id).toPromise().catch(error => {
+          Swal.showValidationMessage(error.message);
+        }),
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && !Swal.getValidationMessage()) {
         MessageSweetAlertService.success('Student added successfully!');
       }
     });

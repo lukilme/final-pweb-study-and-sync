@@ -1,25 +1,22 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Discipline } from '../../../../shared/model/discipline.model';
-import Swal from 'sweetalert2';
-import { DisciplineService } from '../../service/discipline.service';
 
 @Component({
   selector: 'app-discipline-card',
   templateUrl: './discipline-card.component.html',
-  styleUrl: './discipline-card.component.scss'
+  styleUrls: ['./discipline-card.component.scss']
 })
 export class DisciplineCardComponent {
-  @Input() discipline!: Discipline; 
+  @Input() discipline!: Discipline;
   @Input() index!: number;
-  @Output() delete = new EventEmitter<number>();
+  @Output() addStudentEvent = new EventEmitter<number>();
+  @Output() deleteDisciplineEvent = new EventEmitter<number>();
 
-  constructor(private service : DisciplineService){
-
+  addStudent(): void {
+    this.addStudentEvent.emit(this.index);
   }
 
-  deleteThis(){
-    console.log(this.discipline.id);
-    this.delete.emit(this.index); 
+  deleteThis(): void {
+    this.deleteDisciplineEvent.emit(this.index);
   }
-
 }

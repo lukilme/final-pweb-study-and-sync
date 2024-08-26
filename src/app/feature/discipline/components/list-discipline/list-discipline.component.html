@@ -1,11 +1,10 @@
 <div class="discipline-list">
-  <ng-container *ngIf="disciplines.length; else emptyList">
-    <app-discipline-card *ngFor="let discipline of disciplines; trackBy: trackByDiscipline" 
-      [discipline]="discipline">
-    </app-discipline-card>
-  </ng-container>
-  <ng-template #emptyList>
-    <h2>Empty</h2>
-  </ng-template>
-  <mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+  <app-discipline-card 
+  *ngFor="let discipline of disciplines; let i = index; trackBy: trackByDiscipline" 
+  [discipline]="discipline" 
+  [index]="i"
+  (addStudentEvent)="addStudent($event)" 
+  (deleteDisciplineEvent)="onDeleteDiscipline($event)">
+</app-discipline-card>
+<mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>
