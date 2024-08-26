@@ -63,9 +63,7 @@ export class UserFormRegisterComponent {
   }>;
 
   hidePassword: boolean = true;
- 
-
-
+  
   constructor(private service: UserService) {
     this.registerForm = new FormGroup({
       nameRegisterField: new FormControl<string>("", [

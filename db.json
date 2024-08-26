@@ -52,7 +52,7 @@
       "status": "student",
       "disciplines": [],
       "course": "Marketing",
-      "semester": null
+      "semester": 5
     },
     {
       "id": "6c8f",
@@ -104,6 +104,25 @@
       "status": "teacher",
       "disciplines": [],
       "qualification": "Sabe fazer miojo"
+    },
+    {
+      "id": "f497",
+      "name": "Gustavo",
+      "email": "gustavo@gmail.com",
+      "password": "lA1111111111111111?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Marketing",
+      "semester": 7
+    }
+  ],
+  "discipline": [
+    {
+      "id": "ec88",
+      "id_teacher": "asda",
+      "name": "adsad",
+      "description": "fdfasdsad"
     }
   ]
 }

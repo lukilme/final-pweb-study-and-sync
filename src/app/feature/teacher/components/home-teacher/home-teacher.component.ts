@@ -1,7 +1,7 @@
 import { Component, inject, model, signal } from '@angular/core';
 import { UserStorageService } from '../../../../core/storage/user-storage.service';
 import { MatDialog } from '@angular/material/dialog';
-import { CreateDisciplineFormComponent } from '../create-discipline-form/create-discipline-form.component';
+import { CreateDisciplineFormComponent } from '../../../discipline/components/create-discipline-form/create-discipline-form.component';
 
 @Component({
   selector: 'app-home-teacher',

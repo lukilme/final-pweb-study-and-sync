@@ -36,7 +36,6 @@ export class UserFormLoginComponent {
       const formData: UserLoginData = this.loginForm.value as UserLoginData;
       this.service.login(formData).subscribe({
         next: () => {
-          
           this.route.navigate(["home"]);
         },
         error: (error: any) => {

@@ -14,7 +14,6 @@ import { FormException } from "../../../core/exception/form.exception";
 
 @Injectable()
 export class UserService extends ServiceAbstract<User> {
-  // Define the target URL for HTTP requests
   override URL_TARGET = "http://localhost:3000/user";
 
   constructor(
@@ -30,21 +29,16 @@ export class UserService extends ServiceAbstract<User> {
    * @param userForm - The registration data to validate and use for creating a user.
    */
   register(userForm: UserRegisterData) {
-    // Validate registration data
     UserValidator.registerValidate(userForm);
 
-    // Build user object based on registration data
     const newUser: Teacher | Student = this.buildUser(userForm);
 
-    // Create the user and handle the observable response
     this.create(newUser).subscribe({
       next: (value) => {
         console.log("User successfully created:", value);
-        // Additional success logic can be added here if needed
       },
       error: (err) => {
         console.error("Error occurred while creating user:", err);
-        // Handle error scenario
       },
     });
   }
@@ -55,27 +49,22 @@ export class UserService extends ServiceAbstract<User> {
    * @returns An observable indicating the login outcome.
    */
   login(loginData: UserLoginData) {
-    // Validate login data
     UserValidator.loginValidate(loginData);
 
-    // Read user by email and handle the response
     return this.readBy("email", loginData.emailLoginField).pipe(
       catchError(err => {
         console.error("Error occurred while fetching users:", err);
-        return throwError(() => err); // Re-throw the error for further handling
+        return throwError(() => err); 
       }),
       map(users => {
         if (users.length > 0) {
-          // Check if the password matches
           if (users[0].password === loginData.passwordLoginField) {
-            // Navigate to home page on successful login
-            this.route.navigate(["home"]);
+            this.storage.saveUser(users[0]);
+
           } else {
-            // Throw an exception if the password is incorrect
             throw new FormException("WrongPassword", 'PASSWORD');
           }
         } else {
-          // Throw an exception if the user is not found
           throw new FormException("UserNotFound", 'EMAIL');
         }
       })

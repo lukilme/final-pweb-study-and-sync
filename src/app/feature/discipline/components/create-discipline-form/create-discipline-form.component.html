@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>Create Discipline</h2>
+<mat-dialog-content id="form-create-discipline">
+    <mat-form-field appearance="outline">
+        <mat-label>Name:</mat-label>
+        <input matInput />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Description:</mat-label>
+        <textarea matInput [maxLength]="textareaMaxLength" (resize)="true"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+    <button class="button-special" id="cancel-button" mat-button mat-dialog-close>Cancel</button>
+    <button class="button-special" id="create-button" mat-button (click)="createDiscipline()" cdkFocusInitial>Create</button>
+</mat-dialog-actions>
