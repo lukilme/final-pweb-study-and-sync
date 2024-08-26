@@ -1,43 +1,60 @@
 import { Component, OnInit } from '@angular/core';
-import {  UserStorageService } from '../../core/storage/user-storage.service';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs';
+import { UserStorageService } from '../../core/storage/user-storage.service';
+import { Router } from '@angular/router';
 import { User } from '../../shared/model/user.model';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  styleUrls: ['./header.component.scss'] 
 })
 export class HeaderComponent implements OnInit {
   currentUser: User | null | undefined;
+  currentButton: string;
 
   constructor(
     private userStorage: UserStorageService,
-    private router: Router,
-  ) {}
+    private router: Router
+  ) {
+    this.currentButton = "user";
+  }
 
   ngOnInit(): void {
-    this.router.events.pipe(
-        filter(event => event instanceof NavigationEnd)
-      ).subscribe((event: NavigationEnd) => {
-        console.log('A URL mudou para:', event.urlAfterRedirects);
-        this.isLogged();
-      });
     this.isLogged();
   }
 
-  isLogged(){
+  isLogged(): void {
     this.currentUser = this.userStorage.getUser();
-    if (this.currentUser!=null) {
-      this.router.navigate(['home']);
+    if (this.currentUser != null) {
+      console.log(location.pathname)
+      if(location.pathname=='/'){
+        this.router.navigate(['home']);
+      }else{
+        this.router.navigate([location.pathname]);
+      }
     } else {
-      this.router.navigate(['']);
+      if (this.router.url !== '/') { 
+        this.router.navigate(['']);
+      }
     }
   }
 
-  logout(){
+  logout(): void {
     this.userStorage.clearAllData();
-    this.isLogged();
+    this.router.navigate(['']);
+  }
+
+  changePerfil(): void {
+    if (this.currentUser) { 
+      this.router.navigate([`user/${this.currentUser.id}`]);
+      this.currentButton = 'home';
+    }
+  }
+
+  changeHome(){
+    if (this.currentUser) { 
+      this.router.navigate([`home`]);
+      this.currentButton = 'user';
+    }
   }
 }

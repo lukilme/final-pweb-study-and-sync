@@ -5,36 +5,10 @@
     padding: 16px;
   }
   
-  .discipline-card {
-    background-color: #f3f3f3;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
   
-    &:hover {
-      transform: translateY(-5px);
-    }
-  
-    mat-card-header {
-      background-color: #4caf50;
-      color: white;
-      border-radius: 8px 8px 0 0;
-    }
-  
-    mat-card-actions {
-      display: flex;
-      justify-content: flex-end;
-      padding: 8px;
-  
-      button {
-        margin-left: 8px;
-      }
-    }
-  }
   
   mat-paginator {
     margin-top: 16px;
     background-color: #e0e0e0;
     border-radius: 8px;
   }
-  

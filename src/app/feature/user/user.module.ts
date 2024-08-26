@@ -16,6 +16,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TeacherModule } from '../teacher/teacher.module';
 import { StudentModule } from '../student/student.module';
 import { HomeComponent } from './components/home/home.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+
 
 
 
@@ -39,7 +41,8 @@ export const MY_FORMATS = {
     UserFormRegisterComponent,
     UserFormLoginComponent,
     UserFormComponent,
-    HomeComponent
+    HomeComponent,
+    PerfilComponent
   ],
   providers:[
     UserService,
@@ -60,7 +63,7 @@ export const MY_FORMATS = {
   ],
   exports:[
     UserFormComponent,
-    HomeComponent
+    HomeComponent,
   ]
 })
 export class UserModule {}

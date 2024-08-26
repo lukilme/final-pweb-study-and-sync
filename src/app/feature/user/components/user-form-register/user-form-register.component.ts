@@ -118,6 +118,7 @@ export class UserFormRegisterComponent {
       }
     } else {
       console.log("Form is invalid!", this.registerForm.errors);
+      MessageSweetAlertService.error("Form is invalid!")
     }
   }
   trackOption(index: number, option: any): any {
@@ -125,7 +126,7 @@ export class UserFormRegisterComponent {
   }
 
   onOptionSelected() {
-    console.log("okasd")
+
     const selectedCourse = this.courses.find((course) => course.value === this.registerForm.get("disciplineRegisterField")?.value)
     if (selectedCourse) {
       this.semester_number = [];
@@ -152,7 +153,6 @@ export class UserFormRegisterComponent {
         this.registerForm.get('disciplineRegisterField')?.setValue("Internet systems");
         this.onOptionSelected();
         this.registerForm.get('semesterRegisterField')?.setValue("1");
-        console.log(this.registerForm.get('disciplineRegisterField')?.value);
         this.registerForm.get('qualificationRegisterField')?.reset();
       }
     } else {

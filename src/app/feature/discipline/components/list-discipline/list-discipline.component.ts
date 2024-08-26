@@ -17,6 +17,9 @@ export class ListDisciplineComponent implements OnInit {
   totalItems: number = 0;
   pageSize: number = 10;
   currentPage: number = 1;
+  trackByDiscipline(index: number, discipline: Discipline): string {
+    return discipline.id; // ou qualquer outra propriedade única que identifique a disciplina
+  }
   @Input()
   refreshListSubject!: BehaviorSubject<boolean>;
 
