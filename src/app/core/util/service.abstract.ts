@@ -75,14 +75,15 @@ export abstract class ServiceAbstract<T> implements ServiceInterface<T> {
   }
 
   /**
-   * Retrieves paginated data from the target URL.
-   * @param limit - The number of items per page.
-   * @param page - The current page number (1-based).
-   * @returns An Observable that emits an array of data objects of type T corresponding to the specified page and limit.
-   */
-  pagination(limit: number, page: number): Observable<Object> {
-    return this.httpClient.get<Object>(
-      `${this.URL_TARGET}?_page=${page}&_per_page=${limit}`
-    );
-  }
+ * Retrieves paginated data from the target URL.
+ * @param limit - The number of items per page.
+ * @param page - The current page number (1-based).
+ * @param sortField - The field by which the data should be sorted (optional).
+ * @returns An Observable that emits an array of data objects of type T corresponding to the specified page and limit.
+ */
+pagination(limit: number, page: number, sortField?: string): Observable<Object> {
+  const sortParam = sortField ? `&_sort=${sortField}` : '';
+  return this.httpClient.get<Object>(
+    `${this.URL_TARGET}?_page=${page}&_per_page=${limit}${sortParam}&_order=asc`
+  )}
 }

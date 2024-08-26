@@ -1,3 +1,4 @@
+<div id="content-central">
 <ng-container *ngIf="actual_user?.status === 'teacher'; else studentTemplate">
     <app-home-teacher></app-home-teacher>
   </ng-container>
@@ -5,4 +6,4 @@
   <ng-template #studentTemplate>
     <app-home-student></app-home-student>
   </ng-template>
-  
+</div>

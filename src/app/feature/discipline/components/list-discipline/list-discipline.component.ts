@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DisciplineService } from '../../service/discipline.service';
 import { PageEvent } from '@angular/material/paginator';
 import { Discipline } from '../../../../shared/model/discipline.model';
+import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
 
 @Component({
   selector: 'app-list-discipline',
@@ -31,6 +32,7 @@ export class ListDisciplineComponent implements OnInit {
     this.service.delete(disciplineToDelete.id).subscribe({
       next: () => {
         this.loadDisciplines(this.pageSize, this.currentPage);
+        MessageSweetAlertService.sucesso("Deleted discipline!")
       },
       error: () => {
         console.error('Error deleting discipline');

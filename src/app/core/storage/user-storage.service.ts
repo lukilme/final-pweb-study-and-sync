@@ -6,7 +6,7 @@ export interface SavedUser {
   name: string;
   status: string;
   birthday: Date;
-
+  disciplines: string[]
 }
 
 @Injectable({ providedIn: 'root' }) 
@@ -20,6 +20,7 @@ export class UserStorageService {
       name: user.name,
       status: user.status,
       birthday: user.birthday, 
+      disciplines: user.disciplines
     };
 
     const jsonData = JSON.stringify(savedUser);

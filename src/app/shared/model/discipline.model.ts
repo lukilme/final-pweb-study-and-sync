@@ -7,11 +7,13 @@ export class Discipline{
     description: string;
     students: string[] = [];
     color: string;
+    creation_date : Date;
 
-    constructor(id_teacher: string, name: string, description: string, color:string){
+    constructor(id_teacher: string, name: string, description: string, date: Date, color:string = "#FFFFFF"){
         this.id_teacher = id_teacher;
         this.name = name;
         this.description = description;
         this.color = color;
+        this.creation_date = date;
     }
 }

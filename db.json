@@ -119,106 +119,22 @@
   ],
   "discipline": [
     {
-      "id": "f864",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
+      "id": "7efc",
+      "id_teacher": "3f30",
+      "name": "ServerServer",
+      "description": "ServerServerServerServerServerServer",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "1024-07-26T14:19:28.415Z"
     },
     {
-      "id": "f8e6",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "8215",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "0d60",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "c0d1",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "9422",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "a5d9",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "3257",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "c861",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "bdd6",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "54cf",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "6631",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "d85a",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "21b5",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "074d",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    },
-    {
-      "id": "ef3f",
-      "id_teacher": "asda",
-      "name": "adsad",
-      "description": "fdfasdsad"
-    }
-  ],
-  "config": [
-    {
-      "count_users": 10,
-      "count_discipline": 20
+      "id": "547a",
+      "id_teacher": "3f30",
+      "name": "sadsadsadsad",
+      "description": "sadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsad",
+      "students": [],
+      "color": "#FFFFFF",
+      "creation_date": "2024-08-26T14:19:56.142Z"
     }
   ]
 }
