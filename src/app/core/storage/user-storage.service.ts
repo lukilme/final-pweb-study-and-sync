@@ -39,6 +39,7 @@ export class UserStorageService {
       console.error('Error parsing stored user data:', error);
       return null;
     }
+    
   }
   clearAllData(): void {
     localStorage.clear();

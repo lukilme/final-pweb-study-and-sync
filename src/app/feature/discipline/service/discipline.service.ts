@@ -13,15 +13,17 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
 
   constructor(
     httpClient: HttpClient,
-    private route: Router,
     private storage: DisciplineStorageService
   ) {
     super(httpClient);
   }
 
+  paginationDiscipline(limit : number, page: number){   
+    return this.pagination(limit, page);
+  }
 
   createDiscipline(){
-    const discipline = new Discipline("asda","adsad","fdfasdsad");
+    const discipline = new Discipline("asda","adsad","fdfasdsad", " adsaasad");
     console.log("okok")
     return this.create(discipline);
   }

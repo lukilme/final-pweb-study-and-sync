@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DisciplineService } from '../../service/discipline.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
 
 
 @Component({
@@ -35,6 +36,7 @@ createDiscipline() {
     this.service.createDiscipline().subscribe({
       next:()=>{
         this.dialogRef.close();
+        MessageSweetAlertService.sucesso("Create successully")
       },
       error: ()=>{
         console.log("erro");

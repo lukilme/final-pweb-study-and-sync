@@ -73,4 +73,16 @@ export abstract class ServiceAbstract<T> implements ServiceInterface<T> {
   readBy(key: string, value: string): Observable<T[]> {
     return this.httpClient.get<T[]>(`${this.URL_TARGET}?${key}=${value}`);
   }
+
+  /**
+   * Retrieves paginated data from the target URL.
+   * @param limit - The number of items per page.
+   * @param page - The current page number (1-based).
+   * @returns An Observable that emits an array of data objects of type T corresponding to the specified page and limit.
+   */
+  pagination(limit: number, page: number): Observable<Object> {
+    return this.httpClient.get<Object>(
+      `${this.URL_TARGET}?_page=${page}&_per_page=${limit}`
+    );
+  }
 }

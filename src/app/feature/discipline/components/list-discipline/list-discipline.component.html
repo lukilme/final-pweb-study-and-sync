@@ -1,4 +1,11 @@
 <div>
-    <mat-paginator [length]="{total_disciplines}" [pageSize]="10" aria-label="Select page">
+    <div *ngFor="let discipline of disciplines; let i = index">
+        <app-discipline-card
+          [discipline]="discipline"
+          [index]="i"
+          (delete)="onDeleteDiscipline($event)">
+        </app-discipline-card>
+      </div>
+    <mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page">
     </mat-paginator>
 </div>
