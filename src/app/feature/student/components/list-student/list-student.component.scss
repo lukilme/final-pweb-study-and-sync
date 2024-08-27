@@ -1,3 +1,14 @@
 #list-student{
-    margin:40px auto;
-}
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 30px auto;
+    width: 90%;
+  }
+  
+  .student-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  
