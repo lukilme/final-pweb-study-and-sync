@@ -6,6 +6,7 @@ import { MessageSweetAlertService } from '../../../../shared/service/message-swe
 import { UserStorageService } from '../../../../core/storage/user-storage.service';
 import { DisciplineFormInterface, DisciplineFormInterfaceCreated } from '../../../../core/interfaces/discipline.form.interface';
 import { Discipline } from '../../../../shared/model/discipline.model';
+import { User } from '../../../../shared/model/user.model';
 
 @Component({
   selector: 'app-create-discipline-form',
@@ -86,13 +87,28 @@ export class CreateDisciplineFormComponent {
       this.createFormDiscipline.markAllAsTouched();
       return;
     }
-
+  
     const disciplineData = this.getFormValues();
-    const serviceMethod = this.editMode ? this.service.updateDiscipline(disciplineData) : this.service.createDiscipline(disciplineData);
-
+    const serviceMethod = this.editMode 
+      ? this.service.updateDiscipline(disciplineData) 
+      : this.service.createDiscipline(disciplineData);
+      
     serviceMethod.subscribe({
-      next: () => this.handleSuccess(),
-      error: () => console.log("Error")
+      next: (response: Object | null) => {
+        this.handleSuccess();
+      },
+      error: (err: any) => {
+        if(this.editMode){
+          MessageSweetAlertService.error("Error when updating course");
+        }else{
+          MessageSweetAlertService.error("Error when creating discipline");
+        }
+      },
+      complete: () => {
+        console.log("feito");
+      }
     });
   }
+  
+  
 }

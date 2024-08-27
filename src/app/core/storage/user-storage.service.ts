@@ -20,7 +20,7 @@ export class UserStorageService {
       name: user.name,
       status: user.status,
       birthday: user.birthday, 
-      disciplines: user.disciplines
+      disciplines: user.disciplines,
     };
 
     const jsonData = JSON.stringify(savedUser);

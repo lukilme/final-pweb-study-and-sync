@@ -21,7 +21,7 @@ export class ListDisciplineComponent implements OnInit {
     return discipline.id;
   }
   @Input()
-  refreshListSubject!: BehaviorSubject<boolean>;
+  refreshListSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
    private readonly disciplineService: DisciplineService,
