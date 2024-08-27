@@ -81,6 +81,31 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     return this.readAll();
   }
 
+  deleteDiscipline(disciplineToDelete: Discipline): void {
+    disciplineToDelete.students.forEach((student) => {
+      this.userService.read(student).subscribe({
+        next: (result: User) => {
+          result.disciplines = result.disciplines.filter((disc) => disc !== disciplineToDelete.id);
+          this.userService.update(result, result.id).subscribe({
+            error: (err) => {
+              console.error(`Error updating user ${result.id}:`, err);
+            },
+          });
+        },
+        error: (err) => {
+          console.error(`Error reading user ${student}:`, err);
+        }
+      });
+    });
+  
+    this.delete(disciplineToDelete.id).subscribe({
+      error: (err) => {
+        console.error(`Error deleting discipline ${disciplineToDelete.id}:`, err);
+      }
+    });
+  }
+  
+
   addStudentToDiscipline(
     email: string,
     id: string

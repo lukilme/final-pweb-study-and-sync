@@ -83,16 +83,9 @@ export class ListDisciplineComponent implements OnInit {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.disciplineService.delete(disciplineToDelete.id).subscribe({
-          next: () => {
-            this.loadDisciplines();
-            MessageSweetAlertService.success('Discipline deleted successfully!');
-          },
-          error: (err) => {
-            console.error('Error deleting discipline:', err);
-            MessageSweetAlertService.error('Failed to delete discipline. Please try again.');
-          }
-        });
+        this.disciplineService.deleteDiscipline(disciplineToDelete);
+        this.loadDisciplines();
+        MessageSweetAlertService.success("Bye bye discipline");
       }
     });
   }

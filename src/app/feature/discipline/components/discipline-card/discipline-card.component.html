@@ -1,20 +1,23 @@
-<mat-card class="discipline-card">
-  <mat-card-header [ngStyle]="{'background-color': discipline.color}">
-    <div mat-card-avatar class="discipline-avatar"></div>
-    <mat-card-title><a href="/discipline/{{discipline.id}}">{{discipline.name}}</a></mat-card-title>
-    <mat-card-subtitle>ID: {{discipline.id}}</mat-card-subtitle>
+<mat-card class="discipline-card" [ngStyle]="{'border-left': '8px solid ' + discipline.color, 'box-shadow': '0 4px 8px rgba(0, 0, 0, 0.1)'}">
+  <mat-card-header>
+    <div mat-card-avatar class="discipline-avatar" [ngStyle]="{'background-color': discipline.color}"></div>
+    <mat-card-title>
+      <a href="/discipline/{{discipline.id}}" style="text-decoration: none; color: #333;">{{discipline.name}}</a>
+    </mat-card-title>
+    <mat-card-subtitle style="color: #888;">ID: {{discipline.id}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>{{discipline.description}}</p>
+    <p style="margin: 16px 0; line-height: 1.6;">{{discipline.description}}</p>
   </mat-card-content>
-  <mat-card-actions>
-    @if(admMode){
-      <button mat-button color="secondary" (click)="updateDiscipline()">Update discipline</button>
-      <button mat-button color="primary" (click)="addStudent()">Add student</button>
-      <button mat-button color="warn" (click)="deleteThis()">Delete discipline</button>
-    }@else {
-      <button mat-button color="warn" (click)="leaveThis()">Leave discipline</button>
-    }
-    
+  <mat-divider></mat-divider>
+  <mat-card-actions align="end">
+    <ng-container *ngIf="admMode; else studentActions">
+      <button mat-raised-button color="accent" (click)="updateDiscipline()">Update</button>
+      <button mat-raised-button color="primary" (click)="addStudent()">Add Student</button>
+      <button mat-raised-button color="warn" (click)="deleteThis()">Delete</button>
+    </ng-container>
+    <ng-template #studentActions>
+      <button mat-raised-button color="warn" (click)="leaveThis()">Leave</button>
+    </ng-template>
   </mat-card-actions>
 </mat-card>

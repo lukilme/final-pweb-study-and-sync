@@ -31,8 +31,7 @@
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "student",
       "disciplines": [
-        "7a99",
-        "3d89"
+        "7a99"
       ],
       "course": "Internet systems",
       "semester": 3
@@ -118,17 +117,6 @@
       ],
       "color": "#db3333",
       "creation_date": "2024-08-27T13:12:12.112Z"
-    },
-    {
-      "id": "3d89",
-      "id_teacher": "696a",
-      "name": "Calamidade",
-      "description": "Calamidade, a aula do caos",
-      "students": [
-        "3779"
-      ],
-      "color": "#d62e2e",
-      "creation_date": "2024-08-27T13:24:38.316Z"
     }
   ]
 }
