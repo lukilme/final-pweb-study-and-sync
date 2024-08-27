@@ -228,8 +228,8 @@
       "name": "sadsadasdsadsadasdas",
       "description": "adasdasdsadsadasdasd",
       "students": [],
-      "color": "#555555",
-      "creation_date": "2024-08-27T00:22:10.711Z"
+      "color": "#8f0000",
+      "creation_date": "2024-08-27T02:42:15.883Z"
     },
     {
       "id": "ce26",
@@ -266,6 +266,60 @@
       "students": [],
       "color": "#f3eb12",
       "creation_date": "2024-08-27T00:33:42.386Z"
+    },
+    {
+      "id": "a0b1",
+      "id_teacher": "3f30",
+      "name": "adasdasdadadasdas",
+      "description": "QUalqu rercoisad sada dsakldasd",
+      "students": [],
+      "color": "#12d8f3",
+      "creation_date": "2024-08-27T02:41:57.076Z"
+    },
+    {
+      "id": "41de",
+      "id_teacher": "3f30",
+      "name": "adasdasdadadasdas",
+      "description": "QUalqu rercoisad sada dsakldasddsadsadasdadasdddsa",
+      "students": [],
+      "color": "#f3eb12",
+      "creation_date": "2024-08-27T02:41:49.284Z"
+    },
+    {
+      "id": "934c",
+      "id_teacher": "3f30",
+      "name": "asdasdasdasdsad123",
+      "description": "daadasdsadasdasdasd",
+      "students": [],
+      "color": "#ae0404",
+      "creation_date": "2024-08-27T02:27:58.154Z"
+    },
+    {
+      "id": "08b9",
+      "id_teacher": "3f30",
+      "name": "DisciplineFormInterfaceCreated",
+      "description": "DisciplineFormInterfaceCreatedDisciplineFormInterfaceCreatedDisciplineFormInterfaceCreated",
+      "students": [],
+      "color": "#0d6359",
+      "creation_date": "2024-08-27T02:37:44.294Z"
+    },
+    {
+      "id": "e3e9",
+      "id_teacher": "3f30",
+      "name": "da11s DisciplineFormInterfaceCreated",
+      "description": "DisciplineFormInterfaceCreatedDisciplineFormInterfaceCreated",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-27T02:50:41.440Z"
+    },
+    {
+      "id": "ac5c",
+      "id_teacher": "3f30",
+      "name": "ksadkaksadkaksadka",
+      "description": "ksadkaksadkaksadkaksadka",
+      "students": [],
+      "color": "#f57070",
+      "creation_date": "2024-08-27T02:51:00.680Z"
     }
   ]
 }

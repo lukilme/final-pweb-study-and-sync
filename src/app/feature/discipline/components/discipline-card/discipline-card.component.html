@@ -8,8 +8,13 @@
     <p>{{discipline.description}}</p>
   </mat-card-content>
   <mat-card-actions>
-    <button mat-button color="secondary" (click)="updateDiscipline()">Update discipline</button>
-    <button mat-button color="primary" (click)="addStudent()">Add student</button>
-    <button mat-button color="warn" (click)="deleteThis()">Delete discipline</button>
+    @if(admMode){
+      <button mat-button color="secondary" (click)="updateDiscipline()">Update discipline</button>
+      <button mat-button color="primary" (click)="addStudent()">Add student</button>
+      <button mat-button color="warn" (click)="deleteThis()">Delete discipline</button>
+    }@else {
+      <button mat-button color="warn" (click)="leaveThis()">Leave discipline</button>
+    }
+    
   </mat-card-actions>
 </mat-card>

@@ -1,29 +1,39 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DisciplineService } from '../../service/discipline.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
 import { UserStorageService } from '../../../../core/storage/user-storage.service';
-import { DisciplineFormInterface } from '../../../../core/interfaces/discipline.form.interface';
+import { DisciplineFormInterface, DisciplineFormInterfaceCreated } from '../../../../core/interfaces/discipline.form.interface';
+import { Discipline } from '../../../../shared/model/discipline.model';
 
 @Component({
   selector: 'app-create-discipline-form',
   templateUrl: './create-discipline-form.component.html',
   styleUrls: ['./create-discipline-form.component.scss'] 
 })
+
 export class CreateDisciplineFormComponent {
+
   textareaMaxLength = 255;
-  createFormDiscipline: FormGroup<{
-    nameDisciplineField: FormControl<string | null>;
-    descriptionDisciplineField: FormControl<string | null>;
-  }>;
+  editMode = false;
+  createFormDiscipline: FormGroup;
+  discipline: Discipline | null = null;
 
   constructor(
     private dialogRef: MatDialogRef<CreateDisciplineFormComponent>,
     private service: DisciplineService,
-    private userStorage: UserStorageService
+    private userStorage: UserStorageService,
+    @Inject(MAT_DIALOG_DATA) public updatedDiscipline: any | null
   ) {
-    this.createFormDiscipline = new FormGroup({
+    this.createFormDiscipline = this.createForm();
+    if (updatedDiscipline?.discipline) {
+      this.populateForm(updatedDiscipline.discipline);
+    }
+  }
+
+  private createForm(): FormGroup {
+    return new FormGroup({
       nameDisciplineField: new FormControl<string>("", [
         Validators.required,
         Validators.minLength(8),
@@ -31,35 +41,53 @@ export class CreateDisciplineFormComponent {
       descriptionDisciplineField: new FormControl<string>("", [
         Validators.required,
         Validators.minLength(16),
-      ])
-     
+      ]),
+      colorDisciplineField: new FormControl<string>("#555555")
     });
   }
 
-  createDiscipline() {
-    let color : string = '#555555'
-    const textElement = document.getElementById("myColor") as HTMLInputElement | HTMLTextAreaElement;
-    if (textElement) {
-      color = textElement.value;
-    }
-    if (this.createFormDiscipline.valid) {
-      const newDiscipline: DisciplineFormInterface = {
-        id_creator: this.userStorage.userSaved?.id,
-        name: this.createFormDiscipline.get("nameDisciplineField")?.value,
-        description: this.createFormDiscipline.get("descriptionDisciplineField")?.value,
-        color: color
-      };
-      this.service.createDiscipline(newDiscipline).subscribe({
-        next: () => {
-          this.dialogRef.close();
-          MessageSweetAlertService.success("Created successfully"); 
-        },
-        error: () => {
-          console.log("Error");
-        }
-      });
-    } else {
+  private populateForm(discipline: Discipline): void {
+    this.editMode = true;
+    this.discipline = discipline;
+    this.createFormDiscipline.patchValue({
+      nameDisciplineField: discipline.name,
+      descriptionDisciplineField: discipline.description,
+      colorDisciplineField: discipline.color || '#555555'
+    });
+  }
+
+  private getDisciplineColor(): string {
+    const textElement = document.getElementById("myColor") as HTMLInputElement | null;
+    return textElement ? textElement.value : '#555555';
+  }
+
+  private getFormValues(): DisciplineFormInterfaceCreated | DisciplineFormInterface {
+    return {
+      id: this.discipline?.id,
+      id_creator: this.userStorage.userSaved?.id,
+      name: this.createFormDiscipline.get("nameDisciplineField")?.value!,
+      description: this.createFormDiscipline.get("descriptionDisciplineField")?.value!,
+      color: this.getDisciplineColor()
+    };
+  }
+
+  private handleSuccess(): void {
+    this.dialogRef.close();
+    MessageSweetAlertService.success(this.editMode ? "Updated successfully" : "Created successfully");
+  }
+
+  createOrUpdateDiscipline(): void {
+    if (this.createFormDiscipline.invalid) {
       this.createFormDiscipline.markAllAsTouched();
+      return;
     }
+
+    const disciplineData = this.getFormValues();
+    const serviceMethod = this.editMode ? this.service.updateDiscipline(disciplineData) : this.service.createDiscipline(disciplineData);
+
+    serviceMethod.subscribe({
+      next: () => this.handleSuccess(),
+      error: () => console.log("Error")
+    });
   }
 }

@@ -28,6 +28,7 @@ export class ListDisciplineComponent implements OnInit {
   ) {
    
   }
+
   ngOnInit() {
     this.loadDisciplines()
     this.refreshListSubject.subscribe(refresh => {
@@ -39,6 +40,9 @@ export class ListDisciplineComponent implements OnInit {
   }
 
 
+  leaveStudent(index: number){
+    
+  }
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;

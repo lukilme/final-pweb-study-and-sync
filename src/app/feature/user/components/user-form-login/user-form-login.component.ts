@@ -37,6 +37,7 @@ export class UserFormLoginComponent {
       this.service.login(formData).subscribe({
         next: () => {
           this.route.navigate(["home"]);
+          location.reload();
         },
         error: (error: any) => {
           if (error instanceof FormException) {

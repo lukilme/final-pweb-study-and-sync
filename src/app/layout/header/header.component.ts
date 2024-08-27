@@ -49,7 +49,7 @@ export class HeaderComponent implements OnInit {
 
   logout(): void {
     this.userStorage.clearAllData();
-    this.router.navigate(['']);
+    location.reload();
   }
 
   changePerfil(): void {

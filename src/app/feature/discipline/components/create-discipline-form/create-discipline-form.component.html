@@ -1,4 +1,8 @@
-<h2 mat-dialog-title>Create Discipline</h2>
+@if(editMode){
+  <h2 mat-dialog-title>Update Discipline</h2>
+}@else{
+  <h2 mat-dialog-title>Create Discipline</h2>
+}
 <mat-dialog-content id="form-create-discipline">
   <form [formGroup]="createFormDiscipline">
     <mat-form-field appearance="outline">
@@ -28,16 +32,12 @@
         Description must be at least <strong>16</strong> characters
       </mat-error>
     </mat-form-field>
-
- 
       <mat-label>Color:</mat-label>
-      
-      <input type="color" id="myColor" value="#555555">
-      
+      <input type="color" id="myColor" value="#555555"  formControlName="colorDisciplineField">
   </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
   <button class="button-special" id="cancel-button" mat-button mat-dialog-close>Cancel</button>
-  <button class="button-special" id="create-button" mat-button (click)="createDiscipline()" cdkFocusInitial>Create</button>
+  <button class="button-special" id="create-button" mat-button (click)="createOrUpdateDiscipline()" cdkFocusInitial>Update</button>
 </mat-dialog-actions>
