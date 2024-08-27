@@ -5,6 +5,7 @@ import { Discipline } from '../../../../shared/model/discipline.model';
 import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
 import Swal from 'sweetalert2';
 import { BehaviorSubject } from 'rxjs';
+import { UserStorageService } from '../../../../core/storage/user-storage.service';
 
 
 @Component({
@@ -24,7 +25,8 @@ export class ListDisciplineComponent implements OnInit {
   refreshListSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
-   private readonly disciplineService: DisciplineService,
+   private disciplineService: DisciplineService,
+   private storage : UserStorageService
   ) {
    
   }
@@ -97,9 +99,27 @@ export class ListDisciplineComponent implements OnInit {
 
   loadDisciplines(): void {
     this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({
-      next: (response: any) => {
-        this.disciplines = response.data;
-        this.totalItems = response.items;
+      next: (response: Object) => {
+        // Garantir que a resposta tem a estrutura esperada
+        const dataResponse = response as { data: Discipline[] };
+  
+        // Inicializar ou limpar a lista de disciplinas
+        this.disciplines = [];
+  
+        if (this.storage.userSaved) {
+          const listDiscipline: string[] = this.storage.userSaved.disciplines;
+          listDiscipline.forEach((discipline_id) => {
+            console.log('Searching for discipline ID:', discipline_id);
+            const found = dataResponse.data.find((value: Discipline) => value.id === discipline_id);
+            if (found) {
+              this.disciplines.push(found);
+            }
+          });
+        }
+  
+        console.log('Disciplines loaded:', this.disciplines);
+        // Assumindo que totalItems deve ser o total de disciplinas encontradas
+        this.totalItems = this.disciplines.length;
       },
       error: (err) => {
         console.error('Error loading disciplines:', err);
@@ -107,4 +127,5 @@ export class ListDisciplineComponent implements OnInit {
       }
     });
   }
+  
 }

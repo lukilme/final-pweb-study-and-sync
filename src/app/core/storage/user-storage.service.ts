@@ -15,6 +15,7 @@ export class UserStorageService {
   userSaved : User | null | undefined;
 
   saveUser(user: User): void { 
+    console.log(user);
     const savedUser: SavedUser = { 
       id: user.id,
       name: user.name,
