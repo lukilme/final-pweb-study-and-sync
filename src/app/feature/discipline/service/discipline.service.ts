@@ -27,6 +27,28 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     return this.pagination(limit, page, "-creation_date");
   }
 
+
+  leaveDiscipline(userId: string, disciplineId: string): void {
+    this.userService.read(userId).pipe(
+      switchMap(userUpdate =>
+        this.read(disciplineId).pipe(
+          map(disciplineUpdate => ({ userUpdate, disciplineUpdate }))
+        )
+      )
+    ).subscribe({
+      next: ({ userUpdate, disciplineUpdate }) => {
+        userUpdate.disciplines = userUpdate.disciplines.filter(id => id !== disciplineId);
+        disciplineUpdate.students = disciplineUpdate.students.filter(id => id !== userId);
+  
+        this.userService.update(userUpdate, userId).subscribe();
+        this.update(disciplineUpdate, disciplineId).subscribe();
+      },
+      error: (err) => {
+        console.error('Error while leaving discipline:', err);
+      }
+    });
+  }
+
   createDiscipline(newDiscipline: Object): Observable<Object | null>  {
     return this.create(
       this.buildDiscipline(newDiscipline as DisciplineFormInterfaceCreated)

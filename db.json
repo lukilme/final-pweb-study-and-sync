@@ -30,9 +30,7 @@
       "password": "Estudante1?",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "student",
-      "disciplines": [
-        "7a99"
-      ],
+      "disciplines": [],
       "course": "Internet systems",
       "semester": 3
     },
@@ -112,7 +110,6 @@
       "name": "MAtemática 1",
       "description": "Materia de mateamtica basuica",
       "students": [
-        "3779",
         "d5d2"
       ],
       "color": "#db3333",

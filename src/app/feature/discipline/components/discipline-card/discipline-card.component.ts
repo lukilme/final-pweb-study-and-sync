@@ -18,7 +18,7 @@ export class DisciplineCardComponent {
   @Input() index!: number;
   @Output() addStudentEvent = new EventEmitter<number>();
   @Output() deleteDisciplineEvent = new EventEmitter<number>();
-  @Output() leaveDisciplineEvent = new EventEmitter<number>();
+  @Output() leaveDisciplineEvent = new EventEmitter<string>();
 
 
 
@@ -38,7 +38,7 @@ export class DisciplineCardComponent {
   }
 
   leaveThis(){
-    this.leaveDisciplineEvent.emit(this.index);
+    this.leaveDisciplineEvent.emit(this.discipline.id);
   }
 
   

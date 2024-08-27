@@ -41,6 +41,15 @@ export class ListDisciplineComponent implements OnInit {
     });
   }
 
+  leaveDiscipline(id : string){
+    console.log(id, this.storage.userSaved?.id)
+    if(this.storage.userSaved){
+      console.log(this.storage.userSaved)
+      this.disciplineService.leaveDiscipline( this.storage.userSaved?.id, id)
+    }
+    
+  }
+
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;
