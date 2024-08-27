@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, ViewChild } from '@angular/core';
 import { Discipline } from '../../../../shared/model/discipline.model';
 import { UserStorageService } from '../../../../core/storage/user-storage.service';
 import { CreateDisciplineFormComponent } from '../create-discipline-form/create-discipline-form.component';
@@ -20,11 +20,14 @@ export class DisciplineCardComponent {
   @Output() deleteDisciplineEvent = new EventEmitter<number>();
   @Output() leaveDisciplineEvent = new EventEmitter<number>();
 
+
+
   constructor(private storageUser :UserStorageService){
     if(storageUser.userSaved?.status!='teacher'){
       this.admMode = false;
     }
   }
+
 
   addStudent(): void {
     this.addStudentEvent.emit(this.index);
@@ -34,16 +37,16 @@ export class DisciplineCardComponent {
     this.deleteDisciplineEvent.emit(this.index);
   }
 
-
   leaveThis(){
     this.leaveDisciplineEvent.emit(this.index);
   }
 
+  
   updateDiscipline() {
     const dialogRef = this.dialog.open(CreateDisciplineFormComponent, {
       data: { discipline: this.discipline }
     });
-  
+    
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.refreshListSubject.next(true);
@@ -51,4 +54,7 @@ export class DisciplineCardComponent {
     });
   }
   
+  
 }
+
+

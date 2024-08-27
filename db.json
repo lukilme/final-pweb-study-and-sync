@@ -1,325 +1,102 @@
 {
   "user": [
     {
-      "id": "3f30",
-      "name": "Luciano",
-      "email": "luciano@gmail.com",
-      "password": "12345678",
+      "id": "696a",
+      "name": "Senhor Professor",
+      "email": "professor@gmail.com",
+      "password": "Professor1?",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "teacher",
       "disciplines": [],
-      "course": "Internet System",
-      "semester": 4
+      "qualification": "Formado em Ciencias da computação na UFPB"
     },
     {
-      "id": "d9d6",
-      "name": "Luciano",
-      "email": "luciano@gmail.com",
-      "password": "12345678",
+      "id": "7c7a",
+      "name": "Professor João",
+      "email": "professor1@gmail.com",
+      "password": "Professor3?",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "teacher",
       "disciplines": [],
-      "qualification": "Computer Scientis"
+      "qualification": "Formado na Uniesquina"
     },
     {
-      "id": "ff29",
-      "name": "fulano seila",
-      "email": "fulano@gmail.com",
-      "password": "12345678",
+      "id": "3779",
+      "name": "Estudante",
+      "email": "estudante1@gmail.com",
+      "password": "Estudante1?",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "student",
       "disciplines": [],
-      "course": "Internet System",
-      "semester": 4
-    },
-    {
-      "id": "b5ad",
-      "name": "fulano seila",
-      "email": "fulano1@gmail.com",
-      "password": "12345678",
-      "birthday": "2003-12-12T02:00:00.000Z",
-      "status": "student",
-      "disciplines": [],
-      "course": "Internet System",
-      "semester": 4
-    },
-    {
-      "id": "48d6",
-      "name": "Juliano",
-      "email": "julio@gmail.com",
-      "password": "12345678",
-      "birthday": "2003-12-12T02:00:00.000Z",
-      "status": "student",
-      "disciplines": [
-        "0292",
-        "2aa6"
-      ],
-      "course": "Marketing",
-      "semester": 5
-    },
-    {
-      "id": "6c8f",
-      "name": "dasdsadsad",
-      "email": "dasdasd@gmail.com",
-      "password": "1111111111",
-      "birthday": "1212-12-12T03:06:28.000Z",
-      "status": "teacher",
-      "disciplines": [],
-      "qualification": "adsadasdasdasdas"
-    },
-    {
-      "id": "e481",
-      "name": "sadasdasdasd",
-      "email": "dfsfgdfs@mal.com",
-      "password": "11111111111111111111",
-      "birthday": "1111-11-11T03:06:28.000Z",
-      "status": "teacher",
-      "disciplines": [],
-      "qualification": "dbgdhfgfhg"
-    },
-    {
-      "id": "c138",
-      "name": "sadasdasdasd",
-      "email": "dfsfgdfs@mal.com",
-      "password": "11111111111111111111",
-      "birthday": "1111-11-11T03:06:28.000Z",
-      "status": "student",
-      "disciplines": [],
-      "course": "Computer networks",
+      "course": "Internet systems",
       "semester": 3
     },
     {
-      "id": "c2cc",
-      "name": "FUlano loco",
-      "email": "fulano@gmail.com",
-      "password": "11111111111111111111",
+      "id": "d5d2",
+      "name": "Estudante Pedro",
+      "email": "estudante2@gmail.com",
+      "password": "Estudante1?",
       "birthday": "2003-12-12T02:00:00.000Z",
-      "status": "teacher",
+      "status": "student",
       "disciplines": [],
-      "qualification": "Faz macarrão muito bem"
+      "course": "Internet systems",
+      "semester": 3
     },
     {
-      "id": "a1a5",
-      "name": "Fulano Goçalves",
-      "email": "fulano@gmail.com",
-      "password": "12345678",
+      "id": "b1b6",
+      "name": "Estudante Paulo",
+      "email": "estudante3@gmail.com",
+      "password": "Estudante1?",
       "birthday": "2003-12-12T02:00:00.000Z",
-      "status": "teacher",
+      "status": "student",
       "disciplines": [],
-      "qualification": "Sabe fazer miojo"
+      "course": "Internet systems",
+      "semester": 3
     },
     {
-      "id": "f497",
-      "name": "Gustavo",
-      "email": "gustavo@gmail.com",
-      "password": "lA1111111111111111?",
+      "id": "add0",
+      "name": "Estudante Maria",
+      "email": "estudante4@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Internet systems",
+      "semester": 5
+    },
+    {
+      "id": "1409",
+      "name": "Estudante Joana",
+      "email": "estudante5@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Internet systems",
+      "semester": 5
+    },
+    {
+      "id": "8058",
+      "name": "Estudante Luis",
+      "email": "estudante6@gmail.com",
+      "password": "Estudante1?",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "student",
       "disciplines": [],
       "course": "Marketing",
-      "semester": 7
+      "semester": 3
+    },
+    {
+      "id": "7ac0",
+      "name": "Estudante Marcos",
+      "email": "estudante7@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Electrical engineering",
+      "semester": 8
     }
   ],
-  "discipline": [
-    {
-      "id": "547a",
-      "id_teacher": "3f30",
-      "name": "sadsadsadsad",
-      "description": "sadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsadsad",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T14:19:56.142Z"
-    },
-    {
-      "id": "04d3",
-      "id_teacher": "3f30",
-      "name": "Portugues",
-      "description": "portughes muito legal",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T22:13:16.043Z"
-    },
-    {
-      "id": "cc6e",
-      "id_teacher": "3f30",
-      "name": "dasdsadasdsad",
-      "description": "asdasdsadsadsaddasdas",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T22:20:20.871Z"
-    },
-    {
-      "id": "539d",
-      "id_teacher": "3f30",
-      "name": "dasd sadsafwev23r3qr e",
-      "description": "radfsaerfgefgw sfgrs szf",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T22:27:48.021Z"
-    },
-    {
-      "id": "2aa6",
-      "id_teacher": "3f30",
-      "name": "Classse da juliar",
-      "description": "dasdasdsaddsadsad",
-      "students": [
-        "48d6"
-      ],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T22:37:38.657Z"
-    },
-    {
-      "id": "5f7a",
-      "id_teacher": "3f30",
-      "name": "sadasdasdsadasdasdsadasdasdsadasdasd",
-      "description": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T23:56:18.953Z"
-    },
-    {
-      "id": "b626",
-      "id_teacher": "3f30",
-      "name": "sadasdasdsadasdasdsadasdasdsadasdasd",
-      "description": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T23:56:24.481Z"
-    },
-    {
-      "id": "4efa",
-      "id_teacher": "3f30",
-      "name": "sadasdasdsadasdasdsadasdasd",
-      "description": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T23:56:29.769Z"
-    },
-    {
-      "id": "158b",
-      "id_teacher": "3f30",
-      "name": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "description": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T23:56:36.825Z"
-    },
-    {
-      "id": "a448",
-      "id_teacher": "3f30",
-      "name": "sadasdasdsadasdasdsadasdasdsadasdasd",
-      "description": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T23:56:42.361Z"
-    },
-    {
-      "id": "d251",
-      "id_teacher": "3f30",
-      "name": "sadasdasdsadasdasdsadasdasdsadasdasd",
-      "description": "sadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasdsadasdasd",
-      "students": [],
-      "color": "#FFFFFF",
-      "creation_date": "2024-08-26T23:56:47.538Z"
-    },
-    {
-      "id": "5754",
-      "id_teacher": "3f30",
-      "name": "sadsadasdsadsadasdas",
-      "description": "adasdasdsadsadasdasd",
-      "students": [],
-      "color": "#8f0000",
-      "creation_date": "2024-08-27T02:42:15.883Z"
-    },
-    {
-      "id": "ce26",
-      "id_teacher": "3f30",
-      "name": "dasdasdasd",
-      "description": "dfafasdasdasdasdasdad",
-      "students": [],
-      "color": "#555555",
-      "creation_date": "2024-08-27T00:22:29.894Z"
-    },
-    {
-      "id": "f495",
-      "id_teacher": "3f30",
-      "name": "sadsa aghfjjhkhjkhj",
-      "description": "kjhkjhkjhkjhkjhkhjkhkjh",
-      "students": [],
-      "color": "#555555",
-      "creation_date": "2024-08-27T00:23:41.415Z"
-    },
-    {
-      "id": "55f6",
-      "id_teacher": "3f30",
-      "name": "asdasdasdasdsad",
-      "description": "daadasdsadasdasdasd",
-      "students": [],
-      "color": "#ae0404",
-      "creation_date": "2024-08-27T00:31:06.211Z"
-    },
-    {
-      "id": "31f0",
-      "id_teacher": "3f30",
-      "name": "adasdasdadadasdas",
-      "description": "QUalqu rercoisad sada dsakldasd",
-      "students": [],
-      "color": "#f3eb12",
-      "creation_date": "2024-08-27T00:33:42.386Z"
-    },
-    {
-      "id": "a0b1",
-      "id_teacher": "3f30",
-      "name": "adasdasdadadasdas",
-      "description": "QUalqu rercoisad sada dsakldasd",
-      "students": [],
-      "color": "#12d8f3",
-      "creation_date": "2024-08-27T02:41:57.076Z"
-    },
-    {
-      "id": "41de",
-      "id_teacher": "3f30",
-      "name": "adasdasdadadasdas",
-      "description": "QUalqu rercoisad sada dsakldasddsadsadasdadasdddsa",
-      "students": [],
-      "color": "#f3eb12",
-      "creation_date": "2024-08-27T02:41:49.284Z"
-    },
-    {
-      "id": "934c",
-      "id_teacher": "3f30",
-      "name": "asdasdasdasdsad123",
-      "description": "daadasdsadasdasdasd",
-      "students": [],
-      "color": "#ae0404",
-      "creation_date": "2024-08-27T02:27:58.154Z"
-    },
-    {
-      "id": "08b9",
-      "id_teacher": "3f30",
-      "name": "DisciplineFormInterfaceCreated",
-      "description": "DisciplineFormInterfaceCreatedDisciplineFormInterfaceCreatedDisciplineFormInterfaceCreated",
-      "students": [],
-      "color": "#0d6359",
-      "creation_date": "2024-08-27T02:37:44.294Z"
-    },
-    {
-      "id": "e3e9",
-      "id_teacher": "3f30",
-      "name": "da11s DisciplineFormInterfaceCreated",
-      "description": "DisciplineFormInterfaceCreatedDisciplineFormInterfaceCreated",
-      "students": [],
-      "color": "#555555",
-      "creation_date": "2024-08-27T02:50:41.440Z"
-    },
-    {
-      "id": "ac5c",
-      "id_teacher": "3f30",
-      "name": "ksadkaksadkaksadka",
-      "description": "ksadkaksadkaksadkaksadka",
-      "students": [],
-      "color": "#f57070",
-      "creation_date": "2024-08-27T02:51:00.680Z"
-    }
-  ]
+  "discipline": []
 }

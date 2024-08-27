@@ -10,7 +10,10 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-
+  a{
+    color:rgb(24, 24, 24);
+    text-decoration: none;
+  }
 
   &:hover {
     transform: translateY(-5px);

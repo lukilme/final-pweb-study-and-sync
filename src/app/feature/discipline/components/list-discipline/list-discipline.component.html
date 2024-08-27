@@ -4,7 +4,8 @@
   [discipline]="discipline" 
   [index]="i"
   (addStudentEvent)="addStudent($event)" 
-  (deleteDisciplineEvent)="onDeleteDiscipline($event)">
+  (deleteDisciplineEvent)="onDeleteDiscipline($event)"
+  (updateList)="loadDisciplines()">
 </app-discipline-card>
 <mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
 </div>

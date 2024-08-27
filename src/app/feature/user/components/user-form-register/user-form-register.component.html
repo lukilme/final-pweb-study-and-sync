@@ -48,7 +48,7 @@
           <mat-hint *ngIf="!registerForm.get('birthdayRegisterField')?.value">Select your birthday date</mat-hint>
           <mat-error *ngIf="registerForm.get('birthdayRegisterField')?.hasError('required')"> Birthday is <strong>required</strong> </mat-error>
       </mat-form-field>
-      <mat-radio-group formControlName="statusRegisterField" (change)="onOptionStatusSelected()" aria-label="Select an option">
+      <mat-radio-group id="status-select" [disabled]="flag_disability"  formControlName="statusRegisterField" (change)="onOptionStatusSelected()" aria-label="Select an option">
           <label>I am:</label><br />
           <mat-radio-button value="teacher">Teacher</mat-radio-button>
           <mat-radio-button value="student">Student</mat-radio-button>
@@ -88,5 +88,11 @@
       </div>
   </ng-template>
   <mat-divider></mat-divider>
-  <button id="send-register" type="submit" mat-raised-button color="primary">Register</button>
+  <button id="send-register" type="submit" mat-raised-button color="primary">
+    @if(focus_user){
+        Update
+    }@else{
+        Register
+    }
+  </button>
 </form>

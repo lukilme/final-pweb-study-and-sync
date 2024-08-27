@@ -11,11 +11,4 @@ export class PerfilComponent {
   constructor(private route: ActivatedRoute){
 
   }
-
-  ngOnInit() {
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-      console.log(id);
-    });
-  }
 }

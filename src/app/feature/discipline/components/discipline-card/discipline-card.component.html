@@ -1,7 +1,7 @@
 <mat-card class="discipline-card">
   <mat-card-header [ngStyle]="{'background-color': discipline.color}">
     <div mat-card-avatar class="discipline-avatar"></div>
-    <mat-card-title>{{discipline.name}}</mat-card-title>
+    <mat-card-title><a href="/discipline/{{discipline.id}}">{{discipline.name}}</a></mat-card-title>
     <mat-card-subtitle>ID: {{discipline.id}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>

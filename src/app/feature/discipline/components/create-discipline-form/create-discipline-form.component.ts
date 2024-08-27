@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, EventEmitter, Inject, Output } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { DisciplineService } from '../../service/discipline.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -15,10 +15,13 @@ import { Discipline } from '../../../../shared/model/discipline.model';
 
 export class CreateDisciplineFormComponent {
 
+ 
   textareaMaxLength = 255;
   editMode = false;
   createFormDiscipline: FormGroup;
   discipline: Discipline | null = null;
+
+
 
   constructor(
     private dialogRef: MatDialogRef<CreateDisciplineFormComponent>,
@@ -67,13 +70,15 @@ export class CreateDisciplineFormComponent {
       id_creator: this.userStorage.userSaved?.id,
       name: this.createFormDiscipline.get("nameDisciplineField")?.value!,
       description: this.createFormDiscipline.get("descriptionDisciplineField")?.value!,
-      color: this.getDisciplineColor()
+      color: this.getDisciplineColor(),
+      date_creation : this.discipline?.creation_date
     };
   }
 
   private handleSuccess(): void {
     this.dialogRef.close();
-    MessageSweetAlertService.success(this.editMode ? "Updated successfully" : "Created successfully");
+    MessageSweetAlertService.successWithReload(this.editMode ? "Updated successfully" : "Created successfully");
+    
   }
 
   createOrUpdateDiscipline(): void {

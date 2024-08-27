@@ -6,6 +6,11 @@ import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS,  } from "@angular/material-moment-adapter";
 import { MessageSweetAlertService } from "../../../../shared/service/message-sweet-alert.service";
 import { MatSelectChange } from "@angular/material/select";
+import { ActivatedRoute, Router } from "@angular/router";
+import { User } from "../../../../shared/model/user.model";
+import { Subject, takeUntil } from "rxjs";
+import { Teacher } from "../../../../shared/model/teacher.model";
+import { Student } from "../../../../shared/model/student.model";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -41,6 +46,11 @@ export class UserFormRegisterComponent {
   semester_number : string[]= [];
   semester_input_flag: boolean = true; 
   option_flag = "teacher";
+  flag_disability = false;
+  focus_user : User | null = null;
+  private unsubscribe$ = new Subject<void>();
+
+
   courses: Course[] = [
     {value: 'Internet systems', viewValue: 'Internet systems', semesters:6},
     {value: 'Computer networks', viewValue: 'Computer Networks', semesters:6},
@@ -64,7 +74,7 @@ export class UserFormRegisterComponent {
 
   hidePassword: boolean = true;
   
-  constructor(private service: UserService) {
+  constructor(private service: UserService, private route : ActivatedRoute, private router: Router) {
     this.registerForm = new FormGroup({
       nameRegisterField: new FormControl<string>("", [
         Validators.required
@@ -100,6 +110,61 @@ export class UserFormRegisterComponent {
     this.onOptionStatusSelected();
   }
 
+  ngOnInit() {
+    this.route.params.pipe(takeUntil(this.unsubscribe$)).subscribe(params => {
+      const id = params['id'];
+      if (id) {
+        this.service.read(id).subscribe({
+          next: (value: User) => {
+            this.focus_user = value;
+            console.log(this.focus_user);
+            this.populateForm(this.focus_user);
+          },
+          error: (err) => {
+            console.error(err)
+            MessageSweetAlertService.error("User not found");
+            this.router.navigate([""]);
+            
+          }
+        });
+      }
+    });
+  }
+
+  populateForm(user: User) {
+    this.registerForm.patchValue({
+    nameRegisterField: user.name,
+    emailRegisterField: user.email,
+    statusRegisterField: user.status,
+    passwordRegisterField : user.password,
+    birthdayRegisterField: user.birthday.toString(),
+    });
+    const textElement = document.getElementById("status-select") as HTMLInputElement | null;
+    if(textElement){
+      textElement.value = user.status;
+      this.flag_disability = true;
+    }
+    if(user.status=='teacher'){
+      const teacherAux = user as Teacher;
+      this.registerForm.patchValue({
+        qualificationRegisterField : teacherAux.qualification,
+        disciplineRegisterField : 'Internet systems'
+      })
+      this.onOptionSelected();
+      this.registerForm.get('semesterRegisterField')?.setValue("1");
+    }else{
+      const studentAux = user as Student;
+      this.registerForm.patchValue({
+          semesterRegisterField : studentAux.semester.toString(),
+         disciplineRegisterField : studentAux.course,
+         qualificationRegisterField: 'XXXXXXXXXXXXXXXXXXXXXXXXXXXX'
+      })
+    }
+    
+  }
+
+
+
   backtothefuture(control : FormControl) : { [error: string]: boolean } | null{
     if(this.registerForm){
       return  new Date(control.value)< new Date() ? null: { 'backToTheFuture': true };
@@ -110,17 +175,22 @@ export class UserFormRegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       const formData: UserRegisterData = this.registerForm.value as UserRegisterData;
-      try {
-        this.service.register(formData);
-        MessageSweetAlertService.success("Registered successfully! 🎉✨")
-      } catch (error: any) {
-        MessageSweetAlertService.error(error.message)
-      }
+      
+      this.service.register(formData).subscribe({
+        next: (value ) => {
+          MessageSweetAlertService.success("Registered successfully! 🎉✨");
+        },
+        error: (error : any) => {
+          MessageSweetAlertService.error(error.message);
+        }
+      });
     } else {
       console.log("Form is invalid!", this.registerForm.errors);
-      MessageSweetAlertService.error("Form is invalid!")
+      MessageSweetAlertService.error("Form is invalid!");
     }
   }
+  
+
   trackOption(index: number, option: any): any {
     return option; 
   }

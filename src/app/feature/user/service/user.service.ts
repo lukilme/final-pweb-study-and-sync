@@ -3,7 +3,7 @@ import { User } from "../../../shared/model/user.model";
 import { UserRegisterData } from "../../../core/interfaces/user.register.interface";
 import { UserLoginData } from "../../../core/interfaces/user.login.interface";
 import { HttpClient } from "@angular/common/http";
-import { catchError, map, throwError } from "rxjs";
+import { catchError, map, Observable, switchMap, throwError } from "rxjs";
 import { UserValidator } from "./user.validator.service";
 import { Router } from "@angular/router";
 import { UserStorageService } from "../../../core/storage/user-storage.service";
@@ -28,20 +28,31 @@ export class UserService extends ServiceAbstract<User> {
    * Registers a new user by validating the input and creating the user.
    * @param userForm - The registration data to validate and use for creating a user.
    */
-  register(userForm: UserRegisterData) {
+  register(userForm: UserRegisterData): Observable<User> {
     UserValidator.registerValidate(userForm);
-
-    const newUser: Teacher | Student = this.buildUser(userForm);
-
-    this.create(newUser).subscribe({
-      next: (value) => {
-        console.log("User successfully created:", value);
-      },
-      error: (err) => {
-        console.error("Error occurred while creating user:", err);
-      },
-    });
+  
+    return this.readBy('email', userForm.emailRegisterField).pipe(
+      catchError((err) => {
+        console.error("Error on verify email:", err);
+        return throwError(() => new Error("Error on verify email"));
+      }),
+      switchMap((users: User[]) => {
+        if (users.length > 0) {
+          return throwError(() => new Error("Email already registered"));
+        } else {
+          const newUser: Teacher | Student = this.buildUser(userForm);
+          return this.create(newUser).pipe(
+            catchError((err) => {
+              console.error("Error occurred while creating user:", err);
+              return throwError(() => new Error("Error occurred while creating user"));
+            })
+          );
+        }
+      })
+    );
   }
+  
+  
 
   /**
    * Logs in a user by validating the input and checking credentials.

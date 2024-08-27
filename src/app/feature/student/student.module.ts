@@ -4,13 +4,17 @@ import { HomeStudentComponent } from './components/home-student/home-student.com
 import { MaterialModule } from '../../core/material/material.module';
 import { InviteDisciplineFormComponent } from './components/invite-discipline-form/invite-discipline-form.component';
 import { DisciplineModule } from '../discipline/discipline.module';
+import { ListStudentComponent } from './components/list-student/list-student.component';
+import { StudentCardComponent } from './components/student-card/student-card.component';
 
 
 
 @NgModule({
   declarations: [
     HomeStudentComponent,
-    InviteDisciplineFormComponent
+    InviteDisciplineFormComponent,
+    ListStudentComponent,
+    StudentCardComponent
   ],
   imports: [
     CommonModule,

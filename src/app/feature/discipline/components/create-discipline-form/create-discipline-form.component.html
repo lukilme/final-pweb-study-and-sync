@@ -39,5 +39,11 @@
 
 <mat-dialog-actions align="center">
   <button class="button-special" id="cancel-button" mat-button mat-dialog-close>Cancel</button>
-  <button class="button-special" id="create-button" mat-button (click)="createOrUpdateDiscipline()" cdkFocusInitial>Update</button>
+  <button class="button-special" id="create-button" mat-button (click)="createOrUpdateDiscipline()" cdkFocusInitial>
+    @if(editMode){
+      Update
+    }@else {
+      Create
+    }
+  </button>
 </mat-dialog-actions>

@@ -40,10 +40,6 @@ export class ListDisciplineComponent implements OnInit {
   }
 
 
-  leaveStudent(index: number){
-    
-  }
-
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex + 1;
     this.pageSize = event.pageSize;
@@ -99,7 +95,7 @@ export class ListDisciplineComponent implements OnInit {
     });
   }
 
-  private loadDisciplines(): void {
+  loadDisciplines(): void {
     this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({
       next: (response: any) => {
         this.disciplines = response.data;
