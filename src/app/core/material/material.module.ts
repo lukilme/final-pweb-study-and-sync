@@ -15,6 +15,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCardContent } from '@angular/material/card';
 
 @NgModule({
   declarations: [],
@@ -36,6 +37,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatDialogModule,
     MatToolbarModule,
     MatSelectModule
+    
  
   ],providers:[
     MatPaginatorIntl
@@ -56,7 +58,8 @@ import { MatSelectModule } from '@angular/material/select';
     MatPaginatorModule,
     MatDialogModule,
     MatToolbarModule,
-    MatSelectModule
+    MatSelectModule,
+
   ]
 })
 export class MaterialModule { }

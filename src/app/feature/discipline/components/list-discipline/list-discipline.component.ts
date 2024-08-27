@@ -100,10 +100,8 @@ export class ListDisciplineComponent implements OnInit {
   loadDisciplines(): void {
     this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({
       next: (response: Object) => {
-        // Garantir que a resposta tem a estrutura esperada
         const dataResponse = response as { data: Discipline[] };
-  
-        // Inicializar ou limpar a lista de disciplinas
+ 
         this.disciplines = [];
   
         if (this.storage.userSaved) {
@@ -118,7 +116,6 @@ export class ListDisciplineComponent implements OnInit {
         }
   
         console.log('Disciplines loaded:', this.disciplines);
-        // Assumindo que totalItems deve ser o total de disciplinas encontradas
         this.totalItems = this.disciplines.length;
       },
       error: (err) => {

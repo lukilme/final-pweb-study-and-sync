@@ -6,6 +6,8 @@ import { MaterialModule } from '../../core/material/material.module';
 import { DisciplineCardComponent } from './components/discipline-card/discipline-card.component';
 import { MatCard, MatCardActions, MatCardContent, MatCardHeader, MatCardSubtitle, MatCardTitle } from '@angular/material/card';
 import { DisciplineHomeComponent } from './components/discipline-home/discipline-home.component';
+import { StudentModule } from '../student/student.module';
+import { ListStudentComponent } from '../student/components/list-student/list-student.component';
 
 
 @NgModule({
@@ -23,7 +25,7 @@ import { DisciplineHomeComponent } from './components/discipline-home/discipline
     MatCardTitle,
     MatCardContent,
     MatCardActions,
-    MatCardSubtitle
+    MatCardSubtitle,
 
   ],
   exports:[

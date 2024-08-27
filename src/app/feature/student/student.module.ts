@@ -6,6 +6,8 @@ import { InviteDisciplineFormComponent } from './components/invite-discipline-fo
 import { DisciplineModule } from '../discipline/discipline.module';
 import { ListStudentComponent } from './components/list-student/list-student.component';
 import { StudentCardComponent } from './components/student-card/student-card.component';
+import { MatCardContent, MatCardActions, MatCardSubtitle, MatCard } from '@angular/material/card';
+import { DisciplineService } from '../discipline/service/discipline.service';
 
 
 
@@ -19,10 +21,15 @@ import { StudentCardComponent } from './components/student-card/student-card.com
   imports: [
     CommonModule,
     MaterialModule,
+    MatCardContent,
+    MatCardActions,
+    MatCardSubtitle,
+    MatCard,
     DisciplineModule
   ],
   exports:[
-    HomeStudentComponent
+    HomeStudentComponent,
+    ListStudentComponent
   ]
 })
 export class StudentModule { }
