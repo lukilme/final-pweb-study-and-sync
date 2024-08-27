@@ -19,4 +19,7 @@ export class DisciplineCardComponent {
   deleteThis(): void {
     this.deleteDisciplineEvent.emit(this.index);
   }
+  updateDiscipline():void{
+    
+  }
 }

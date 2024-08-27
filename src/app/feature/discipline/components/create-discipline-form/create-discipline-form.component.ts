@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Inject, Output } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { DisciplineService } from '../../service/discipline.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
@@ -18,8 +18,6 @@ export class CreateDisciplineFormComponent {
     descriptionDisciplineField: FormControl<string | null>;
   }>;
 
-
-
   constructor(
     private dialogRef: MatDialogRef<CreateDisciplineFormComponent>,
     private service: DisciplineService,
@@ -33,17 +31,24 @@ export class CreateDisciplineFormComponent {
       descriptionDisciplineField: new FormControl<string>("", [
         Validators.required,
         Validators.minLength(16),
-      ]),
+      ])
+     
     });
   }
 
   createDiscipline() {
+    let color : string = '#555555'
+    const textElement = document.getElementById("myColor") as HTMLInputElement | HTMLTextAreaElement;
+    if (textElement) {
+      color = textElement.value;
+    }
     if (this.createFormDiscipline.valid) {
       const newDiscipline: DisciplineFormInterface = {
-        id_creator : this.userStorage.userSaved?.id,
+        id_creator: this.userStorage.userSaved?.id,
         name: this.createFormDiscipline.get("nameDisciplineField")?.value,
-        description : this.createFormDiscipline.get("descriptionDisciplineField")?.value
-      }
+        description: this.createFormDiscipline.get("descriptionDisciplineField")?.value,
+        color: color
+      };
       this.service.createDiscipline(newDiscipline).subscribe({
         next: () => {
           this.dialogRef.close();

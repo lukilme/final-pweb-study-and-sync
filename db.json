@@ -221,6 +221,51 @@
       "students": [],
       "color": "#FFFFFF",
       "creation_date": "2024-08-26T23:56:47.538Z"
+    },
+    {
+      "id": "5754",
+      "id_teacher": "3f30",
+      "name": "sadsadasdsadsadasdas",
+      "description": "adasdasdsadsadasdasd",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-27T00:22:10.711Z"
+    },
+    {
+      "id": "ce26",
+      "id_teacher": "3f30",
+      "name": "dasdasdasd",
+      "description": "dfafasdasdasdasdasdad",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-27T00:22:29.894Z"
+    },
+    {
+      "id": "f495",
+      "id_teacher": "3f30",
+      "name": "sadsa aghfjjhkhjkhj",
+      "description": "kjhkjhkjhkjhkjhkhjkhkjh",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-27T00:23:41.415Z"
+    },
+    {
+      "id": "55f6",
+      "id_teacher": "3f30",
+      "name": "asdasdasdasdsad",
+      "description": "daadasdsadasdasdasd",
+      "students": [],
+      "color": "#ae0404",
+      "creation_date": "2024-08-27T00:31:06.211Z"
+    },
+    {
+      "id": "31f0",
+      "id_teacher": "3f30",
+      "name": "adasdasdadadasdas",
+      "description": "QUalqu rercoisad sada dsakldasd",
+      "students": [],
+      "color": "#f3eb12",
+      "creation_date": "2024-08-27T00:33:42.386Z"
     }
   ]
 }

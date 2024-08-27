@@ -9,7 +9,7 @@ export class Discipline{
     color: string;
     creation_date : Date;
 
-    constructor(id_teacher: string, name: string, description: string, date: Date, color:string = "#FFFFFF"){
+    constructor(id_teacher: string, name: string, description: string, date: Date, color:string){
         this.id_teacher = id_teacher;
         this.name = name;
         this.description = description;

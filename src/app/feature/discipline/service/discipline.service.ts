@@ -32,7 +32,8 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
       newDiscipline.id_creator || '', 
       newDiscipline.name || '', 
       newDiscipline.description || '', 
-      new Date()
+      new Date(),
+      newDiscipline.color || '#555555'
     );
     return this.create(discipline);
   }
