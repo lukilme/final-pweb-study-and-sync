@@ -5,7 +5,6 @@ import { UserRegisterData } from "../../../../core/interfaces/user.register.inte
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS,  } from "@angular/material-moment-adapter";
 import { MessageSweetAlertService } from "../../../../shared/service/message-sweet-alert.service";
-import { MatSelectChange } from "@angular/material/select";
 import { ActivatedRoute, Router } from "@angular/router";
 import { User } from "../../../../shared/model/user.model";
 import { Subject, takeUntil } from "rxjs";
@@ -119,6 +118,7 @@ export class UserFormRegisterComponent {
             this.focus_user = value;
             console.log(this.focus_user);
             this.populateForm(this.focus_user);
+            this.option_flag = value.status;
           },
           error: (err) => {
             console.error(err)
@@ -175,10 +175,11 @@ export class UserFormRegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       const formData: UserRegisterData = this.registerForm.value as UserRegisterData;
-      
-      this.service.register(formData).subscribe({
-        next: (value ) => {
-          MessageSweetAlertService.success("Registered successfully! 🎉✨");
+      const actions : Function = (this.focus_user == null)? this.service.register : this.service.updateUser;
+      actions(formData).subscribe({
+        next: () => {
+          const message : string =  (this.focus_user == null)? "Registered successfully! 🎉✨" : "Updated successfully! 🎉✨";
+          MessageSweetAlertService.success(message);
         },
         error: (error : any) => {
           MessageSweetAlertService.error(error.message);
@@ -196,7 +197,6 @@ export class UserFormRegisterComponent {
   }
 
   onOptionSelected() {
-
     const selectedCourse = this.courses.find((course) => course.value === this.registerForm.get("disciplineRegisterField")?.value)
     if (selectedCourse) {
       this.semester_number = [];

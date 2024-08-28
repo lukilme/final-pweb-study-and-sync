@@ -8,7 +8,7 @@ import {
 } from "../../../core/interfaces/discipline.form.interface";
 import { Discipline } from "../../../shared/model/discipline.model";
 import { Student } from "../../../shared/model/student.model";
-import { Observable, of, throwError } from "rxjs";
+import { forkJoin, Observable, of, throwError } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { UserStorageService } from "../../../core/storage/user-storage.service";
 import { User } from "../../../shared/model/user.model";
@@ -19,7 +19,11 @@ import { User } from "../../../shared/model/user.model";
 export class DisciplineService extends ServiceAbstract<Discipline> {
   override URL_TARGET = "http://localhost:3000/discipline";
 
-  constructor(httpClient: HttpClient, private userService: UserService, private storage : UserStorageService) {
+  constructor(
+    httpClient: HttpClient,
+    private userService: UserService,
+    private storage: UserStorageService
+  ) {
     super(httpClient);
   }
 
@@ -27,29 +31,35 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     return this.pagination(limit, page, "-creation_date");
   }
 
-
-  leaveDiscipline(userId: string, disciplineId: string): void {
-    this.userService.read(userId).pipe(
-      switchMap(userUpdate =>
+  leaveDiscipline(userId: string, disciplineId: string): Observable<void> {
+    return this.userService.read(userId).pipe(
+      switchMap((userUpdate) =>
         this.read(disciplineId).pipe(
-          map(disciplineUpdate => ({ userUpdate, disciplineUpdate }))
+          map((disciplineUpdate) => ({ userUpdate, disciplineUpdate }))
         )
-      )
-    ).subscribe({
-      next: ({ userUpdate, disciplineUpdate }) => {
-        userUpdate.disciplines = userUpdate.disciplines.filter(id => id !== disciplineId);
-        disciplineUpdate.students = disciplineUpdate.students.filter(id => id !== userId);
-  
-        this.userService.update(userUpdate, userId).subscribe();
-        this.update(disciplineUpdate, disciplineId).subscribe();
-      },
-      error: (err) => {
-        console.error('Error while leaving discipline:', err);
-      }
-    });
+      ),
+      switchMap(({ userUpdate, disciplineUpdate }) => {
+        userUpdate.disciplines = userUpdate.disciplines.filter(
+          (id) => id !== disciplineId
+        );
+        disciplineUpdate.students = disciplineUpdate.students.filter(
+          (id) => id !== userId
+        );
+        return forkJoin([
+          this.userService.update(userUpdate, userId),
+          this.update(disciplineUpdate, disciplineId)
+        ]).pipe(
+          map(() => void 0) 
+        );
+      }),
+      catchError((err) => {
+        console.error("Error while leaving discipline:", err);
+        return throwError(() => new Error('Failed to leave discipline'));
+      })
+    );
   }
 
-  createDiscipline(newDiscipline: Object): Observable<Object | null>  {
+  createDiscipline(newDiscipline: Object): Observable<Object | null> {
     return this.create(
       this.buildDiscipline(newDiscipline as DisciplineFormInterfaceCreated)
     ).pipe(
@@ -62,11 +72,11 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
             })
           );
         }
-        return of(null);  
+        return of(null);
       }),
       catchError((error) => {
-        console.error('Erro ao criar disciplina ou atualizar usuário:', error);
-        return throwError(() => error); 
+        console.error("Erro ao criar disciplina ou atualizar usuário:", error);
+        return throwError(() => error);
       })
     );
   }
@@ -107,7 +117,9 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
     disciplineToDelete.students.forEach((student) => {
       this.userService.read(student).subscribe({
         next: (result: User) => {
-          result.disciplines = result.disciplines.filter((disc) => disc !== disciplineToDelete.id);
+          result.disciplines = result.disciplines.filter(
+            (disc) => disc !== disciplineToDelete.id
+          );
           this.userService.update(result, result.id).subscribe({
             error: (err) => {
               console.error(`Error updating user ${result.id}:`, err);
@@ -116,22 +128,44 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
         },
         error: (err) => {
           console.error(`Error reading user ${student}:`, err);
-        }
+        },
       });
     });
-  
+
     this.delete(disciplineToDelete.id).subscribe({
       error: (err) => {
-        console.error(`Error deleting discipline ${disciplineToDelete.id}:`, err);
-      }
+        console.error(
+          `Error deleting discipline ${disciplineToDelete.id}:`,
+          err
+        );
+      },
     });
   }
-  
+
+  loadDisciplines(ids_discpline: string[]): Observable<Discipline[]> {
+    const disciplineRequests = ids_discpline.map((id) =>
+      this.read(id).pipe(
+        catchError((error) => {
+          console.error(`Failed to load discipline with id ${id}:`, error);
+          return throwError(
+            () => new Error(`Failed to load discipline with id ${id}`)
+          );
+        })
+      )
+    );
+
+    return forkJoin(disciplineRequests).pipe(
+      catchError((error) => {
+        console.error("Failed to load disciplines:", error);
+        return throwError(() => new Error("Failed to load disciplines"));
+      })
+    );
+  }
 
   addStudentToDiscipline(
     email: string,
     id: string
-  ): Observable<Discipline | undefined> {
+  ): Observable<Discipline> {
     return this.userService.readBy("email", email).pipe(
       map(
         (users) =>
@@ -155,7 +189,7 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
                   );
                 })
               )
-            : throwError(() => new Error("Student not found with this email")) // Exceção quando o email não é encontrado
+            : throwError(() => new Error("Student not found with this email")) 
       ),
       catchError((err) => {
         console.error("Error adding student:", err.message);

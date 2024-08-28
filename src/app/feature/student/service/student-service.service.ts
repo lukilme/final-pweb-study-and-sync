@@ -18,7 +18,6 @@ export class StudentServiceService extends ServiceAbstract<Student>{
   getStudentByDiscipline(id: string): Observable<Student[]> {
     return this.disciplineService.read(id).pipe(
       switchMap((discipline: Discipline) => {
-        console.log(discipline);
         const studentObservables = discipline.students.map(studentId =>
           this.read(studentId)
         );

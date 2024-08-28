@@ -4,22 +4,18 @@ import { UserRegisterData } from "../../../core/interfaces/user.register.interfa
 import { UserLoginData } from "../../../core/interfaces/user.login.interface";
 import { HttpClient } from "@angular/common/http";
 import { catchError, map, Observable, of, switchMap, throwError } from "rxjs";
-import { UserValidator } from "./user.validator.service";
+import { UserValidator } from "./user.validator";
 import { UserStorageService } from "../../../core/storage/user-storage.service";
 import { Teacher } from "../../../shared/model/teacher.model";
 import { Student } from "../../../shared/model/student.model";
 import { ServiceAbstract } from "../../../core/util/service.abstract";
 import { FormException } from "../../../core/exception/form.exception";
 
-
 @Injectable()
 export class UserService extends ServiceAbstract<User> {
   override URL_TARGET = "http://localhost:3000/user";
 
-  constructor(
-    httpClient: HttpClient,
-    private storage: UserStorageService
-  ) {
+  constructor(httpClient: HttpClient, private storage: UserStorageService) {
     super(httpClient);
   }
 
@@ -66,13 +62,20 @@ export class UserService extends ServiceAbstract<User> {
     if (this.storage.userSaved) {
       return this.read(this.storage.userSaved.id).pipe(
         map((result: User) => {
-          this.storage.saveUser(result);
-          console.log(this.storage.userSaved);
+          if (result.status == "teacher") {
+            const userToSave = result as Teacher;
+            this.storage.saveUser(userToSave);
+          } else {
+            const userToSave = result as Student;
+            this.storage.saveUser(userToSave);
+          }
           return result;
         }),
         catchError((error) => {
           console.error("Something wrong with saving user on storage:", error);
-          return throwError(() => new Error("Something wrong with saving user on storage"));
+          return throwError(
+            () => new Error("Something wrong with saving user on storage")
+          );
         })
       );
     } else {
@@ -80,7 +83,6 @@ export class UserService extends ServiceAbstract<User> {
       return throwError(() => new Error("Storage doesn't have a user stocked"));
     }
   }
-  
 
   /**
    * Logs in a user by validating the input and checking credentials.
@@ -98,7 +100,13 @@ export class UserService extends ServiceAbstract<User> {
       map((users) => {
         if (users.length > 0) {
           if (users[0].password === loginData.passwordLoginField) {
-            this.storage.saveUser(users[0]);
+            if (users[0].status == "teacher") {
+              const userToSave = users[0] as Teacher;
+              this.storage.saveUser(userToSave);
+            } else {
+              const userToSave = users[0] as Student;
+              this.storage.saveUser(userToSave);
+            }
           } else {
             throw new FormException("WrongPassword", "PASSWORD");
           }
@@ -137,5 +145,9 @@ export class UserService extends ServiceAbstract<User> {
         parseInt(data.semesterRegisterField, 10)
       );
     }
+  }
+
+  updateUser(updated: UserRegisterData) {
+    UserValidator.registerValidate(updated);
   }
 }
