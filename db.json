@@ -9,7 +9,12 @@
       "status": "teacher",
       "disciplines": [
         "7a99",
-        "3d89"
+        "34fc",
+        "9771",
+        "2569",
+        "5e9d",
+        "323e",
+        "0a74"
       ],
       "qualification": "Formado em Ciencias da computação na UFPB"
     },
@@ -114,6 +119,60 @@
       ],
       "color": "#db3333",
       "creation_date": "2024-08-27T13:12:12.112Z"
+    },
+    {
+      "id": "34fc",
+      "id_teacher": "696a",
+      "name": "ASadksadsad",
+      "description": "ASadksadsadASadksadsadASadksadsad",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T00:42:49.796Z"
+    },
+    {
+      "id": "9771",
+      "id_teacher": "696a",
+      "name": "sadsadsadasdasd",
+      "description": "asdsadasdasfdsfsdf",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:11:53.417Z"
+    },
+    {
+      "id": "2569",
+      "id_teacher": "696a",
+      "name": "adsduserServiceuserServiceuserService",
+      "description": "userServiceuserServiceuserServiceuserService",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:12:06.704Z"
+    },
+    {
+      "id": "5e9d",
+      "id_teacher": "696a",
+      "name": "userServiceuserService",
+      "description": "userServiceuserServiceuserServiceuserService",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:13:32.039Z"
+    },
+    {
+      "id": "323e",
+      "id_teacher": "696a",
+      "name": "userServiceuserServiceuserService",
+      "description": "userServiceuserServiceuserServiceuserServiceuserServiceuserServiceuserService",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:14:11.352Z"
+    },
+    {
+      "id": "0a74",
+      "id_teacher": "696a",
+      "name": "adsadsadad",
+      "description": "adasdasdsaddloadDisciplines(): void {\n  this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({\n    next: (response: { data: Discipline[] }) => {\n      const dataResponse = response.data;\n      console.log(response);\n\n    ",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:19:18.998Z"
     }
   ]
 }

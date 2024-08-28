@@ -4,8 +4,10 @@ import { PageEvent } from '@angular/material/paginator';
 import { Discipline } from '../../../../shared/model/discipline.model';
 import { MessageSweetAlertService } from '../../../../shared/service/message-sweet-alert.service';
 import Swal from 'sweetalert2';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, of } from 'rxjs';
 import { UserStorageService } from '../../../../core/storage/user-storage.service';
+import { UserService } from '../../../user/service/user.service';
+import { User } from '../../../../shared/model/user.model';
 
 
 @Component({
@@ -26,7 +28,8 @@ export class ListDisciplineComponent implements OnInit {
 
   constructor(
    private disciplineService: DisciplineService,
-   private storage : UserStorageService
+   private storage : UserStorageService,
+   private userService : UserService
   ) {
    
   }
@@ -59,27 +62,35 @@ export class ListDisciplineComponent implements OnInit {
 
   addStudent(index: number): void {
     const discipline = this.disciplines[index];
-
+  
     Swal.fire({
       title: 'Send student email',
-      input: 'text',
+      input: 'email', // Usa o tipo de input 'email' para validação automática
       inputAttributes: {
-        autocapitalize: 'off'
+        autocapitalize: 'off',
+        placeholder: 'Enter student email'
       },
       showCancelButton: true,
       confirmButtonText: 'Add student',
       showLoaderOnConfirm: true,
-      preConfirm: (email: string) => 
-        this.disciplineService.addStudentToDiscipline(email, discipline.id).toPromise().catch(error => {
-          Swal.showValidationMessage(error.message);
-        }),
+      preConfirm: (email: string) => {
+        return this.disciplineService.addStudentToDiscipline(email, discipline.id).pipe(
+          catchError(error => {
+            Swal.showValidationMessage(`Error: ${error.message}`);
+            return of(null); 
+          })
+        );
+      },
       allowOutsideClick: () => !Swal.isLoading()
     }).then((result) => {
       if (result.isConfirmed && !Swal.getValidationMessage()) {
+        this.userService.updateStorageUser();
         MessageSweetAlertService.success('Student added successfully!');
+
       }
     });
   }
+  
 
   onDeleteDiscipline(index: number): void {
     const disciplineToDelete = this.disciplines[index];
@@ -101,24 +112,32 @@ export class ListDisciplineComponent implements OnInit {
 
   loadDisciplines(): void {
     this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({
-      next: (response: Object) => {
-        const dataResponse = response as { data: Discipline[] };
- 
-        this.disciplines = [];
+      next: (response: any) => {
+        const dataResponse = response.data;
+        console.log(response);
   
-        if (this.storage.userSaved) {
-          const listDiscipline: string[] = this.storage.userSaved.disciplines;
-          listDiscipline.forEach((discipline_id) => {
-            console.log('Searching for discipline ID:', discipline_id);
-            const found = dataResponse.data.find((value: Discipline) => value.id === discipline_id);
-            if (found) {
-              this.disciplines.push(found);
+        this.userService.updateStorageUser().subscribe({
+          next: (user: User) => {
+            if (user?.disciplines?.length) {
+              const disciplineMap = new Map(
+                dataResponse.map((discipline: { id: any }) => [discipline.id, discipline])
+              );
+  
+              this.disciplines = user.disciplines
+                .map(discipline_id => disciplineMap.get(discipline_id))
+                .filter(discipline => discipline !== undefined) as Discipline[];
+            } else {
+              this.disciplines = [];
             }
-          });
-        }
   
-        console.log('Disciplines loaded:', this.disciplines);
-        this.totalItems = this.disciplines.length;
+            console.log('Disciplines loaded:', this.disciplines);
+            this.totalItems = this.disciplines.length;
+          },
+          error: (err) => {
+            console.error('Error updating storage user:', err);
+            MessageSweetAlertService.error('Failed to update user information. Please try again.');
+          }
+        });
       },
       error: (err) => {
         console.error('Error loading disciplines:', err);
@@ -126,5 +145,7 @@ export class ListDisciplineComponent implements OnInit {
       }
     });
   }
+  
+  
   
 }

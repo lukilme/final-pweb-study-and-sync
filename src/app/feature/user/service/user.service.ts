@@ -3,14 +3,14 @@ import { User } from "../../../shared/model/user.model";
 import { UserRegisterData } from "../../../core/interfaces/user.register.interface";
 import { UserLoginData } from "../../../core/interfaces/user.login.interface";
 import { HttpClient } from "@angular/common/http";
-import { catchError, map, Observable, switchMap, throwError } from "rxjs";
+import { catchError, map, Observable, of, switchMap, throwError } from "rxjs";
 import { UserValidator } from "./user.validator.service";
-import { Router } from "@angular/router";
 import { UserStorageService } from "../../../core/storage/user-storage.service";
 import { Teacher } from "../../../shared/model/teacher.model";
 import { Student } from "../../../shared/model/student.model";
 import { ServiceAbstract } from "../../../core/util/service.abstract";
 import { FormException } from "../../../core/exception/form.exception";
+
 
 @Injectable()
 export class UserService extends ServiceAbstract<User> {
@@ -18,7 +18,6 @@ export class UserService extends ServiceAbstract<User> {
 
   constructor(
     httpClient: HttpClient,
-    private route: Router,
     private storage: UserStorageService
   ) {
     super(httpClient);
@@ -30,8 +29,8 @@ export class UserService extends ServiceAbstract<User> {
    */
   register(userForm: UserRegisterData): Observable<User> {
     UserValidator.registerValidate(userForm);
-  
-    return this.readBy('email', userForm.emailRegisterField).pipe(
+
+    return this.readBy("email", userForm.emailRegisterField).pipe(
       catchError((err) => {
         console.error("Error on verify email:", err);
         return throwError(() => new Error("Error on verify email"));
@@ -44,14 +43,43 @@ export class UserService extends ServiceAbstract<User> {
           return this.create(newUser).pipe(
             catchError((err) => {
               console.error("Error occurred while creating user:", err);
-              return throwError(() => new Error("Error occurred while creating user"));
+              return throwError(
+                () => new Error("Error occurred while creating user")
+              );
             })
           );
         }
       })
     );
   }
-  
+
+  /**
+   * Updates the user saved in storage, if any.
+   *
+   * If a user is saved to storage (`this.storage.userSaved`),
+   * this method will try to fetch the updated user using the saved ID.
+   * If reading is successful, the updated user will be saved again
+   * no storage. If an error occurs during reading or if there is no
+   * user saved to storage, an exception will be thrown.
+   */
+  updateStorageUser(): Observable<User> {
+    if (this.storage.userSaved) {
+      return this.read(this.storage.userSaved.id).pipe(
+        map((result: User) => {
+          this.storage.saveUser(result);
+          console.log(this.storage.userSaved);
+          return result;
+        }),
+        catchError((error) => {
+          console.error("Something wrong with saving user on storage:", error);
+          return throwError(() => new Error("Something wrong with saving user on storage"));
+        })
+      );
+    } else {
+      console.error("Storage doesn't have a user stocked");
+      return throwError(() => new Error("Storage doesn't have a user stocked"));
+    }
+  }
   
 
   /**
@@ -63,20 +91,19 @@ export class UserService extends ServiceAbstract<User> {
     UserValidator.loginValidate(loginData);
 
     return this.readBy("email", loginData.emailLoginField).pipe(
-      catchError(err => {
+      catchError((err) => {
         console.error("Error occurred while fetching users:", err);
-        return throwError(() => err); 
+        return throwError(() => err);
       }),
-      map(users => {
+      map((users) => {
         if (users.length > 0) {
           if (users[0].password === loginData.passwordLoginField) {
             this.storage.saveUser(users[0]);
-
           } else {
-            throw new FormException("WrongPassword", 'PASSWORD');
+            throw new FormException("WrongPassword", "PASSWORD");
           }
         } else {
-          throw new FormException("UserNotFound", 'EMAIL');
+          throw new FormException("UserNotFound", "EMAIL");
         }
       })
     );
@@ -96,7 +123,7 @@ export class UserService extends ServiceAbstract<User> {
         new Date(data.birthdayRegisterField),
         data.statusRegisterField,
         data.qualificationRegisterField,
-        [] 
+        []
       );
     } else {
       return new Student(

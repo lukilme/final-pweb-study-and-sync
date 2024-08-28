@@ -74,15 +74,15 @@ export class UserValidator {
      */
     private static passwordUserValidate(password: string, repeat_password: string) {
         if (!password || password.length < this.MIN_PASSWORD) {
-            throw new Error("Password must be at least 8 characters long.");
+            throw new Error(`Password must be at least ${this.MIN_PASSWORD} characters long.`);
         }
         if (password !== repeat_password) {
             throw new Error("Passwords do not match.");
         }
         // Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character
-        if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
-            throw new Error("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
-        }
+        //if (!/[A-Z]/.test(password) || !/[a-z]/.test(password) || !/[0-9]/.test(password) || !/[^A-Za-z0-9]/.test(password)) {
+            //throw new Error("Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.");
+        //}
     }
 
     /**
