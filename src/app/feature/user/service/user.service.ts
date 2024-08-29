@@ -11,7 +11,9 @@ import { Student } from "../../../shared/model/student.model";
 import { ServiceAbstract } from "../../../core/util/service.abstract";
 import { FormException } from "../../../core/exception/form.exception";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UserService extends ServiceAbstract<User> {
   override URL_TARGET = "http://localhost:3000/user";
 
@@ -147,7 +149,31 @@ export class UserService extends ServiceAbstract<User> {
     }
   }
 
-  updateUser(updated: UserRegisterData) {
-    UserValidator.registerValidate(updated);
+  updateUser(updated: UserRegisterData): Observable<User> {
+    console.log(updated);
+    return this.readBy("email", updated.emailRegisterField).pipe(
+      catchError((err) => {
+        console.error("Error on verify email:", err);
+        return throwError(() => new Error("Error on verify email"));
+      }),
+      switchMap((users: User[]) => {
+        if (users.length > 0) {
+          const existingUser = users[0];
+          
+          if (existingUser.id !== this.storage.userSaved!.id) {
+            return throwError(() => new Error("Email already in use"));
+          }
+        }
+        const newUser: Teacher | Student = this.buildUser(updated);
+        return this.update(newUser,this.storage.userSaved!.id).pipe(
+          catchError((err) => {
+            console.error("Error occurred while creating user:", err);
+            return throwError(
+              () => new Error("Error occurred while creating user")
+            );
+          })
+        );
+      })
+    );
   }
 }

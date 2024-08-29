@@ -175,7 +175,9 @@ export class UserFormRegisterComponent {
   onSubmit() {
     if (this.registerForm.valid) {
       const formData: UserRegisterData = this.registerForm.value as UserRegisterData;
-      const actions : Function = (this.focus_user == null)? this.service.register : this.service.updateUser;
+      const actions = (this.focus_user == null) 
+      ? (data: UserRegisterData) => this.service.register(data) 
+      : (data: UserRegisterData) => this.service.updateUser(data);
       actions(formData).subscribe({
         next: () => {
           const message : string =  (this.focus_user == null)? "Registered successfully! 🎉✨" : "Updated successfully! 🎉✨";
@@ -189,8 +191,7 @@ export class UserFormRegisterComponent {
       console.log("Form is invalid!", this.registerForm.errors);
       MessageSweetAlertService.error("Form is invalid!");
     }
-  }
-  
+  } 
 
   trackOption(index: number, option: any): any {
     return option; 

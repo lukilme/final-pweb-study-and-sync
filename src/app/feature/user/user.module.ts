@@ -45,8 +45,6 @@ export const MY_FORMATS = {
     PerfilComponent
   ],
   providers:[
-    UserService,
-    HttpClient,
     provideMomentDateAdapter(MY_FORMATS),
   ],
   imports: [

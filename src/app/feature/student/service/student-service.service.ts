@@ -11,6 +11,7 @@ import { catchError, forkJoin, Observable, switchMap, throwError } from 'rxjs';
 })
 export class StudentServiceService extends ServiceAbstract<Student>{
   override URL_TARGET: string = "http://localhost:3000/user";
+  
   constructor(private disciplineService : DisciplineService,  httpClient: HttpClient,) {
     super(httpClient);
   }

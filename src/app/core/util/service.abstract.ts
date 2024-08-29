@@ -17,7 +17,8 @@ export abstract class ServiceAbstract<T> implements ServiceInterface<T> {
    * Constructor for the abstract service class.
    * @param httpClient: The HttpClient instance used to make HTTP requests.
    */
-  constructor(private httpClient: HttpClient) {}
+  protected constructor(protected httpClient: HttpClient) {}
+
 
   /**
    * Reads a single data object by its key.

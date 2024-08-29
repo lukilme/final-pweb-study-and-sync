@@ -30,19 +30,15 @@
       "qualification": "Formado na Uniesquina"
     },
     {
-      "id": "3779",
       "name": "Estudante",
-      "email": "estudante1@gmail.com",
+      "email": "estudante11@gmail.com",
       "password": "Estudante1?",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "student",
-      "disciplines": [
-        "34fc",
-        "9771",
-        "7a99"
-      ],
-      "course": "Internet systems",
-      "semester": 3
+      "disciplines": [],
+      "course": "Computer networks",
+      "semester": 3,
+      "id": "3779"
     },
     {
       "id": "d5d2",
@@ -120,8 +116,7 @@
       "name": "MAtemática 1",
       "description": "Materia de mateamtica basuica",
       "students": [
-        "d5d2",
-        "3779"
+        "d5d2"
       ],
       "color": "#db3333",
       "creation_date": "2024-08-27T13:12:12.112Z"
@@ -131,9 +126,7 @@
       "id_teacher": "696a",
       "name": "ASadksadsad",
       "description": "ASadksadsadASadksadsadASadksadsad",
-      "students": [
-        "3779"
-      ],
+      "students": [],
       "color": "#555555",
       "creation_date": "2024-08-28T00:42:49.796Z"
     },
@@ -142,9 +135,7 @@
       "id_teacher": "696a",
       "name": "sadsadsadasdasd",
       "description": "asdsadasdasfdsfsdf",
-      "students": [
-        "3779"
-      ],
+      "students": [],
       "color": "#555555",
       "creation_date": "2024-08-28T01:11:53.417Z"
     },
@@ -163,7 +154,7 @@
       "name": "userServiceuserServiceasaa",
       "description": "userServiceuserServiceuserServiceuserService",
       "students": [],
-      "color": "#555555",
+      "color": "#d4ff00",
       "creation_date": "2024-08-28T01:13:32.039Z"
     },
     {
