@@ -1,36 +1,8 @@
 {
-    "user":[
-       {
-          "id":1,
-          "name":"Alice Johnson",
-          "email":"alice.johnson@example.com",
-          "password":"password123",
-          "birthday":"1990-05-21",
-          "status":"student"
-       },
-       {
-          "id":2,
-          "name":"Bob Smith",
-          "email":"bob.smith@example.com",
-          "password":"securepass456",
-          "birthday":"1985-08-15",
-          "status":"teacher"
-       },
-       {
-          "id":3,
-          "name":"Clara Lee",
-          "email":"clara.lee@example.com",
-          "password":"pass789word",
-          "birthday":"2000-12-10",
-          "status":"student"
-       },
-       {
-          "id":4,
-          "name":"David Brown",
-          "email":"david.brown@example.com",
-          "password":"mypassword321",
-          "birthday":"1975-03-30",
-          "status":"teacher"
-       }
-    ]
- }
+   "user":[
+
+   ],
+   "discipline":[
+      
+   ]
+}
