@@ -1,0 +1,188 @@
+{
+  "user": [
+    {
+      "id": "696a",
+      "name": "Senhor Professor",
+      "email": "professor@gmail.com",
+      "password": "Professor1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "teacher",
+      "disciplines": [
+        "7a99",
+        "34fc",
+        "9771",
+        "2569",
+        "5e9d",
+        "323e",
+        "0a74",
+        "4828"
+      ],
+      "qualification": "Formado em Ciencias da computação na UFPB"
+    },
+    {
+      "id": "7c7a",
+      "name": "Professor João",
+      "email": "professor1@gmail.com",
+      "password": "Professor3?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "teacher",
+      "disciplines": [],
+      "qualification": "Formado na Uniesquina"
+    },
+    {
+      "name": "Estudante",
+      "email": "estudante11@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Computer networks",
+      "semester": 3,
+      "id": "3779"
+    },
+    {
+      "id": "d5d2",
+      "name": "Estudante Pedro",
+      "email": "estudante2@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [
+        "7a99"
+      ],
+      "course": "Internet systems",
+      "semester": 3
+    },
+    {
+      "id": "b1b6",
+      "name": "Estudante Paulo",
+      "email": "estudante3@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Internet systems",
+      "semester": 3
+    },
+    {
+      "id": "add0",
+      "name": "Estudante Maria",
+      "email": "estudante4@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Internet systems",
+      "semester": 5
+    },
+    {
+      "id": "1409",
+      "name": "Estudante Joana",
+      "email": "estudante5@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Internet systems",
+      "semester": 5
+    },
+    {
+      "id": "8058",
+      "name": "Estudante Luis",
+      "email": "estudante6@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Marketing",
+      "semester": 3
+    },
+    {
+      "id": "7ac0",
+      "name": "Estudante Marcos",
+      "email": "estudante7@gmail.com",
+      "password": "Estudante1?",
+      "birthday": "2003-12-12T02:00:00.000Z",
+      "status": "student",
+      "disciplines": [],
+      "course": "Electrical engineering",
+      "semester": 8
+    }
+  ],
+  "discipline": [
+    {
+      "id": "7a99",
+      "id_teacher": "696a",
+      "name": "MAtemática 1",
+      "description": "Materia de mateamtica basuica",
+      "students": [
+        "d5d2"
+      ],
+      "color": "#db3333",
+      "creation_date": "2024-08-27T13:12:12.112Z"
+    },
+    {
+      "id": "34fc",
+      "id_teacher": "696a",
+      "name": "ASadksadsad",
+      "description": "ASadksadsadASadksadsadASadksadsad",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T00:42:49.796Z"
+    },
+    {
+      "id": "9771",
+      "id_teacher": "696a",
+      "name": "sadsadsadasdasd",
+      "description": "asdsadasdasfdsfsdf",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:11:53.417Z"
+    },
+    {
+      "id": "2569",
+      "id_teacher": "696a",
+      "name": "adsduserServiceuserServiceuserService",
+      "description": "userServiceuserServiceuserServiceuserService",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:12:06.704Z"
+    },
+    {
+      "id": "5e9d",
+      "id_teacher": "696a",
+      "name": "userServiceuserServiceasaa",
+      "description": "userServiceuserServiceuserServiceuserService",
+      "students": [],
+      "color": "#d4ff00",
+      "creation_date": "2024-08-28T01:13:32.039Z"
+    },
+    {
+      "id": "323e",
+      "id_teacher": "696a",
+      "name": "userServiceuserServiceuserService",
+      "description": "userServiceuserServiceuserServiceuserServiceuserServiceuserServiceuserService",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:14:11.352Z"
+    },
+    {
+      "id": "0a74",
+      "id_teacher": "696a",
+      "name": "adsadsadad",
+      "description": "adasdasdsaddloadDisciplines(): void {\n  this.disciplineService.paginationDiscipline(this.pageSize, this.currentPage).subscribe({\n    next: (response: { data: Discipline[] }) => {\n      const dataResponse = response.data;\n      console.log(response);\n\n    ",
+      "students": [],
+      "color": "#555555",
+      "creation_date": "2024-08-28T01:19:18.998Z"
+    },
+    {
+      "id": "4828",
+      "id_teacher": "696a",
+      "name": "Porcaria",
+      "description": "PorcariaPorcariaPorcariaPorcaradia",
+      "students": [],
+      "color": "#6833e6",
+      "creation_date": "2024-08-28T13:30:11.450Z"
+    }
+  ]
+}

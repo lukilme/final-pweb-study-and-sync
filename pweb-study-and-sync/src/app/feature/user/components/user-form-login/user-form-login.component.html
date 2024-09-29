@@ -1,0 +1,39 @@
+<form id="form-login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="form-input">
+    <mat-label>Email</mat-label>
+    <input matInput type="text" formControlName="emailLoginField" placeholder="Ex. abc@example.com" maxlength="128">
+    <button *ngIf="loginForm.get('emailLoginField')?.value" matSuffix mat-icon-button aria-label="Clear" (click)="loginForm.get('emailLoginField')?.reset()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-hint>The email must be valid and unique</mat-hint>
+    <mat-error *ngIf="loginForm.get('emailLoginField')?.hasError('email') && !loginForm.get('emailLoginField')?.hasError('required')">
+      Please enter a valid format email address
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('emailLoginField')?.hasError('required')">
+      Email is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('emailLoginField')?.hasError('UserNotFound')">
+      User not found with this email
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="passwordLoginField" maxlength="128">
+    <mat-icon  matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+    <mat-hint *ngIf="loginForm.get('passwordLoginField')?.value?.length === 0">Enter your password</mat-hint>
+    <mat-error *ngIf="loginForm.get('passwordLoginField')?.hasError('required')">
+      Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('passwordLoginField')?.hasError('minlength')&& !loginForm.get('passwordLoginField')?.hasError('required')">
+      Password must be at least <strong>8</strong> characters
+    </mat-error>
+    <mat-error *ngIf="loginForm.get('passwordLoginField')?.hasError('WrongPassword')">
+      Wrong password!
+    </mat-error>
+  </mat-form-field>
+  <div class="centralazy">
+    <button type="button" id="password-recovery">forgot my password</button>
+  </div>
+  <mat-divider></mat-divider>
+  <button id="send-login" type="submit" mat-raised-button color="primary" >Login</button>
+</form>

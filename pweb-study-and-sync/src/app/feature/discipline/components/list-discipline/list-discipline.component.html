@@ -1,0 +1,12 @@
+<div class="discipline-list">
+  <app-discipline-card 
+  *ngFor="let discipline of disciplines; let i = index; trackBy: trackByDiscipline" 
+  [discipline]="discipline" 
+  [index]="i"
+  (addStudentEvent)="addStudent($event)" 
+  (deleteDisciplineEvent)="onDeleteDiscipline($event)"
+  (updateList)="loadDisciplines()"
+  (leaveDisciplineEvent)="leaveDiscipline($event)">
+</app-discipline-card>
+<mat-paginator [length]="totalItems" [pageSize]="10" (page)="onPageChange($event)" aria-label="Select page"></mat-paginator>
+</div>
