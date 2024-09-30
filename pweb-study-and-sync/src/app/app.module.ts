@@ -7,6 +7,7 @@ import { UserModule } from './feature/user/user.module';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { MaterialModule } from './core/material/material.module';
 import { LayoutModule } from './layout/layout.module';
+import { FirestoreModule } from './firestore/firestore.module';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { LayoutModule } from './layout/layout.module';
     AppRoutingModule,
     UserModule,
     MaterialModule,
-    LayoutModule
+    LayoutModule,
+    FirestoreModule
   ],
   providers: [
     provideAnimationsAsync(),
