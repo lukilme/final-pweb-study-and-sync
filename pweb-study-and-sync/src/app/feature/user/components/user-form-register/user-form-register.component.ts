@@ -1,6 +1,7 @@
 import { Component, TrackByFunction } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { UserService } from "../../service/user.service";
+import { UsuarioRestService } from "../../service/user-rest.service";
 import { UserRegisterData } from "../../../../core/interfaces/user.register.interface";
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE } from "@angular/material/core";
 import { MAT_MOMENT_DATE_ADAPTER_OPTIONS,  } from "@angular/material-moment-adapter";
