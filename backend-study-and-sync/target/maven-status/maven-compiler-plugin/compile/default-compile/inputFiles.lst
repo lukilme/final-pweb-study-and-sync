@@ -1,1 +1,21 @@
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/StudyAndSyncApplication.java
+<<<<<<< HEAD
+=======
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/DisciplineController.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/StudentController.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/TeacherController.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/UserController.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/Discipline.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/Student.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/Teacher.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/User.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/dto/UserListDTO.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/DisciplineRepository.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/StudentRepository.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/TeacherRepository.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/UserRepository.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/DisciplineService.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/StudentService.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/TeacherService.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/UserService.java
+>>>>>>> fa8f1a0 (a)

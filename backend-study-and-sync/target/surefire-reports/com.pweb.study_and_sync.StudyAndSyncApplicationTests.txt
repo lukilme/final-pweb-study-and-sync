@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.pweb.study_and_sync.StudyAndSyncApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.072 s -- in com.pweb.study_and_sync.StudyAndSyncApplicationTests

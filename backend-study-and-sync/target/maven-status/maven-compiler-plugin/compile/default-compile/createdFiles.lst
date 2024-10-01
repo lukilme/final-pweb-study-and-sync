@@ -1,1 +1,17 @@
 com/pweb/study_and_sync/StudyAndSyncApplication.class
+<<<<<<< HEAD
+=======
+com/pweb/study_and_sync/model/User.class
+com/pweb/study_and_sync/repository/TeacherRepository.class
+com/pweb/study_and_sync/model/dto/UserListDTO.class
+com/pweb/study_and_sync/controller/DisciplineController.class
+com/pweb/study_and_sync/repository/StudentRepository.class
+com/pweb/study_and_sync/service/TeacherService.class
+com/pweb/study_and_sync/repository/DisciplineRepository.class
+com/pweb/study_and_sync/service/DisciplineService.class
+com/pweb/study_and_sync/model/Discipline.class
+com/pweb/study_and_sync/controller/StudentController.class
+com/pweb/study_and_sync/service/UserService.class
+com/pweb/study_and_sync/repository/UserRepository.class
+com/pweb/study_and_sync/service/StudentService.class
+>>>>>>> fa8f1a0 (a)
