@@ -10,6 +10,7 @@ import { Teacher } from "../../../shared/model/teacher.model";
 import { Student } from "../../../shared/model/student.model";
 import { ServiceAbstract } from "../../../core/util/service.abstract";
 import { FormException } from "../../../core/exception/form.exception";
+import { UsuarioFirestoreService } from "../../../shared/services/usuario-firestore.service";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ import { FormException } from "../../../core/exception/form.exception";
 export class UserService extends ServiceAbstract<User> {
   override URL_TARGET = "http://localhost:3000/user";
 
-  constructor(httpClient: HttpClient, private storage: UserStorageService) {
+  constructor(httpClient: HttpClient, private storage: UserStorageService, private usuarioService: UsuarioFirestoreService) {
     super(httpClient);
   }
 
