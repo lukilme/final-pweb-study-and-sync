@@ -22,7 +22,6 @@ public class Teacher extends User {
     private Set<Discipline> disciplines = new HashSet<>(); 
 
     public Teacher() {
-        
     }
 
     public Teacher(String name, String email, String password, LocalDate birthday, String qualification) {
@@ -37,6 +36,7 @@ public class Teacher extends User {
     public void setQualification(String qualification) {
         this.qualification = qualification;
     }
+
     public Set<Discipline> getDisciplines() {
         return disciplines;
     }

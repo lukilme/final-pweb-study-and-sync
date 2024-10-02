@@ -16,27 +16,22 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    // Método para salvar um estudante
     public Student save(Student student) {
         return studentRepository.save(student);
     }
 
-    // Método para listar todos os estudantes com paginação
     public Page<Student> findAll(PageRequest pageRequest) {
         return studentRepository.findAll(pageRequest);
     }
 
-    // Método para buscar um estudante pelo ID
     public Optional<Student> findById(Long id) {
         return studentRepository.findById(id);
     }
 
-    // Método para buscar um estudante pelo email
     public Optional<Student> findByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
 
-    // Método para atualizar os dados de um estudante
     public Student update(Long id, Student student) {
         Optional<Student> existingStudent = studentRepository.findById(id);
         if (existingStudent.isPresent()) {

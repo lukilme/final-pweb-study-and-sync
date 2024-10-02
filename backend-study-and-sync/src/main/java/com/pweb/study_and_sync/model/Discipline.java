@@ -29,12 +29,13 @@ public class Discipline {
     @Column(nullable = false)
     private LocalDateTime creationDate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
         name = "aluno_curso", 
         joinColumns = @JoinColumn(name = "student_id"), 
         inverseJoinColumns = @JoinColumn(name = "discipline_id")  
     )
+    
     private Set<Student> students = new HashSet<>();
     // no fundo, todo professor também é um estudante
 

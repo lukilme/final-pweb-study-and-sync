@@ -1,22 +1,18 @@
 package com.pweb.study_and_sync.model;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Table;
+import jakarta.persistence.MappedSuperclass;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "tb_usuario")
-@Inheritance(strategy = InheritanceType.JOINED)  // Herança com tabelas separadas e chave estrangeira
+@MappedSuperclass
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String name;
     private String email;
     private String password;
@@ -31,7 +27,6 @@ public class User {
         this.birthday = birthday;
     }
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
