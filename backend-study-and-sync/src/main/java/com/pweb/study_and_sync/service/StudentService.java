@@ -47,7 +47,6 @@ public class StudentService {
         return null;
     }
 
-    // Método para deletar um estudante
     public void delete(Long id) {
         studentRepository.deleteById(id);
     }

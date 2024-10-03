@@ -49,8 +49,7 @@ public class DisciplineController {
         Discipline discipline = disciplineService.findById(id)
             .orElseThrow(() -> new ResourceNotFoundException("Disciplina não encontrada para o id: " + id));
 
-        Discipline savedDiscipline = disciplineService.update(discipline)
-            .orElseThrow(() -> new ResourceNotFoundException("Erro ao atualizar disciplina com id: " + id));
+        Discipline savedDiscipline = disciplineService.update(discipline);
 
         return ResponseEntity.ok(savedDiscipline);
     }

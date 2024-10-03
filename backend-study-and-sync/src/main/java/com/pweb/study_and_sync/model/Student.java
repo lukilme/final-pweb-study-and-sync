@@ -4,8 +4,11 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
@@ -13,12 +16,14 @@ import jakarta.persistence.Table;
 @Table(name = "tb_student")
 public class Student extends User {
 
-    @Column(nullable = false) 
+    @Column(nullable = false)
     private String course;
-    @Column(nullable = false) 
+
+    @Column(nullable = false)
     private Integer semester;
 
-    @ManyToMany(mappedBy = "students")  
+    @ManyToMany(mappedBy = "students", fetch = FetchType.LAZY)
+    @JsonIgnore
     private Set<Discipline> disciplines = new HashSet<>();
 
     public Student() {
@@ -34,6 +39,10 @@ public class Student extends User {
         return course;
     }
 
+    public Set<Discipline> getDisciplines(){
+        return this.disciplines;
+    }
+
     public void setCourse(String course) {
         this.course = course;
     }
@@ -45,4 +54,14 @@ public class Student extends User {
     public void setSemester(Integer semester) {
         this.semester = semester;
     }
+
+    public void addDiscipline(Discipline newDiscipline){
+        this.disciplines.add(newDiscipline);
+    }
+
+    public Discipline removeDiscipline(Discipline disciplineToRemove){
+        this.disciplines.remove(disciplineToRemove);
+        return disciplineToRemove;
+    }
+
 }

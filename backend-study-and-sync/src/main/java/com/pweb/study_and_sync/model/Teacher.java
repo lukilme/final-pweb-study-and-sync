@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -18,7 +20,8 @@ public class Teacher extends User {
     @Column(nullable = false) 
     private String qualification;
 
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY) 
+    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)  
+    @JsonIgnore
     private Set<Discipline> disciplines = new HashSet<>(); 
 
     public Teacher() {
@@ -27,6 +30,16 @@ public class Teacher extends User {
     public Teacher(String name, String email, String password, LocalDate birthday, String qualification) {
         super(name, email, password, birthday);
         this.qualification = qualification;
+    }
+
+    public void addDiscipline(Discipline discipline) {
+        disciplines.add(discipline);
+        discipline.setTeacher(this);
+    }
+
+    public void removeDiscipline(Discipline discipline) {
+        disciplines.remove(discipline);
+        discipline.setTeacher(null);
     }
 
     public String getQualification() {

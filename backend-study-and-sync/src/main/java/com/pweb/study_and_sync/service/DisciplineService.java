@@ -4,6 +4,7 @@ import com.pweb.study_and_sync.model.Discipline;
 import com.pweb.study_and_sync.model.Teacher;
 import com.pweb.study_and_sync.model.dto.DisciplineCreationDTO;
 import com.pweb.study_and_sync.repository.DisciplineRepository;
+import com.pweb.study_and_sync.validator.DisciplineValidator;
 import com.pweb.study_and_sync.exception.ResourceNotFoundException;
 
 import jakarta.transaction.Transactional;
@@ -23,8 +24,7 @@ public class DisciplineService {
     @Autowired
     private DisciplineRepository disciplineRepository;
 
-    @Autowired
-    private TeacherService teacherService;
+
 
 
     public List<Discipline> findAll() {
@@ -37,8 +37,8 @@ public class DisciplineService {
         return disciplineRepository.findById(id);
     }
 
-  
-    public Optional<Discipline> update(Discipline disciplineToUpdate) {
+    @Transactional
+    public Discipline update(Discipline disciplineToUpdate) {
         logger.info("Atualizando disciplina com id: {}", disciplineToUpdate.getId());
         
         Optional<Discipline> existingDiscipline = disciplineRepository.findById(disciplineToUpdate.getId());
@@ -46,18 +46,18 @@ public class DisciplineService {
             logger.warn("Disciplina com id: {} não encontrada", disciplineToUpdate);
             throw new ResourceNotFoundException("Disciplina não encontrada para o id: " + disciplineToUpdate.getId());
         }
-
-        Teacher teacher = teacherService.findById(disciplineToUpdate.getTeacher().getId())
+        TeacherService teacherService = new TeacherService();
+        teacherService.findById(disciplineToUpdate.getTeacher().getId())
             .orElseThrow(() -> new ResourceNotFoundException("Professor não encontrado para o id: " + disciplineToUpdate.getTeacher().getId()));
 
-     
-        return Optional.of(disciplineRepository.save(disciplineToUpdate));
+        DisciplineValidator.validateDiscipline(disciplineToUpdate);
+        return disciplineRepository.save(disciplineToUpdate);
     }
 
     @Transactional
     public Discipline save(DisciplineCreationDTO disciplineToCreate) {
         logger.info("Salvando nova disciplina: {}", disciplineToCreate.name());
-
+        TeacherService teacherService = new TeacherService();
         Teacher teacherOfDiscipline = teacherService.findById(disciplineToCreate.idTeacher())
             .orElseThrow(() -> new ResourceNotFoundException("Professor não encontrado para o id: " + disciplineToCreate.idTeacher()));
 
@@ -68,10 +68,9 @@ public class DisciplineService {
             disciplineToCreate.color(),
             disciplineToCreate.creationDate()
         );
-
+        DisciplineValidator.validateDiscipline(newDiscipline);
         return disciplineRepository.save(newDiscipline);
     }
-
 
     public void deleteById(Long id) {
         logger.info("Deletando disciplina com id: {}", id);

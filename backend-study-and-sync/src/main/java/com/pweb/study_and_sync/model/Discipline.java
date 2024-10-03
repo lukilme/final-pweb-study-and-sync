@@ -5,6 +5,9 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "tb_discipline")
 public class Discipline {
@@ -13,9 +16,10 @@ public class Discipline {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne 
-    @JoinColumn(name = "teacher_id", nullable = false) 
-    private Teacher teacher; 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "teacher_id")
+    @JsonBackReference 
+    private Teacher teacher;
 
     @Column(nullable = false, length = 100)
     private String name;
@@ -29,15 +33,15 @@ public class Discipline {
     @Column(nullable = false)
     private LocalDateTime creationDate;
 
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
-        name = "aluno_curso", 
-        joinColumns = @JoinColumn(name = "student_id"), 
-        inverseJoinColumns = @JoinColumn(name = "discipline_id")  
+        name = "student_course",
+        joinColumns = @JoinColumn(name = "discipline_id"),
+        inverseJoinColumns = @JoinColumn(name = "student_id")
     )
-    
+    @JsonManagedReference("discipline-student")
     private Set<Student> students = new HashSet<>();
-    // no fundo, todo professor também é um estudante
 
     public Discipline() {}
 
@@ -95,6 +99,23 @@ public class Discipline {
 
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate = creationDate;
+    }
+
+    public void setTeacher(Teacher teacher){
+        this.teacher = teacher;
+    }
+    
+    public void addStudent(Student newStudent){
+        this.students.add(newStudent);
+    }
+
+    public Student removeStudent(Student removedStudent){
+        this.students.remove(removedStudent);
+        return removedStudent;
+    }
+
+    public Set<Student> getStudents(){
+        return this.students;
     }
 
     @Override

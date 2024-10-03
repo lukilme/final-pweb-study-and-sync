@@ -6,8 +6,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.pweb.study_and_sync.exception.ResourceNotFoundException;
 import com.pweb.study_and_sync.model.Discipline;
 import com.pweb.study_and_sync.model.Teacher;
+import com.pweb.study_and_sync.model.dto.DisciplineCorrelationDTO;
 import com.pweb.study_and_sync.service.TeacherService;
 
 import java.util.Optional;
@@ -22,8 +24,24 @@ public class TeacherController {
 
     @PostMapping
     public ResponseEntity<Teacher> create(@RequestBody Teacher teacher) {
-        Teacher savedTeacher = teacherService.save(teacher);
-        return ResponseEntity.ok(savedTeacher);
+        try {
+            Teacher savedTeacher = teacherService.save(teacher);
+            return ResponseEntity.ok(savedTeacher);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @PostMapping("/add-student")
+    public ResponseEntity<Void> addStudentToDiscipline(@RequestBody DisciplineCorrelationDTO disciplineCorrelation) {
+        try {
+            teacherService.addStudentToDiscipline(disciplineCorrelation);
+            return ResponseEntity.ok().build();
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(404).body(null); 
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @GetMapping
@@ -37,12 +55,12 @@ public class TeacherController {
     public ResponseEntity<Set<Discipline>> getDisciplines(@PathVariable Long id) {
         try {
             Optional<Set<Discipline>> disciplines = teacherService.getDisciplines(id);
-            return disciplines.map(ResponseEntity::ok)
-                    .orElseGet(() -> ResponseEntity.notFound().build());
+            return disciplines.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
         } catch (Exception e) {
             return ResponseEntity.status(500).build();
         }
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Teacher> findById(@PathVariable Long id) {
         Optional<Teacher> teacher = teacherService.findById(id);
@@ -51,13 +69,25 @@ public class TeacherController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Teacher> update(@PathVariable Long id, @RequestBody Teacher teacher) {
-        Teacher updatedTeacher = teacherService.update(id, teacher);
-        return updatedTeacher != null ? ResponseEntity.ok(updatedTeacher) : ResponseEntity.notFound().build();
+        try {
+            Teacher updatedTeacher = teacherService.update(id, teacher);
+            return ResponseEntity.ok(updatedTeacher);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
-        teacherService.delete(id);
-        return ResponseEntity.noContent().build();
+        try {
+            teacherService.delete(id);
+            return ResponseEntity.noContent().build();
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(500).build();
+        }
     }
 }

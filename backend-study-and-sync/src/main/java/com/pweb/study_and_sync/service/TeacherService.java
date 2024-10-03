@@ -8,9 +8,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.pweb.study_and_sync.exception.ResourceNotFoundException;
 import com.pweb.study_and_sync.model.Discipline;
+import com.pweb.study_and_sync.model.Student;
 import com.pweb.study_and_sync.model.Teacher;
+import com.pweb.study_and_sync.model.dto.DisciplineCorrelationDTO;
 import com.pweb.study_and_sync.repository.TeacherRepository;
+
+import jakarta.transaction.Transactional;
 
 @Service
 public class TeacherService {
@@ -28,6 +33,27 @@ public class TeacherService {
 
     public Optional<Teacher> findById(Long id) {
         return teacherRepository.findById(id);
+    }
+
+    @Transactional
+public void addStudentToDiscipline(DisciplineCorrelationDTO disciplineCorrelation) {
+    StudentService studentService = new StudentService();
+    Student student = studentService.findById(disciplineCorrelation.idStudent()).orElseThrow(() ->
+         new ResourceNotFoundException("Student not found with this ID!")
+    );
+
+    DisciplineService disciplineService = new DisciplineService();
+    Discipline discipline = disciplineService.findById(disciplineCorrelation.idDiscipline()).orElseThrow(() ->
+         new ResourceNotFoundException("Discipline not found with this ID!")
+    );
+
+    if (!discipline.getStudents().contains(student)) {
+        discipline.addStudent(student); 
+    }
+
+    if (!student.getDisciplines().contains(discipline)) {
+        student.addDiscipline(discipline);  
+    }
     }
 
     public Optional<Teacher> findByEmail(String email) {
