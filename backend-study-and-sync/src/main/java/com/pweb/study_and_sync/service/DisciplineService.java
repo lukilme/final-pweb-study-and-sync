@@ -9,6 +9,7 @@ import com.pweb.study_and_sync.exception.ResourceNotFoundException;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +19,22 @@ import java.util.Optional;
 
 @Service
 public class DisciplineService {
+    
+    private final DisciplineRepository disciplineRepository;
+    
+    private final TeacherService teacherService;
 
-    private static final Logger logger = LoggerFactory.getLogger(DisciplineService.class);
-
+    @SuppressWarnings("unused")
+    private final StudentService studentService;
+    
     @Autowired
-    private DisciplineRepository disciplineRepository;
-
-
-
-
+    public DisciplineService(DisciplineRepository disciplineRepository,@Lazy TeacherService teacherService, @Lazy StudentService studentService) {
+        this.disciplineRepository = disciplineRepository;
+        this.teacherService = teacherService;
+        this.studentService = studentService;
+    }
+    
+    private static final Logger logger = LoggerFactory.getLogger(DisciplineService.class);
     public List<Discipline> findAll() {
         logger.info("Buscando todas as disciplinas");
         return disciplineRepository.findAll();
@@ -46,7 +54,7 @@ public class DisciplineService {
             logger.warn("Disciplina com id: {} não encontrada", disciplineToUpdate);
             throw new ResourceNotFoundException("Disciplina não encontrada para o id: " + disciplineToUpdate.getId());
         }
-        TeacherService teacherService = new TeacherService();
+      
         teacherService.findById(disciplineToUpdate.getTeacher().getId())
             .orElseThrow(() -> new ResourceNotFoundException("Professor não encontrado para o id: " + disciplineToUpdate.getTeacher().getId()));
 
@@ -57,7 +65,7 @@ public class DisciplineService {
     @Transactional
     public Discipline save(DisciplineCreationDTO disciplineToCreate) {
         logger.info("Salvando nova disciplina: {}", disciplineToCreate.name());
-        TeacherService teacherService = new TeacherService();
+
         Teacher teacherOfDiscipline = teacherService.findById(disciplineToCreate.idTeacher())
             .orElseThrow(() -> new ResourceNotFoundException("Professor não encontrado para o id: " + disciplineToCreate.idTeacher()));
 

@@ -13,8 +13,16 @@ import com.pweb.study_and_sync.repository.StudentRepository;
 @Service
 public class StudentService {
 
+    private final StudentRepository studentRepository;
+    
+    @SuppressWarnings("unused")
+    private final DisciplineService disciplineService;
+
     @Autowired
-    private StudentRepository studentRepository;
+    public StudentService(StudentRepository studentRepository, DisciplineService disciplineService) {
+        this.studentRepository = studentRepository;
+        this.disciplineService = disciplineService;
+    }
 
     public Student save(Student student) {
         return studentRepository.save(student);

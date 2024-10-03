@@ -1,5 +1,6 @@
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/AppConfig.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/StudyAndSyncApplication.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/AuthController.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/DisciplineController.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/StudentController.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/controller/TeacherController.java
@@ -11,9 +12,14 @@
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/User.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/dto/DisciplineCorrelationDTO.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/dto/DisciplineCreationDTO.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/dto/LoginDTO.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/dto/StudentCreationDTO.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/model/dto/TeacherCreationDTO.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/AuthRepository.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/DisciplineRepository.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/StudentRepository.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/repository/TeacherRepository.java
+/home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/AuthService.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/DisciplineService.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/StudentService.java
 /home/kilmer/Development/college/final-pweb-study-and-sync/backend-study-and-sync/src/main/java/com/pweb/study_and_sync/service/TeacherService.java

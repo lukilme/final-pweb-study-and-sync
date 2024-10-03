@@ -4,7 +4,7 @@
       "id": "696a",
       "name": "Senhor Professor",
       "email": "professor@gmail.com",
-      "password": "Professor1?",
+      "password": "12345678",
       "birthday": "2003-12-12T02:00:00.000Z",
       "status": "teacher",
       "disciplines": [
@@ -107,6 +107,19 @@
       "disciplines": [],
       "course": "Electrical engineering",
       "semester": 8
+    },
+    {
+      "name": "Joao Ninguem",
+      "email": "joao2@gmail.com",
+      "password": "12345678",
+      "birthday": "2003-12-12T03:00:00.000Z",
+      "status": "student",
+      "disciplines": [
+        "7a99"
+      ],
+      "course": "Administration",
+      "semester": 4,
+      "id": "be91"
     }
   ],
   "discipline": [
@@ -116,7 +129,8 @@
       "name": "MAtemática 1",
       "description": "Materia de mateamtica basuica",
       "students": [
-        "d5d2"
+        "d5d2",
+        "be91"
       ],
       "color": "#db3333",
       "creation_date": "2024-08-27T13:12:12.112Z"

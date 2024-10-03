@@ -20,8 +20,16 @@ import jakarta.transaction.Transactional;
 @Service
 public class TeacherService {
 
+    private final TeacherRepository teacherRepository;
+    private final DisciplineService disciplineService;
+    private final StudentService studentService;
+
     @Autowired
-    private TeacherRepository teacherRepository;
+    public TeacherService(TeacherRepository teacherRepository, DisciplineService disciplineService, StudentService studentService) {
+        this.teacherRepository = teacherRepository;
+        this.disciplineService = disciplineService;
+        this.studentService = studentService;
+    }
 
     public Teacher save(Teacher teacher) {
         return teacherRepository.save(teacher);
@@ -37,12 +45,12 @@ public class TeacherService {
 
     @Transactional
 public void addStudentToDiscipline(DisciplineCorrelationDTO disciplineCorrelation) {
-    StudentService studentService = new StudentService();
+
     Student student = studentService.findById(disciplineCorrelation.idStudent()).orElseThrow(() ->
          new ResourceNotFoundException("Student not found with this ID!")
     );
 
-    DisciplineService disciplineService = new DisciplineService();
+ 
     Discipline discipline = disciplineService.findById(disciplineCorrelation.idDiscipline()).orElseThrow(() ->
          new ResourceNotFoundException("Discipline not found with this ID!")
     );

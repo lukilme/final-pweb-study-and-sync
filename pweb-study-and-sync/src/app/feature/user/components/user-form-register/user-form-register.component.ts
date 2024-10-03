@@ -11,6 +11,7 @@ import { User } from "../../../../shared/model/user.model";
 import { Subject, takeUntil } from "rxjs";
 import { Teacher } from "../../../../shared/model/teacher.model";
 import { Student } from "../../../../shared/model/student.model";
+import { UserRESTService } from "../../service/userREST.service";
 
 export const MY_DATE_FORMATS = {
   parse: {
@@ -74,7 +75,7 @@ export class UserFormRegisterComponent {
 
   hidePassword: boolean = true;
   
-  constructor(private service: UserService, private route : ActivatedRoute, private router: Router) {
+  constructor(private service: UserRESTService, private route : ActivatedRoute, private router: Router) {
     this.registerForm = new FormGroup({
       nameRegisterField: new FormControl<string>("", [
         Validators.required

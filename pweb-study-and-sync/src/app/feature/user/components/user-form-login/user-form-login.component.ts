@@ -5,6 +5,7 @@ import { UserLoginData } from "../../../../core/interfaces/user.login.interface"
 import { MessageSweetAlertService } from "../../../../shared/service/message-sweet-alert.service";
 import { FormException } from "../../../../core/exception/form.exception";
 import { Router } from "@angular/router";
+import { UserRESTService } from "../../service/userREST.service";
 
 @Component({
   selector: "app-user-form-login",
@@ -18,7 +19,7 @@ export class UserFormLoginComponent {
   }>;
   hide: boolean = true;
 
-  constructor(private service: UserService, private route : Router) {
+  constructor(private service: UserRESTService, private route : Router) {
     this.loginForm = new FormGroup({
       emailLoginField: new FormControl<string | null>("", [
         Validators.required,
@@ -30,37 +31,47 @@ export class UserFormLoginComponent {
       ]),
     });
   }
-
   onSubmit() {
     if (this.loginForm.valid) {
       const formData: UserLoginData = this.loginForm.value as UserLoginData;
       this.service.login(formData).subscribe({
-        next: () => {
-          this.route.navigate(["home"]);
-          location.reload();
+        next: (response: any) => {
+          if (response) {
+            this.route.navigate(["home"]);
+            // Remover a linha de recarregar a página se desnecessária
+            // location.reload();
+          }
         },
         error: (error: any) => {
-          if (error instanceof FormException) {
-            switch (error.statusCode) {
-              case 'PASSWORD':
-                const formControlErrorPassword = this.loginForm.get('passwordLoginField');
-                if (formControlErrorPassword) {
-                  formControlErrorPassword.setErrors({ [error.message]:true });
-                }
-                break;
-              case 'EMAIL':
-                const formControlErrorEmail = this.loginForm.get('emailLoginField');
-                if (formControlErrorEmail) {
-                  formControlErrorEmail.setErrors({ [error.message]: true });
-                }
-                break;
-              default:
-                MessageSweetAlertService.error("Unexpected error happened");
-                console.error(error);
-            }
+          // Verifique o status da resposta de erro para determinar o tipo de erro
+          if (error.status === 401) { // Unauthorized
+            MessageSweetAlertService.error("Invalid email or password");
           } else {
-            MessageSweetAlertService.error("Unexpected error happened");
-            console.error(error);
+            // Se você estiver recebendo um erro de validação detalhado do backend
+            if (error.error && error.error.details) {
+              error.error.details.forEach((detail: any) => {
+                switch (detail.field) {
+                  case 'password':
+                    const formControlErrorPassword = this.loginForm.get('passwordLoginField');
+                    if (formControlErrorPassword) {
+                      formControlErrorPassword.setErrors({ [detail.message]: true });
+                    }
+                    break;
+                  case 'email':
+                    const formControlErrorEmail = this.loginForm.get('emailLoginField');
+                    if (formControlErrorEmail) {
+                      formControlErrorEmail.setErrors({ [detail.message]: true });
+                    }
+                    break;
+                  default:
+                    MessageSweetAlertService.error("Unexpected error happened");
+                    console.error(detail);
+                }
+              });
+            } else {
+              MessageSweetAlertService.error("Unexpected error happened");
+              console.error(error);
+            }
           }
         }
       });
@@ -68,4 +79,5 @@ export class UserFormLoginComponent {
       MessageSweetAlertService.error("Form fields were not filled out correctly");
     }
   }
+  
 }

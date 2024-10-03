@@ -40,6 +40,7 @@ public class TeacherController {
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(404).body(null); 
         } catch (Exception e) {
+            System.out.println(e);
             return ResponseEntity.status(500).build();
         }
     }

@@ -18,16 +18,12 @@ import { UsuarioRestService } from "./user-rest.service";
 })
 
 export class UserService extends ServiceAbstract<User> {
-  override URL_TARGET = "http://localhost:3000/user";
+  override URL_TARGET = "http://localhost:8080/";
 
   constructor(httpClient: HttpClient, private storage: UserStorageService, private usuarioService: UsuarioFirestoreService) {
     super(httpClient);
   }
 
-  /**
-   * Registers a new user by validating the input and creating the user.
-   * @param userForm - The registration data to validate and use for creating a user.
-   */
   register(userForm: UserRegisterData): Observable<User> {
     UserValidator.registerValidate(userForm);
 
@@ -41,7 +37,7 @@ export class UserService extends ServiceAbstract<User> {
           return throwError(() => new Error("Email already registered"));
         } else {
           const newUser: Teacher | Student = this.buildUser(userForm);
-          return this.create(newUser).pipe(
+          return this.create(newUser, this.URL_TARGET).pipe(
             catchError((err) => {
               console.error("Error occurred while creating user:", err);
               return throwError(
@@ -53,7 +49,6 @@ export class UserService extends ServiceAbstract<User> {
       })
     );
   }
-
   /**
    * Updates the user saved in storage, if any.
    *

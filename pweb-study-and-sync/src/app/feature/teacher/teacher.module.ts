@@ -4,8 +4,6 @@ import { HomeTeacherComponent } from './components/home-teacher/home-teacher.com
 import { MaterialModule } from '../../core/material/material.module';
 import { DisciplineModule } from '../discipline/discipline.module';
 
-
-
 @NgModule({
   declarations: [
     HomeTeacherComponent,
