@@ -107,6 +107,18 @@
       "disciplines": [],
       "course": "Electrical engineering",
       "semester": 8
+    },
+    {
+      "id": "8464",
+      "name": "Maria Maluca",
+      "email": "maluca@gmail.com",
+      "password": "47mm8796",
+      "birthday": "1990-01-20T02:00:00.000Z",
+      "status": "teacher",
+      "disciplines": [
+        "cb7a"
+      ],
+      "qualification": "Formador"
     }
   ],
   "discipline": [

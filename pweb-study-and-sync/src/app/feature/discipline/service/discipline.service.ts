@@ -12,6 +12,7 @@ import { forkJoin, Observable, of, throwError } from "rxjs";
 import { catchError, map, switchMap, tap } from "rxjs/operators";
 import { UserStorageService } from "../../../core/storage/user-storage.service";
 import { User } from "../../../shared/model/user.model";
+import { FirestoreService } from '../../../core/services/firestore.service';
 
 @Injectable({
   providedIn: "root",
@@ -22,7 +23,8 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
   constructor(
     httpClient: HttpClient,
     private userService: UserService,
-    private storage: UserStorageService
+    private storage: UserStorageService,
+    private firestoreService: FirestoreService // Ligação FirestoreService
   ) {
     super(httpClient);
   }
@@ -68,7 +70,18 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
           return this.userService.read(this.storage.userSaved.id).pipe(
             switchMap((user: User) => {
               user.disciplines.push(discipline.id);
-              return this.userService.update(user, user.id);
+              return this.userService.update(user, user.id).pipe(
+                switchMap(() => {
+                  // Salva a disciplina no Firestore e assegura que o retorno seja o esperado
+                  return this.firestoreService.saveDiscipline(discipline).pipe(
+                    map(() => ({ success: true })), // Mapeia o resultado para um objeto em caso de sucesso
+                    catchError((firestoreError) => {
+                      console.error("Erro ao salvar disciplina no Firestore:", firestoreError);
+                      return of(null); // Retorna null em caso de erro no Firestore
+                    })
+                  );
+                })
+              );
             })
           );
         }
@@ -80,6 +93,7 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
       })
     );
   }
+  
 
   updateDiscipline(newDiscipline: Object): Observable<Object | null> {
     const discipline = this.buildDiscipline(
