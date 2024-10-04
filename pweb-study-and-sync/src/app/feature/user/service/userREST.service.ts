@@ -73,19 +73,16 @@ export class UserRESTService extends ServiceAbstract<User> {
 
 
   login(loginData: UserLoginData): Observable<User> {
-    // Validação dos dados de login
     UserValidator.loginValidate(loginData);
-    const URL = 'http://localhost:8080/auth/login'; // Certifique-se de incluir o protocolo (http://)
-    
+    const URL = 'http://localhost:8080/auth/login'; 
+    console.log(loginData);
     return this.httpClient.post<User>(URL, loginData).pipe(
       catchError((err) => {
         console.error("Error occurred while logging in:", err);
-        return throwError(() => new Error("Login failed"));
+        return throwError(() => err);
       })
     );
   }
-
-
 
   buildUser(data: UserRegisterData): Teacher | Student {
     if (data.statusRegisterField === "teacher") {

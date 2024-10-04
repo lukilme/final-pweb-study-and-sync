@@ -23,16 +23,16 @@ public class AuthController {
     private AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<User> login(@RequestBody LoginDTO loginData) {
+    public ResponseEntity<?> login(@RequestBody LoginDTO loginData) {
         try {
             User user = authService.loginWithFallback(loginData);
             return ResponseEntity.ok(user);  
         } catch (NoResultException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                                 .body(null); 
+                                 .body("No account registered with this email.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                                 .body(null); 
+                                 .body("Incorrect password.");
         }
     }
 }
