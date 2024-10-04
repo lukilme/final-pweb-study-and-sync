@@ -18,7 +18,7 @@ export class ListDisciplineComponent implements OnInit {
   disciplines: Discipline[] = [];
   totalItems: number = 0;
   pageSize: number = 10;
-  currentPage: number = 1;
+  currentPage: number = 0;
   trackByDiscipline(index: number, discipline: Discipline): string {
     return discipline.id;
   }

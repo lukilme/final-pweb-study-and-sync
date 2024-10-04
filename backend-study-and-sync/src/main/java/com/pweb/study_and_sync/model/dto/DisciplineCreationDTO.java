@@ -1,9 +1,13 @@
 
 package com.pweb.study_and_sync.model.dto;
 import java.time.LocalDateTime;
+
+import org.springframework.validation.annotation.Validated;
+
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
+@Validated
 public record DisciplineCreationDTO(
     @NotNull Long idTeacher,
     @NotNull String name,

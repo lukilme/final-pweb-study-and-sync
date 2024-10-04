@@ -49,15 +49,7 @@ export class UserService extends ServiceAbstract<User> {
       })
     );
   }
-  /**
-   * Updates the user saved in storage, if any.
-   *
-   * If a user is saved to storage (`this.storage.userSaved`),
-   * this method will try to fetch the updated user using the saved ID.
-   * If reading is successful, the updated user will be saved again
-   * no storage. If an error occurs during reading or if there is no
-   * user saved to storage, an exception will be thrown.
-   */
+
   updateStorageUser(): Observable<User> {
     if (this.storage.userSaved) {
       return this.read(this.storage.userSaved.id).pipe(

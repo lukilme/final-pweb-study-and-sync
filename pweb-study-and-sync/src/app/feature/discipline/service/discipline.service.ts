@@ -17,7 +17,7 @@ import { User } from "../../../shared/model/user.model";
   providedIn: "root",
 })
 export class DisciplineService extends ServiceAbstract<Discipline> {
-  override URL_TARGET = "http://localhost:3000/discipline";
+  override URL_TARGET = "http://localhost:8080/discipline";
 
   constructor(
     httpClient: HttpClient,
@@ -62,24 +62,9 @@ export class DisciplineService extends ServiceAbstract<Discipline> {
   createDiscipline(newDiscipline: Object): Observable<Object | null> {
     return this.create(
       this.buildDiscipline(newDiscipline as DisciplineFormInterfaceCreated)
-    ).pipe(
-      switchMap((discipline: Discipline) => {
-        if (this.storage.userSaved) {
-          return this.userService.read(this.storage.userSaved.id).pipe(
-            switchMap((user: User) => {
-              user.disciplines.push(discipline.id);
-              return this.userService.update(user, user.id);
-            })
-          );
-        }
-        return of(null);
-      }),
-      catchError((error) => {
-        console.error("Erro ao criar disciplina ou atualizar usuário:", error);
-        return throwError(() => error);
-      })
     );
   }
+  
 
   updateDiscipline(newDiscipline: Object): Observable<Object | null> {
     const discipline = this.buildDiscipline(
