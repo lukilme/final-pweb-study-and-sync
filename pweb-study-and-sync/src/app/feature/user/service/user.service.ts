@@ -11,7 +11,6 @@ import { Student } from "../../../shared/model/student.model";
 import { ServiceAbstract } from "../../../core/util/service.abstract";
 import { FormException } from "../../../core/exception/form.exception";
 import { UsuarioFirestoreService } from "../../../shared/services/usuario-firestore.service";
-import { UsuarioRestService } from "./user-rest.service";
 
 @Injectable({
   providedIn: 'root'
